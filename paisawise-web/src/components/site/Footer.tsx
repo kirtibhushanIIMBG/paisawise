@@ -26,7 +26,7 @@ export function Footer() {
                   <li key={link.href + link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-copy transition-colors hover:text-white"
+                      className="text-sm text-copy transition-colors hover:text-fg"
                     >
                       {link.label}
                     </Link>
@@ -40,7 +40,7 @@ export function Footer() {
         {/* Disclosure block. Required on every route: the site is a mock and a
             convincing fintech page is exactly the thing that misleads if faked. */}
         <div className="mt-14 space-y-4 rounded-2xl border border-edge bg-panel p-6">
-          <p className="text-sm font-semibold text-white">Academic project notice</p>
+          <p className="text-sm font-semibold text-fg">Academic project notice</p>
           <p className="max-w-4xl text-sm leading-relaxed text-copy">{DISCLAIMER}</p>
           <p className="max-w-4xl text-sm leading-relaxed text-dim">
             PaisaWise is not registered with any financial regulator and holds no
@@ -55,10 +55,10 @@ export function Footer() {
         <div className="mt-8 flex flex-col gap-4 border-t border-edge pt-8 text-sm text-dim sm:flex-row sm:items-center sm:justify-between">
           <p>Built as a Sales and Business Development coursework submission.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="transition-colors hover:text-white">
+            <Link href="/privacy" className="transition-colors hover:text-fg">
               Privacy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-white">
+            <Link href="/terms" className="transition-colors hover:text-fg">
               Terms
             </Link>
           </div>

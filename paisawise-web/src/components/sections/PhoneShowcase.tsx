@@ -46,7 +46,7 @@ function PhoneScreen({ index }: { index: number }) {
         <p className="text-[0.62rem] uppercase tracking-widest text-dim">
           August balance
         </p>
-        <p className="num text-2xl font-bold text-white">{rupees(66600)}</p>
+        <p className="num text-2xl font-bold text-fg">{rupees(66600)}</p>
         <div className="space-y-2 pt-2">
           {[
             ["Rent", 24000, 100],
@@ -85,7 +85,7 @@ function PhoneScreen({ index }: { index: number }) {
         <div className="rounded-xl bg-panel-alt/50 p-3">
           <div className="flex justify-between text-[0.68rem] text-copy">
             <span>Saved so far</span>
-            <span className="num text-white">{rupees(5200)}</span>
+            <span className="num text-fg">{rupees(5200)}</span>
           </div>
           <div className="mt-2 h-2 rounded-full bg-panel-alt">
             <div className="h-full w-[65%] rounded-full bg-positive" />
@@ -98,7 +98,7 @@ function PhoneScreen({ index }: { index: number }) {
     return (
       <div className="space-y-3">
         <div className="rounded-xl border border-accent/40 bg-violet/15 p-3">
-          <p className="text-[0.68rem] font-semibold text-white">
+          <p className="text-[0.68rem] font-semibold text-fg">
             Shopping is running hot
           </p>
           <p className="mt-1 text-[0.66rem] leading-relaxed text-copy">
@@ -116,7 +116,7 @@ function PhoneScreen({ index }: { index: number }) {
             className="flex justify-between text-[0.68rem] text-copy"
           >
             <span>{m as string}</span>
-            <span className="num text-white">{rupees(a as number)}</span>
+            <span className="num text-fg">{rupees(a as number)}</span>
           </div>
         ))}
       </div>
@@ -128,7 +128,7 @@ function PhoneScreen({ index }: { index: number }) {
         Next call
       </p>
       <div className="rounded-xl bg-panel-alt/50 p-3">
-        <p className="text-[0.72rem] font-semibold text-white">
+        <p className="text-[0.72rem] font-semibold text-fg">
           Tuesday, 6:30 pm
         </p>
         <p className="mt-1 text-[0.66rem] text-copy">
@@ -190,7 +190,7 @@ export function PhoneShowcase() {
   return (
     <section
       ref={scope}
-      className="border-b border-edge bg-panel-alt py-20 text-white md:py-28"
+      className="border-b border-edge bg-panel-alt py-20 text-fg md:py-28"
       aria-labelledby="product-heading"
     >
       <div className="shell">
@@ -230,7 +230,7 @@ export function PhoneShowcase() {
                     <Icon size={19} />
                   </span>
                   <div>
-                    <h3 className="text-xl font-semibold text-white">{s.title}</h3>
+                    <h3 className="text-xl font-semibold text-fg">{s.title}</h3>
                     <p className="mt-2 max-w-md leading-relaxed text-copy">
                       {s.body}
                     </p>

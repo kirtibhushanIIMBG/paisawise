@@ -23,9 +23,14 @@ import { cn } from "@/lib/utils";
 
 /*
   Chart decisions, per the dataviz method:
-  · Spending categories are NOMINAL, so every bar takes the same single hue.
-    A value-ramp across nominal categories double-encodes length as colour.
-    Identity comes from the axis labels.
+  · Spending categories are NOMINAL, so each takes its own hue from a
+    categorical palette. What is banned is a *value ramp*, where colour
+    tracks bar length and double-encodes magnitude. This palette does not:
+    each hue is bound to a category key below, so a category keeps its
+    colour as the sort order changes between months.
+  · The palette is validated, not chosen by eye. Worst adjacent CVD
+    separation is dE 13.8 against a target of 8, on both the dark cell fill
+    and the white light-mode card. Steps live in globals.css.
   · No donut. Six categories with close values compare badly in angle; bars are
     the right form and let the numbers be read directly.
   · Over-budget state is never colour-alone: it ships with an icon and a
@@ -33,6 +38,16 @@ import { cn } from "@/lib/utils";
   · A table view is provided, which is also the required relief for the
     contrast WARN the palette validator raised on muted-on-surface.
 */
+
+/* Colour follows the entity, never its rank. */
+const CATEGORY_COLOUR: Record<string, string> = {
+  food: "var(--color-cat-1)",
+  rent: "var(--color-cat-2)",
+  transport: "var(--color-cat-3)",
+  shopping: "var(--color-cat-4)",
+  bills: "var(--color-cat-5)",
+  other: "var(--color-cat-6)",
+};
 
 const AXIS = { fontSize: 11, fill: "var(--chart-axis)" };
 
@@ -77,7 +92,7 @@ export function Dashboard() {
     () =>
       [...month.categories]
         .sort((a, b) => b.spent - a.spent)
-        .map((c) => ({ ...c, over: c.spent > c.budget })),
+        .map((c) => ({ ...c, over: c.spent > c.budget, colour: CATEGORY_COLOUR[c.key] })),
     [month],
   );
 
@@ -315,11 +330,7 @@ export function Dashboard() {
                   />
                   <Bar dataKey="spent" name="Spent" radius={[0, 4, 4, 0]} maxBarSize={18}>
                     {categoryData.map((c) => (
-                      <Cell
-                        key={c.key}
-                        fill="var(--chart-series)"
-                        fillOpacity={c.over ? 1 : 0.55}
-                      />
+                      <Cell key={c.key} fill={c.colour} fillOpacity={1} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -331,7 +342,16 @@ export function Dashboard() {
                   key={c.key}
                   className="flex items-center justify-between gap-3 text-xs"
                 >
-                  <span className="text-copy">{c.label}</span>
+                  {/* Swatch makes this list the chart's legend, so colour is
+                      tied to a named category rather than left to be guessed. */}
+                  <span className="flex min-w-0 items-center gap-2">
+                    <span
+                      aria-hidden
+                      className="size-2.5 shrink-0 rounded-full"
+                      style={{ background: c.colour }}
+                    />
+                    <span className="truncate text-copy">{c.label}</span>
+                  </span>
                   <span className="flex items-center gap-2">
                     {c.over ? (
                       <span className="num inline-flex items-center gap-1 font-semibold text-accent">

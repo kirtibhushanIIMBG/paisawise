@@ -117,7 +117,10 @@ export const MONTHS: MonthData[] = [
     80400,
     [
       ["food", "Food and dining", 12600, 12500],
-      ["rent", "Rent", 24000, 24000],
+      /* Rent was revised upward from July, which the homepage copy already
+         refers to ("your rent moved last quarter"). It also stops the largest
+         bar being identical in all three months. */
+      ["rent", "Rent", 22500, 22500],
       ["transport", "Transport", 5100, 5500],
       ["shopping", "Shopping", 13400, 8500],
       ["bills", "Bills and utilities", 5900, 6500],

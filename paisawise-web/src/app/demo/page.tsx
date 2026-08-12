@@ -36,7 +36,7 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="border-t border-edge bg-panel-alt py-20 text-white md:py-24">
+      <section className="border-t border-edge bg-panel-alt py-20 text-fg md:py-24">
         <div className="shell text-center">
           <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.6vw,2.5rem)] font-semibold">
             Yours would look like this by the end of week one
@@ -47,15 +47,11 @@ export default function DemoPage() {
             is waived if your relationship manager sent you.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href="/get-started" variant="onInk" size="lg">
+            <Button href="/get-started" size="lg">
               Get started
               <ArrowRight size={18} />
             </Button>
-            <Button
-              href="/pricing"
-              size="lg"
-              className="border border-edge bg-transparent text-white hover:border-accent hover:bg-panel"
-            >
+            <Button href="/pricing" variant="secondary" size="lg">
               See pricing
             </Button>
           </div>

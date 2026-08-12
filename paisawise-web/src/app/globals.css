@@ -44,6 +44,19 @@
   --color-plot-soft: #4a4080;
   --color-plot-ref: #7c7c8a;
 
+  /* Categorical steps, one per spending category, assigned in fixed order and
+     bound to the category key rather than to bar position. The chart sorts by
+     size and the order changes month to month, so keying colour to rank would
+     repaint a category as it moved. Snapped with the dataviz validator against
+     both the dark cell fill and the white light-mode card: worst adjacent CVD
+     separation is dE 13.8 against a target of 8. */
+  --color-cat-1: #a161e0;
+  --color-cat-2: #dd5400;
+  --color-cat-3: #00a795;
+  --color-cat-4: #8f8d00;
+  --color-cat-5: #d44996;
+  --color-cat-6: #0088f2;
+
   --font-display: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 

@@ -148,7 +148,7 @@ export default function PricingPage() {
         </Reveal>
       </Section>
 
-      <section className="bg-panel-alt py-20 text-white md:py-28">
+      <section className="bg-panel-alt py-20 text-fg md:py-28">
         <div className="shell text-center">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.8vw,2.6rem)] font-semibold">
@@ -159,15 +159,11 @@ export default function PricingPage() {
               investing should wait a couple of months.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button href="/get-started" variant="onInk" size="lg">
+              <Button href="/get-started" size="lg">
                 Find where to start
                 <ArrowRight size={18} />
               </Button>
-              <Button
-                href="/contact"
-                size="lg"
-                className="border border-edge bg-transparent text-white hover:border-accent hover:bg-panel"
-              >
+              <Button href="/contact" variant="secondary" size="lg">
                 Talk to someone
               </Button>
             </div>

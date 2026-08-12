@@ -34,7 +34,7 @@ export default function BlogIndexPage() {
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="violet">Writing</Badge>
-          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-white">
+          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-fg">
             Money advice that knows what rent costs in a metro
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-copy">

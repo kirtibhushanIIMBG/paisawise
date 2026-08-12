@@ -184,7 +184,7 @@ export default function Home() {
             <div className="bg-panel px-5 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-dim md:px-8">
               Free tracking apps
             </div>
-            <div className="bg-panel-alt px-5 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-white md:px-8">
+            <div className="bg-panel-alt px-5 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg md:px-8">
               PaisaWise
             </div>
           </div>

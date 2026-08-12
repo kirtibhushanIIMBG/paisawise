@@ -100,7 +100,7 @@ export default async function BlogPostPage({
         <div className="relative max-w-3xl">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-copy transition-colors duration-200 hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-copy transition-colors duration-200 hover:text-fg"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             All posts
@@ -108,12 +108,12 @@ export default async function BlogPostPage({
           <div className="mt-7">
             <Badge tone="violet">{post.category}</Badge>
           </div>
-          <h1 className="mt-5 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-white">
+          <h1 className="mt-5 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">
             {post.title}
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-copy">{post.excerpt}</p>
           <div className="num mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-copy">
-            <span className="font-semibold text-white">{post.author}</span>
+            <span className="font-semibold text-fg">{post.author}</span>
             <span aria-hidden="true">·</span>
             <span>{post.authorRole}</span>
             <span aria-hidden="true">·</span>

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { AgentationToolbar } from "@/components/dev/AgentationToolbar";
 
 /**
  * Clash Display carries headings. It has the rupee glyph but NO tabular
@@ -75,6 +76,7 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </div>
+        <AgentationToolbar />
       </body>
     </html>
   );

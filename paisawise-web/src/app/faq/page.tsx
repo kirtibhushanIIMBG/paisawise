@@ -63,7 +63,7 @@ export default function FaqPage() {
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="violet">Questions</Badge>
-          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-white">
+          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-fg">
             The ten questions people ask before they subscribe
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-copy">
@@ -73,7 +73,7 @@ export default function FaqPage() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-copy">
             <span className="num">
-              <span className="font-semibold text-white">{rupees(PRICE.monthly)}</span> a
+              <span className="font-semibold text-fg">{rupees(PRICE.monthly)}</span> a
               month
             </span>
             <span aria-hidden="true" className="text-dim">
@@ -137,13 +137,13 @@ export default function FaqPage() {
       <Section tone="ink">
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
-            <h2 className="text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-white">
+            <h2 className="text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-fg">
               Still have a question we did not answer?
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-copy">
               Send it across and an advisor replies. If your bank relationship
               manager introduced you to PaisaWise, mention it: the{" "}
-              <span className="num font-semibold text-white">
+              <span className="num font-semibold text-fg">
                 {rupees(PRICE.onboarding)}
               </span>{" "}
               onboarding fee is waived for you.
@@ -158,7 +158,7 @@ export default function FaqPage() {
               variant="ghost"
               size="lg"
               href="/get-started"
-              className="border border-edge text-white hover:text-accent"
+              className="border border-edge text-fg hover:text-accent"
             >
               Get started
             </Button>

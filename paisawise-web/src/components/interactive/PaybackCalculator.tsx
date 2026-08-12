@@ -71,7 +71,7 @@ function Track({
         <label htmlFor={id} className="text-sm font-semibold text-copy">
           {label}
         </label>
-        <output htmlFor={id} className="num text-lg font-bold text-white">
+        <output htmlFor={id} className="num text-lg font-bold text-fg">
           {format(value)}
         </output>
       </div>
@@ -109,7 +109,7 @@ export function PaybackCalculator({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-3xl border border-edge bg-panel-alt text-white",
+        "overflow-hidden rounded-3xl border border-edge bg-panel-alt text-fg",
         className,
       )}
     >
@@ -117,7 +117,7 @@ export function PaybackCalculator({ className }: { className?: string }) {
         {/* controls */}
         <div className="border-b border-edge p-8 lg:border-b-0 lg:border-r lg:p-10">
           <p className="eyebrow text-accent">Work it out yourself</p>
-          <h3 className="mt-3 text-2xl font-semibold text-white">
+          <h3 className="mt-3 text-2xl font-semibold text-fg">
             Does {rupees(PRICE.monthly)} a month pay for itself?
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-copy">
@@ -166,7 +166,7 @@ export function PaybackCalculator({ className }: { className?: string }) {
 
             <div className="flex items-baseline justify-between gap-4 border-t border-edge pt-6">
               <dt className="text-sm text-copy">PaisaWise costs</dt>
-              <dd className="num text-xl font-semibold text-white">
+              <dd className="num text-xl font-semibold text-fg">
                 {rupees(PRICE.monthly)}
                 <span className="ml-2 text-sm font-normal text-dim">
                   about {rupeesExact(PRICE.perDay)} a day
@@ -190,7 +190,7 @@ export function PaybackCalculator({ className }: { className?: string }) {
 
           <div className="mt-8 rounded-2xl bg-panel p-6">
             {worthIt ? (
-              <p className="text-lg font-semibold text-white">
+              <p className="text-lg font-semibold text-fg">
                 That is{" "}
                 <span className="num text-positive" data-testid="calc-multiple">
                   {multiple.toFixed(1)}×
@@ -198,14 +198,14 @@ export function PaybackCalculator({ className }: { className?: string }) {
                 what it costs you.
               </p>
             ) : (
-              <p className="text-lg font-semibold text-white">
+              <p className="text-lg font-semibold text-fg">
                 At this level the subscription does not pay for itself yet. Your
                 advisor would tell you the same thing on the first call.
               </p>
             )}
             <p className="mt-2 text-sm text-copy">
               Over a year, that is{" "}
-              <span className="num font-semibold text-white">
+              <span className="num font-semibold text-fg">
                 {rupees(result.yearlyNet)}
               </span>{" "}
               you would have kept.

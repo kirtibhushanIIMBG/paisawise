@@ -73,7 +73,7 @@ export default function AboutPage() {
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="violet">About PaisaWise</Badge>
-          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-white">
+          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-fg">
             Good financial guidance should not depend on how much money you
             already have.
           </h1>
@@ -82,7 +82,7 @@ export default function AboutPage() {
             gets a product brochure. Someone with a crore gets a person who
             knows their name. PaisaWise exists to close that gap for the first
             group, at{" "}
-            <span className="num font-semibold text-white">
+            <span className="num font-semibold text-fg">
               {rupees(PRICE.monthly)}
             </span>{" "}
             a month.
@@ -96,7 +96,7 @@ export default function AboutPage() {
               variant="ghost"
               size="lg"
               href="/contact"
-              className="border border-edge text-white hover:text-accent"
+              className="border border-edge text-fg hover:text-accent"
             >
               Book a call
             </Button>
@@ -219,7 +219,7 @@ export default function AboutPage() {
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
             <Mark className="h-10 w-10" />
-            <h2 className="mt-6 text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-white">
+            <h2 className="mt-6 text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-fg">
               You are the one doing the saving. We just make it obvious what to
               do next.
             </h2>
@@ -237,7 +237,7 @@ export default function AboutPage() {
               variant="ghost"
               size="lg"
               href="/contact"
-              className="border border-edge text-white hover:text-accent"
+              className="border border-edge text-fg hover:text-accent"
             >
               Book a call
             </Button>

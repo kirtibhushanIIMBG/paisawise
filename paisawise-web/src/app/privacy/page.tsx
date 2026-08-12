@@ -110,7 +110,7 @@ export default function PrivacyPage() {
       <Section tone="ink" className="py-14 md:py-20">
         <div className="max-w-3xl">
           <Badge tone="violet">Legal</Badge>
-          <h1 className="mt-6 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-white">
+          <h1 className="mt-6 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">
             Privacy policy
           </h1>
           <p className="num mt-5 text-sm text-copy">Last updated {LAST_UPDATED}</p>

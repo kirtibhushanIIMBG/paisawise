@@ -392,7 +392,7 @@ export default function Home() {
           className="pointer-events-none absolute bottom-[-18rem] left-1/2 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full opacity-40 blur-[110px]"
           style={{
             background:
-              "radial-gradient(circle, var(--color-violet) 0%, transparent 70%)",
+              "radial-gradient(circle, var(--accent-fill) 0%, transparent 70%)",
           }}
         />
         <div className="shell relative text-center">

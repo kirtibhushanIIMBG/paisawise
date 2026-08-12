@@ -25,7 +25,7 @@
   --color-mint: #12b981;
 
   /* Near-black field. The site's default presentation is dark: a hairline grid
-     drawn on a near-black ground, with violet as the single accent hue. The
+     drawn on a near-black ground, with gold as the single accent hue. The
      brand colours above still drive the accent, so the deck and the site agree.
      Named for what they are rather than by Tailwind scale, which is banned. */
   --color-void: #09090b;
@@ -36,6 +36,35 @@
   --color-quiet: #a1a1aa;
   --color-faint: #71717a;
   --color-mint-l: #34d399;
+
+  /* ------------------------------------------------------------------ gold
+     The brand accent. Gold is the savings instrument in India, which is a
+     sharper fit for a money coach than the violet it replaces.
+
+     Gold is a light hue, so it needs two steps rather than one. On the
+     near-black ground it is bright and high contrast; on white it has to
+     darken sharply to stay readable as text. Measured against #ffffff:
+     #e0a020 is 2.28:1 and fails, #946108 is 5.29:1 and passes. Buttons
+     therefore take ink text on gold (7.87:1), never white (2.28:1). */
+  --color-gold: #e0a020;
+  --color-gold-l: #f0b23a;
+  --color-gold-d: #c88a12;
+  --color-gold-ink: #946108;
+  --color-gold-t: #fdf4e3;
+  --color-gold-t2: #fefaf1;
+  --color-gold-plot: #b87a0b;
+
+  /* Warning is its own status colour, not the accent.
+     Over-budget used to borrow the brand hue, which was tolerable when the
+     brand was violet and is not now that it is amber: a caution state and
+     the brand must not be the same colour. Coral reads as caution and sits
+     28 degrees off the gold. */
+  --color-coral: #ff7a5c;
+  --color-coral-d: #b03a0a;
+
+  /* Light-mode positive. #12b981 is only 2.54:1 on white, so the light
+     theme takes a darker green for text. */
+  --color-emerald-d: #047857;
 
   /* Chart steps for the dark surface. Snapped with the dataviz validator
      against the #0e0e12 cell fill, not eyeballed: the previous dark steps
@@ -75,16 +104,21 @@
   --edge-strong: #d7d2e8;
   --copy: var(--color-body);
   --dim: var(--color-muted);
-  --accent: var(--color-violet);
-  --accent-soft: var(--color-violet-t);
-  --accent-soft-2: var(--color-violet-t2);
-  --positive: var(--color-mint);
+  /* `accent` is the text-safe step, `accent-fill` the solid step for buttons
+     and marks. They differ because gold cannot be both on a white ground. */
+  --accent: var(--color-gold-ink);
+  --accent-fill: var(--color-gold);
+  --accent-fill-h: var(--color-gold-d);
+  --accent-soft: var(--color-gold-t);
+  --accent-soft-2: var(--color-gold-t2);
+  --positive: var(--color-emerald-d);
+  --warning: var(--color-coral-d);
+  --on-accent: var(--color-ink);
 
-  /* Chart tokens. Spending categories are nominal, so every bar takes the same
-     single hue: a value-ramp across nominal categories double-encodes bar
-     length as colour. Identity comes from the axis labels, not the fill. */
-  --chart-series: var(--color-violet);
-  --chart-series-soft: #d9cfff;
+  /* Chart tokens. The single-hue series is the brand gold, darkened to the
+     step that clears 3:1 against a white card. */
+  --chart-series: var(--color-gold-plot);
+  --chart-series-soft: #f0dcb4;
   --chart-ref: var(--color-muted);
   --chart-grid: var(--color-line);
   --chart-axis: var(--color-muted);
@@ -102,13 +136,17 @@
   --edge-strong: var(--color-hairline-2);
   --copy: var(--color-quiet);
   --dim: var(--color-faint);
-  --accent: var(--color-violet-l);
-  --accent-soft: #221d40;
-  --accent-soft-2: #191634;
+  --accent: var(--color-gold-l);
+  --accent-fill: var(--color-gold);
+  --accent-fill-h: var(--color-gold-l);
+  --accent-soft: #3a2a08;
+  --accent-soft-2: #2a1f06;
   --positive: var(--color-mint-l);
+  --warning: var(--color-coral);
+  --on-accent: var(--color-ink);
 
   /* Chosen against the cell fill, not flipped from light. See @theme above. */
-  --chart-series: var(--color-plot);
+  --chart-series: var(--color-gold-l);
   --chart-series-soft: var(--color-plot-soft);
   --chart-ref: var(--color-plot-ref);
   --chart-grid: var(--color-hairline);
@@ -125,9 +163,13 @@
   --color-copy: var(--copy);
   --color-dim: var(--dim);
   --color-accent: var(--accent);
+  --color-accent-fill: var(--accent-fill);
+  --color-accent-fill-h: var(--accent-fill-h);
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-2: var(--accent-soft-2);
   --color-positive: var(--positive);
+  --color-warning: var(--warning);
+  --color-on-accent: var(--on-accent);
 }
 
 @layer base {
@@ -158,13 +200,13 @@
     line-height: 1.05;
   }
   :focus-visible {
-    outline: 2px solid var(--color-violet);
+    outline: 2px solid var(--accent-fill);
     outline-offset: 3px;
     border-radius: 4px;
   }
   ::selection {
-    background: var(--color-violet);
-    color: #fff;
+    background: var(--accent-fill);
+    color: var(--color-ink);
   }
 }
 
@@ -197,7 +239,7 @@
   .grain {
     background-image: radial-gradient(
       circle at 1px 1px,
-      color-mix(in srgb, var(--color-violet) 22%, transparent) 1px,
+      color-mix(in srgb, var(--accent-fill) 22%, transparent) 1px,
       transparent 0
     );
     background-size: 22px 22px;
@@ -235,7 +277,7 @@
     padding-block: 0.12em;
   }
 
-  /* Soft violet bloom behind hero and product frames. Atmospheric only. */
+  /* Soft brand bloom behind hero and product frames. Atmospheric only. */
   .bloom::before {
     content: "";
     position: absolute;
@@ -244,7 +286,7 @@
     pointer-events: none;
     background: radial-gradient(
       50% 50% at 50% 50%,
-      color-mix(in srgb, var(--color-violet) 38%, transparent) 0%,
+      color-mix(in srgb, var(--accent-fill) 38%, transparent) 0%,
       transparent 72%
     );
     filter: blur(90px);

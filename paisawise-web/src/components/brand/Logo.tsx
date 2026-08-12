@@ -11,9 +11,12 @@ import { cn } from "@/lib/utils";
  * artwork rather than interface colour, so they do not belong in the token set.
  */
 
+/* Ring and mid follow the gold accent; the disc stays ink so the white piggy
+   keeps its contrast. Kept as literals because this is logo artwork rather
+   than interface colour, and the mark must not restyle with the theme. */
 const COLOURWAY = {
-  light: { base: "#171526", ring: "#4A3F8F", mid: "#2A2350" },
-  ink: { base: "#241F3D", ring: "#6C4CF1", mid: "#332A63" },
+  light: { base: "#171526", ring: "#8A6508", mid: "#2A2208" },
+  ink: { base: "#211B0A", ring: "#E0A020", mid: "#3A2E10" },
 } as const;
 
 export function Mark({

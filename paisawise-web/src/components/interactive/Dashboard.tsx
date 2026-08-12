@@ -114,7 +114,7 @@ export function Dashboard() {
               className={cn(
                 "rounded-full px-5 py-2 text-sm font-semibold transition-colors",
                 m.key === monthKey
-                  ? "bg-violet text-white"
+                  ? "bg-accent-fill text-on-accent"
                   : "text-copy hover:text-accent",
               )}
             >
@@ -156,9 +156,9 @@ export function Dashboard() {
       {totals.over.length > 0 ? (
         <div
           role="status"
-          className="flex flex-wrap items-start gap-3 rounded-2xl border border-accent bg-accent-soft p-5"
+          className="flex flex-wrap items-start gap-3 rounded-2xl border border-warning/40 bg-warning/10 p-5"
         >
-          <AlertTriangle size={20} className="mt-0.5 shrink-0 text-accent" aria-hidden />
+          <AlertTriangle size={20} className="mt-0.5 shrink-0 text-warning" aria-hidden />
           <div className="flex-1">
             <p className="font-semibold text-fg">
               {totals.over.length === 1
@@ -354,7 +354,7 @@ export function Dashboard() {
                   </span>
                   <span className="flex items-center gap-2">
                     {c.over ? (
-                      <span className="num inline-flex items-center gap-1 font-semibold text-accent">
+                      <span className="num inline-flex items-center gap-1 font-semibold text-warning">
                         <AlertTriangle size={11} aria-hidden />
                         over {rupees(c.spent - c.budget)}
                       </span>

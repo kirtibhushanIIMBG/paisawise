@@ -35,7 +35,7 @@ export default function ContactPage() {
       <Section tone="ink" className="relative overflow-hidden">
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
-          <Badge tone="violet">Contact</Badge>
+          <Badge tone="accent">Contact</Badge>
           <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-fg">
             Three ways to reach us. One of them saves you{" "}
             <span className="num">{rupees(PRICE.onboarding)}</span>.

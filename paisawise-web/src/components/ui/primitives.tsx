@@ -19,12 +19,14 @@ const BUTTON_BASE =
   "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const BUTTON_VARIANT: Record<string, string> = {
-  primary: "shine bg-violet text-white hover:bg-violet-d",
+  /* Ink on gold, never white. Gold is a light hue: white text over it is
+     2.28:1 and fails, ink is 7.87:1. */
+  primary: "shine bg-accent-fill text-on-accent hover:bg-accent-fill-h",
   secondary:
     "shine border border-edge-strong bg-panel-alt text-fg hover:border-accent hover:text-accent",
   ghost: "text-copy hover:text-accent",
   /* A white button stays light on hover in both themes. */
-  onInk: "bg-white text-ink hover:bg-violet-t",
+  onInk: "bg-white text-ink hover:bg-gold-t",
 };
 
 const BUTTON_SIZE: Record<string, string> = {
@@ -183,16 +185,17 @@ export function SectionHead({
 
 export function Badge({
   children,
-  tone = "violet",
+  tone = "accent",
   className,
 }: {
   children: React.ReactNode;
-  tone?: "violet" | "mint" | "neutral";
+  tone?: "accent" | "mint" | "warning" | "neutral";
   className?: string;
 }) {
   const tones = {
-    violet: "bg-accent-soft text-accent",
+    accent: "bg-accent-soft text-accent",
     mint: "bg-positive/12 text-positive",
+    warning: "bg-warning/12 text-warning",
     neutral: "bg-panel-alt text-copy border border-edge",
   };
   return (

@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { CursorGlow } from "@/components/motion/CursorGlow";
+import { ScrollFx } from "@/components/motion/ScrollFx";
 import { AgentationToolbar } from "@/components/dev/AgentationToolbar";
 
 /**
@@ -66,10 +68,12 @@ export default function RootLayout({
       <body className={`${clash.variable} ${inter.variable} antialiased`}>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-violet focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent-fill focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>
+        <ScrollFx />
+        <CursorGlow />
         {/* The rails. Everything on every route sits inside this frame. */}
         <div className="frame min-h-screen">
           <Header />

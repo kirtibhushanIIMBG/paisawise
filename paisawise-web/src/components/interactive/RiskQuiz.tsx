@@ -108,7 +108,7 @@ export function RiskQuiz() {
           aria-label="Quiz progress"
         >
           <div
-            className="h-full rounded-full bg-violet transition-[width] duration-500 [transition-timing-function:var(--ease-out-expo)]"
+            className="h-full rounded-full bg-accent-fill transition-[width] duration-500 [transition-timing-function:var(--ease-out-expo)]"
             style={{ width: `${progress}%` }}
           />
         </div>

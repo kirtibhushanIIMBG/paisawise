@@ -33,7 +33,7 @@ export default function BlogIndexPage() {
       <Section tone="ink" className="relative overflow-hidden">
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
-          <Badge tone="violet">Writing</Badge>
+          <Badge tone="accent">Writing</Badge>
           <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-fg">
             Money advice that knows what rent costs in a metro
           </h1>
@@ -51,7 +51,7 @@ export default function BlogIndexPage() {
           <div className="grid md:grid-cols-[1.15fr_0.85fr]">
             <div className="p-7 md:p-10">
               <div className="flex flex-wrap items-center gap-3">
-                <Badge tone="violet">{featured.category}</Badge>
+                <Badge tone="accent">{featured.category}</Badge>
                 <span className="text-sm font-semibold text-dim">Latest</span>
               </div>
               <h2 className="mt-5 text-[clamp(1.6rem,3.2vw,2.3rem)] font-semibold text-fg">

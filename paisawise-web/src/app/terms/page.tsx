@@ -118,7 +118,7 @@ export default function TermsPage() {
     <>
       <Section tone="ink" className="py-14 md:py-20">
         <div className="max-w-3xl">
-          <Badge tone="violet">Legal</Badge>
+          <Badge tone="accent">Legal</Badge>
           <h1 className="mt-6 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">
             Terms of use
           </h1>

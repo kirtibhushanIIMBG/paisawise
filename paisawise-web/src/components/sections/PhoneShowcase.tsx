@@ -61,7 +61,7 @@ function PhoneScreen({ index }: { index: number }) {
               </div>
               <div className="mt-1 h-1.5 rounded-full bg-panel-alt">
                 <div
-                  className="h-full rounded-full bg-violet-l"
+                  className="h-full rounded-full bg-accent-fill"
                   style={{ width: `${pct as number}%` }}
                 />
               </div>
@@ -97,7 +97,7 @@ function PhoneScreen({ index }: { index: number }) {
   if (index === 2) {
     return (
       <div className="space-y-3">
-        <div className="rounded-xl border border-accent/40 bg-violet/15 p-3">
+        <div className="rounded-xl border border-accent/40 bg-accent-fill/15 p-3">
           <p className="text-[0.68rem] font-semibold text-fg">
             Shopping is running hot
           </p>
@@ -223,7 +223,7 @@ export function PhoneShowcase() {
                     className={cn(
                       "grid h-11 w-11 shrink-0 place-items-center rounded-full border transition-colors duration-500",
                       active === i
-                        ? "border-accent bg-violet/20 text-accent"
+                        ? "border-accent bg-accent-fill/20 text-accent"
                         : "border-edge text-dim",
                     )}
                   >
@@ -247,7 +247,7 @@ export function PhoneShowcase() {
             className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:self-start"
           >
             <div className="mx-auto w-full max-w-[17rem]">
-              <div className="relative rounded-[2.2rem] border border-edge bg-panel p-3 shadow-2xl shadow-violet/10">
+              <div className="relative rounded-[2.2rem] border border-edge bg-panel p-3 shadow-2xl shadow-accent-fill/10">
                 <div className="mx-auto mb-2 h-1 w-14 rounded-full bg-panel-alt" />
                 <div className="min-h-[21rem] rounded-[1.6rem] bg-panel-alt p-5">
                   <PhoneScreen index={active} />
@@ -259,7 +259,7 @@ export function PhoneShowcase() {
                     key={s.title}
                     className={cn(
                       "h-1.5 rounded-full transition-all duration-500",
-                      active === i ? "w-7 bg-violet-l" : "w-1.5 bg-panel-alt",
+                      active === i ? "w-7 bg-accent-fill" : "w-1.5 bg-panel-alt",
                     )}
                   />
                 ))}

@@ -15,7 +15,7 @@ import { MONTHS, monthTotals, RECENT_TRANSACTIONS } from "@/lib/demo-data";
   CTA is deliberately soft here; the hard ask lives at the pricing and close.
 
   Layout follows the reference: copy left, a framed product panel right, one
-  violet bloom behind. The panel shows the same seeded month the /demo route
+  gold bloom behind. The panel shows the same seeded month the /demo route
   uses, so the promise above the fold and the product below it agree.
 */
 
@@ -49,7 +49,7 @@ function ProductPanel() {
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1.5">
-            <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-xs font-semibold text-accent">
+            <span className="inline-flex items-center gap-1 rounded-full bg-warning/12 px-2.5 py-1 text-xs font-semibold text-warning">
               <AlertTriangle size={12} />
               Over by <span className="num">{rupees(TOTALS.spent - TOTALS.budget)}</span>
             </span>
@@ -201,7 +201,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <div data-hero="panel" className="relative">
+        <div data-hero="panel" data-fx="parallax" className="relative">
           <ProductPanel />
           <p className="mt-3 text-center text-xs italic text-dim">
             Sample data, shown for illustration.

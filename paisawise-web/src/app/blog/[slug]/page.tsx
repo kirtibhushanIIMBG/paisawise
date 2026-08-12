@@ -106,7 +106,7 @@ export default async function BlogPostPage({
             All posts
           </Link>
           <div className="mt-7">
-            <Badge tone="violet">{post.category}</Badge>
+            <Badge tone="accent">{post.category}</Badge>
           </div>
           <h1 className="mt-5 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">
             {post.title}

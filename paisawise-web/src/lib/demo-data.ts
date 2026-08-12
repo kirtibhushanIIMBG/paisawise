@@ -121,21 +121,29 @@ export function monthTotals(m: MonthData) {
   return { spent, budget, saved: m.income - spent, over };
 }
 
-/** Fictional institutions. Never use a real bank name here. */
+/**
+ * Fictional Indian institutions. Never use a real bank name here.
+ *
+ * The names read Indian because the buyer is Indian and "Northgate Bank" did
+ * not, but they stay invented on purpose: this list sits under the line
+ * "PaisaWise can see these", so a real bank's name would read as a claimed
+ * integration and contradict the affiliation disclaimer in the footer.
+ */
 export const LINKED_ACCOUNTS = [
-  { name: "Meridian Bank", type: "Savings", mask: "4417", kind: "bank" as const },
-  { name: "Northgate Bank", type: "Salary", mask: "8802", kind: "bank" as const },
-  { name: "Cortex Bank", type: "Credit card", mask: "2290", kind: "bank" as const },
-  { name: "PayStream", type: "UPI", mask: "@paystream", kind: "upi" as const },
-  { name: "QuickPe", type: "UPI", mask: "@quickpe", kind: "upi" as const },
+  { name: "Sampada Bank", type: "Savings", mask: "4417", kind: "bank" as const },
+  { name: "Rajpath Bank", type: "Salary", mask: "8802", kind: "bank" as const },
+  { name: "Nivesh Bank", type: "Credit card", mask: "2290", kind: "bank" as const },
+  { name: "PayKosh", type: "UPI", mask: "@paykosh", kind: "upi" as const },
+  { name: "TaraPe", type: "UPI", mask: "@tarape", kind: "upi" as const },
 ];
 
+/** Merchants are invented too, for the same reason and to stay consistent. */
 export const RECENT_TRANSACTIONS = [
-  { merchant: "Blue Tokai Coffee", category: "Food and dining", amount: 480, day: "Today" },
+  { merchant: "Kaapi House", category: "Food and dining", amount: 480, day: "Today" },
   { merchant: "Metro card top-up", category: "Transport", amount: 1000, day: "Today" },
-  { merchant: "Zephyr Online", category: "Shopping", amount: 3299, day: "Yesterday" },
+  { merchant: "Bazaar Online", category: "Shopping", amount: 3299, day: "Yesterday" },
   { merchant: "Electricity board", category: "Bills and utilities", amount: 2140, day: "Yesterday" },
-  { merchant: "Corner Store", category: "Food and dining", amount: 860, day: "2 days ago" },
+  { merchant: "Kirana store", category: "Food and dining", amount: 860, day: "2 days ago" },
 ];
 
 /* --------------------------------------------------------- calculator ---- */

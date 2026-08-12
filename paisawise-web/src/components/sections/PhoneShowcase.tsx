@@ -107,9 +107,9 @@ function PhoneScreen({ index }: { index: number }) {
           </p>
         </div>
         {[
-          ["Zephyr Online", 3299],
-          ["Corner Store", 860],
-          ["Blue Tokai", 480],
+          ["Bazaar Online", 3299],
+          ["Kirana store", 860],
+          ["Kaapi House", 480],
         ].map(([m, a]) => (
           <div
             key={m as string}

@@ -22,9 +22,10 @@ export default function DemoPage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-copy">
             This is the dashboard a member sees on the first of the month. The
-            numbers belong to a made-up salaried professional earning{" "}
-            <span className="num">{rupees(82000)}</span>, with three bank accounts
-            and two UPI apps linked.
+            numbers belong to a made-up salaried professional on a base of{" "}
+            <span className="num">{rupees(82000)}</span> a month, with three bank
+            accounts and two UPI apps linked. Switch months to watch every figure
+            move: July carried variable pay, June was short a reimbursement.
           </p>
         </div>
       </section>

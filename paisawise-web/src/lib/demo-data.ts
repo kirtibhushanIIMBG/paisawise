@@ -84,31 +84,44 @@ export const MONTHS: MonthData[] = [
     ],
     7,
   ),
+  /*
+    Income and budgets move month to month, and they have to.
+
+    Take-home is not flat for a salaried professional: variable pay lands in
+    July, and June was short a reimbursement. Budgets move too, because the
+    product's own claim is that it reads your history and "adjusts the target
+    as your cash flow moves". Holding either constant made two of the four
+    KPI tiles read as frozen when the month switched, which looked like a
+    broken control rather than a stable salary.
+
+    August is the month the hero panel and the overspend alert both quote, so
+    its figures stay put.
+  */
   month(
     "jul",
     "July",
-    82000,
+    94500,
     [
       ["food", "Food and dining", 11900, 12000],
       ["rent", "Rent", 24000, 24000],
-      ["transport", "Transport", 6800, 6000],
-      ["shopping", "Shopping", 7100, 8000],
+      ["transport", "Transport", 6800, 6500],
+      ["shopping", "Shopping", 7100, 9000],
       ["bills", "Bills and utilities", 6600, 7000],
-      ["other", "Everything else", 5200, 6000],
+      ["other", "Everything else", 5200, 6500],
     ],
     23,
   ),
   month(
     "jun",
     "June",
-    82000,
+    80400,
     [
-      ["food", "Food and dining", 12600, 12000],
+      ["food", "Food and dining", 12600, 12500],
       ["rent", "Rent", 24000, 24000],
-      ["transport", "Transport", 5100, 6000],
-      ["shopping", "Shopping", 13400, 8000],
-      ["bills", "Bills and utilities", 5900, 7000],
-      ["other", "Everything else", 3800, 6000],
+      ["transport", "Transport", 5100, 5500],
+      ["shopping", "Shopping", 13400, 8500],
+      ["bills", "Bills and utilities", 5900, 6500],
+      ["other", "Everything else", 3800, 5500],
     ],
     41,
   ),

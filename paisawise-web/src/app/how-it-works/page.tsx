@@ -69,7 +69,7 @@ export default function HowItWorksPage() {
               <li key={s.step}>
                 <Reveal>
                   <div className="flex gap-6">
-                    <span className="num relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-edge bg-panel text-lg font-bold text-violet">
+                    <span className="num relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-edge bg-panel text-lg font-bold text-accent">
                       {s.step}
                     </span>
                     <div className="pt-2">
@@ -99,7 +99,7 @@ export default function HowItWorksPage() {
             return (
               <Reveal key={d.heading}>
                 <Card className="h-full p-8">
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-accent-soft text-violet">
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-accent-soft text-accent">
                     <Icon size={19} />
                   </span>
                   <h3 className="mt-5 text-lg font-semibold text-fg">{d.heading}</h3>

@@ -113,14 +113,14 @@ export default function PrivacyPage() {
           <h1 className="mt-6 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-white">
             Privacy policy
           </h1>
-          <p className="num mt-5 text-sm text-pale">Last updated {LAST_UPDATED}</p>
+          <p className="num mt-5 text-sm text-copy">Last updated {LAST_UPDATED}</p>
         </div>
       </Section>
 
       <Section className="py-14 md:py-20">
         <div className="max-w-[46rem]">
           <div className="flex gap-4 rounded-2xl border border-edge bg-accent-soft p-5 md:p-6">
-            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-violet" aria-hidden="true" />
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
             <div>
               <p className="font-semibold text-fg">
                 This is coursework, and it is not a legal agreement
@@ -171,7 +171,7 @@ export default function PrivacyPage() {
             </Button>
             <p className="text-sm text-dim">
               Or go back to the{" "}
-              <Link href="/faq" className="font-semibold text-violet underline-offset-4 hover:underline">
+              <Link href="/faq" className="font-semibold text-accent underline-offset-4 hover:underline">
                 FAQ
               </Link>
               , where the data questions are answered in shorter form.

@@ -31,7 +31,7 @@ function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-      className="grid h-10 w-10 place-items-center rounded-full border border-edge text-copy transition-colors hover:border-violet hover:text-violet"
+      className="grid h-10 w-10 place-items-center rounded-full border border-edge text-copy transition-colors hover:border-accent hover:text-accent"
     >
       {dark ? <Sun size={17} /> : <Moon size={17} />}
     </button>
@@ -79,7 +79,7 @@ export function Header() {
           {NAV.map((item) =>
             "children" in item ? (
               <div key={item.label} className="group relative">
-                <button className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-[0.95rem] font-medium text-copy transition-colors hover:text-violet">
+                <button className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-[0.95rem] font-medium text-copy transition-colors hover:text-accent">
                   {item.label}
                   <ChevronDown
                     size={15}
@@ -87,7 +87,7 @@ export function Header() {
                   />
                 </button>
                 <div className="invisible absolute left-0 top-full w-72 translate-y-1 pt-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                  <div className="rounded-2xl border border-edge bg-panel p-2 shadow-xl shadow-ink/5">
+                  <div className="rounded-2xl border border-edge bg-panel p-2 shadow-xl shadow-black/40">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
@@ -108,8 +108,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors hover:text-violet",
-                  pathname === item.href ? "text-violet" : "text-copy",
+                  "rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors hover:text-accent",
+                  pathname === item.href ? "text-accent" : "text-copy",
                 )}
               >
                 {item.label}

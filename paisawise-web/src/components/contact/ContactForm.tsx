@@ -42,7 +42,7 @@ const FIELD_BASE =
   "w-full rounded-xl border bg-panel px-4 py-3 text-[0.95rem] text-fg " +
   "placeholder:text-dim transition-colors duration-200 " +
   "[transition-timing-function:var(--ease-out-expo)] " +
-  "hover:border-violet/60 focus:border-violet focus:outline-none";
+  "hover:border-accent/60 focus:border-accent focus:outline-none";
 
 export function ContactForm() {
   const [values, setValues] = React.useState<Record<Field, string>>({
@@ -91,8 +91,8 @@ export function ContactForm() {
         role="status"
         aria-live="polite"
       >
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-mint/12">
-          <CheckCircle2 className="h-6 w-6 text-mint" aria-hidden="true" />
+        <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-positive/12">
+          <CheckCircle2 className="h-6 w-6 text-positive" aria-hidden="true" />
         </span>
         <h3 className="mt-5 text-xl font-semibold text-fg">
           Thanks, {values.name.trim().split(" ")[0]}. That is logged.
@@ -146,11 +146,11 @@ export function ContactForm() {
             onChange={(e) => update("name", e.target.value)}
             aria-invalid={errors.name ? true : undefined}
             aria-describedby={errors.name ? "contact-name-error" : undefined}
-            className={cn(FIELD_BASE, errors.name ? "border-violet" : "border-edge")}
+            className={cn(FIELD_BASE, errors.name ? "border-accent" : "border-edge")}
             placeholder="Rohit Menon"
           />
           {errors.name ? (
-            <p id="contact-name-error" role="alert" className="mt-2 text-sm text-violet">
+            <p id="contact-name-error" role="alert" className="mt-2 text-sm text-accent">
               {errors.name}
             </p>
           ) : null}
@@ -172,11 +172,11 @@ export function ContactForm() {
             onChange={(e) => update("email", e.target.value)}
             aria-invalid={errors.email ? true : undefined}
             aria-describedby={errors.email ? "contact-email-error" : undefined}
-            className={cn(FIELD_BASE, errors.email ? "border-violet" : "border-edge")}
+            className={cn(FIELD_BASE, errors.email ? "border-accent" : "border-edge")}
             placeholder="you@example.com"
           />
           {errors.email ? (
-            <p id="contact-email-error" role="alert" className="mt-2 text-sm text-violet">
+            <p id="contact-email-error" role="alert" className="mt-2 text-sm text-accent">
               {errors.email}
             </p>
           ) : null}
@@ -203,7 +203,7 @@ export function ContactForm() {
           className={cn(
             FIELD_BASE,
             "resize-y",
-            errors.message ? "border-violet" : "border-edge",
+            errors.message ? "border-accent" : "border-edge",
           )}
           placeholder="Tell us which banks and UPI apps you use, and what you are trying to sort out."
         />
@@ -212,7 +212,7 @@ export function ContactForm() {
           need them.
         </p>
         {errors.message ? (
-          <p id="contact-message-error" role="alert" className="mt-2 text-sm text-violet">
+          <p id="contact-message-error" role="alert" className="mt-2 text-sm text-accent">
             {errors.message}
           </p>
         ) : null}

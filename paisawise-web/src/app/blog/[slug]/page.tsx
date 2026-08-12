@@ -58,7 +58,7 @@ function Block({ block }: { block: BlogBlock }) {
       <ul className="mt-6 space-y-3.5">
         {block.content.map((item) => (
           <li key={item} className="flex gap-3.5">
-            <Check className="mt-1.5 h-4 w-4 shrink-0 text-violet" aria-hidden="true" />
+            <Check className="mt-1.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
             <span
               className={`text-[1.05rem] leading-relaxed text-copy${
                 hasFigure(item) ? " num" : ""
@@ -100,7 +100,7 @@ export default async function BlogPostPage({
         <div className="relative max-w-3xl">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-pale transition-colors duration-200 hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-copy transition-colors duration-200 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             All posts
@@ -111,8 +111,8 @@ export default async function BlogPostPage({
           <h1 className="mt-5 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-white">
             {post.title}
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-pale">{post.excerpt}</p>
-          <div className="num mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-pale">
+          <p className="mt-5 text-lg leading-relaxed text-copy">{post.excerpt}</p>
+          <div className="num mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-copy">
             <span className="font-semibold text-white">{post.author}</span>
             <span aria-hidden="true">·</span>
             <span>{post.authorRole}</span>
@@ -163,7 +163,7 @@ export default async function BlogPostPage({
             <Card
               key={next.slug}
               as="article"
-              className="group relative flex h-full flex-col transition-colors duration-200 hover:border-violet"
+              className="group relative flex h-full flex-col transition-colors duration-200 hover:border-accent"
             >
               <Badge tone="neutral" className="self-start">
                 {next.category}

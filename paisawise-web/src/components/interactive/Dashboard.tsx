@@ -100,7 +100,7 @@ export function Dashboard() {
                 "rounded-full px-5 py-2 text-sm font-semibold transition-colors",
                 m.key === monthKey
                   ? "bg-violet text-white"
-                  : "text-copy hover:text-violet",
+                  : "text-copy hover:text-accent",
               )}
             >
               {m.label}
@@ -111,7 +111,7 @@ export function Dashboard() {
         <button
           onClick={() => setShowTable((v) => !v)}
           aria-pressed={showTable}
-          className="inline-flex items-center gap-2 rounded-full border border-edge px-4 py-2 text-sm font-medium text-copy transition-colors hover:border-violet hover:text-violet"
+          className="inline-flex items-center gap-2 rounded-full border border-edge px-4 py-2 text-sm font-medium text-copy transition-colors hover:border-accent hover:text-accent"
         >
           <Table2 size={15} />
           {showTable ? "Show charts" : "Show table"}
@@ -123,7 +123,7 @@ export function Dashboard() {
         {[
           { label: "Money in", value: month.income, tone: "" },
           { label: "Spent", value: totals.spent, tone: "" },
-          { label: "Left over", value: totals.saved, tone: "text-mint" },
+          { label: "Left over", value: totals.saved, tone: "text-positive" },
           { label: "Budget set", value: totals.budget, tone: "" },
         ].map((k) => (
           <div key={k.label} className="rounded-2xl border border-edge bg-panel p-5">
@@ -141,9 +141,9 @@ export function Dashboard() {
       {totals.over.length > 0 ? (
         <div
           role="status"
-          className="flex flex-wrap items-start gap-3 rounded-2xl border border-violet bg-accent-soft p-5"
+          className="flex flex-wrap items-start gap-3 rounded-2xl border border-accent bg-accent-soft p-5"
         >
-          <AlertTriangle size={20} className="mt-0.5 shrink-0 text-violet" aria-hidden />
+          <AlertTriangle size={20} className="mt-0.5 shrink-0 text-accent" aria-hidden />
           <div className="flex-1">
             <p className="font-semibold text-fg">
               {totals.over.length === 1
@@ -189,12 +189,12 @@ export function Dashboard() {
                   </td>
                   <td className="px-5 py-3 text-right">
                     {c.over ? (
-                      <span className="num inline-flex items-center gap-1.5 text-violet">
+                      <span className="num inline-flex items-center gap-1.5 text-accent">
                         <AlertTriangle size={13} aria-hidden />
                         Over by {rupees(c.spent - c.budget)}
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 text-mint">
+                      <span className="inline-flex items-center gap-1.5 text-positive">
                         <Check size={13} aria-hidden />
                         On track
                       </span>
@@ -334,7 +334,7 @@ export function Dashboard() {
                   <span className="text-copy">{c.label}</span>
                   <span className="flex items-center gap-2">
                     {c.over ? (
-                      <span className="num inline-flex items-center gap-1 font-semibold text-violet">
+                      <span className="num inline-flex items-center gap-1 font-semibold text-accent">
                         <AlertTriangle size={11} aria-hidden />
                         over {rupees(c.spent - c.budget)}
                       </span>
@@ -358,7 +358,7 @@ export function Dashboard() {
           <ul className="mt-5 space-y-3">
             {LINKED_ACCOUNTS.map((a) => (
               <li key={a.name} className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-accent-soft text-violet">
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-accent-soft text-accent">
                   {a.kind === "bank" ? <Building2 size={16} /> : <Smartphone size={16} />}
                 </span>
                 <span className="flex-1">

@@ -21,30 +21,34 @@ export default function Home() {
       {/* 1 · PAS:PROBLEM — the question is the hero */}
       <Hero />
 
-      {/* 2 · Cialdini:social-proof — guide credibility, immediately after the hook */}
-      <section className="border-y border-edge bg-panel-alt py-10">
-        <div className="shell">
-          <Reveal
-            selector="[data-stat]"
-            className="grid grid-cols-2 gap-8 md:grid-cols-4"
-          >
-            {[
-              { to: 4, suffix: "", label: "Accounts linked on average" },
-              { to: 12, suffix: " months", label: "Of history read on day one" },
-              { to: 1, suffix: " call", label: "With a certified advisor, monthly" },
-              { to: 499, prefix: "₹", label: "A month, cancel anytime" },
-            ].map((s) => (
-              <div key={s.label} data-stat>
-                <div className="text-[clamp(1.7rem,3.4vw,2.4rem)] font-bold leading-none text-fg">
-                  {s.prefix}
-                  <Counter to={s.to} />
-                  {s.suffix}
-                </div>
-                <p className="mt-2 text-sm leading-snug text-copy">{s.label}</p>
+      {/* 2 · Cialdini:social-proof — guide credibility, immediately after the hook.
+             Edge-to-edge cells: the dividers are the page grid, not card borders.
+             -mr-px tucks the last column's edge under the frame rail. */}
+      <section className="border-b border-edge bg-panel-alt">
+        <Reveal
+          selector="[data-stat]"
+          className="-mr-px grid grid-cols-2 md:grid-cols-4"
+        >
+          {[
+            { to: 4, suffix: "", label: "Accounts linked on average" },
+            { to: 12, suffix: " months", label: "Of history read on day one" },
+            { to: 1, suffix: " call", label: "With a certified advisor, monthly" },
+            { to: 499, prefix: "₹", label: "A month, cancel anytime" },
+          ].map((s) => (
+            <div
+              key={s.label}
+              data-stat
+              className="border-b border-r border-edge px-6 py-8 last:border-b-0 md:border-b-0 md:px-8"
+            >
+              <div className="num text-[clamp(1.7rem,3.4vw,2.4rem)] font-semibold leading-none text-fg">
+                {s.prefix}
+                <Counter to={s.to} />
+                {s.suffix}
               </div>
-            ))}
-          </Reveal>
-        </div>
+              <p className="mt-2.5 text-sm leading-snug text-copy">{s.label}</p>
+            </div>
+          ))}
+        </Reveal>
       </section>
 
       {/* 3 · PAS:AGITATE · Cialdini:loss-aversion — no CTA, tension must not resolve here */}
@@ -71,7 +75,7 @@ export default function Home() {
             },
           ].map((p) => (
             <Card key={p.n} data-pain className="border-edge p-8">
-              <span className="num text-sm font-bold text-violet">{p.n}</span>
+              <span className="num text-sm font-bold text-accent">{p.n}</span>
               <h3 className="mt-4 text-2xl font-semibold text-fg">{p.title}</h3>
               <p className="mt-4 leading-relaxed text-copy">{p.body}</p>
             </Card>
@@ -113,10 +117,13 @@ export default function Home() {
             lede="The plan is short on purpose. A long onboarding is where good intentions go to die."
           />
         </Reveal>
-        <Reveal selector="[data-step]" className="mt-14 grid gap-6 md:grid-cols-3">
+        <Reveal
+          selector="[data-step]"
+          className="mt-14 grid overflow-hidden rounded-2xl border border-edge md:grid-cols-3"
+        >
           {HOW_IT_WORKS.map((s) => (
-            <Card key={s.step} data-step className="relative p-8">
-              <span className="num text-4xl font-bold text-accent-soft">
+            <Card key={s.step} data-step variant="cell" className="relative p-8">
+              <span className="num text-4xl font-semibold text-accent">
                 {s.step}
               </span>
               <h3 className="mt-4 text-xl font-semibold text-fg">{s.title}</h3>
@@ -177,7 +184,7 @@ export default function Home() {
             <div className="bg-panel px-5 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-dim md:px-8">
               Free tracking apps
             </div>
-            <div className="bg-ink px-5 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-white md:px-8">
+            <div className="bg-panel-alt px-5 py-4 text-xs font-semibold uppercase tracking-[0.12em] text-white md:px-8">
               PaisaWise
             </div>
           </div>
@@ -193,7 +200,7 @@ export default function Home() {
                 <span className="text-sm text-copy">{row.free}</span>
               </div>
               <div className="flex items-center gap-3 border-l border-edge bg-accent-soft-2 px-5 py-4 md:px-8">
-                <Check size={15} className="shrink-0 text-mint" aria-hidden />
+                <Check size={15} className="shrink-0 text-positive" aria-hidden />
                 <span className="text-sm font-semibold text-fg">
                   {row.paisawise}
                 </span>
@@ -221,10 +228,10 @@ export default function Home() {
         </Reveal>
         <Reveal
           selector="[data-quote]"
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid overflow-hidden rounded-2xl border border-edge sm:grid-cols-2 lg:grid-cols-4"
         >
           {TESTIMONIALS.map((t) => (
-            <Card key={t.name} data-quote className="flex flex-col">
+            <Card key={t.name} data-quote variant="cell" className="flex flex-col">
               <div className="flex gap-0.5" aria-label={`${t.rating} out of 5`}>
                 {Array.from({ length: 5 }, (_, i) => (
                   <Star
@@ -233,7 +240,7 @@ export default function Home() {
                     aria-hidden
                     className={
                       i < t.rating
-                        ? "fill-violet text-violet"
+                        ? "fill-accent text-accent"
                         : "text-edge"
                     }
                   />
@@ -257,7 +264,7 @@ export default function Home() {
       </Section>
 
       {/* 10 · risk reversal · Cialdini:authority */}
-      <Section tone="ink" className="bg-ink">
+      <Section tone="ink" className="bg-panel-alt">
         <Reveal>
           <SectionHead
             eyebrow="Security"
@@ -268,20 +275,16 @@ export default function Home() {
         </Reveal>
         <Reveal
           selector="[data-trust]"
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid overflow-hidden rounded-2xl border border-edge sm:grid-cols-2 lg:grid-cols-4"
         >
           {TRUST_POINTS.map((t, i) => {
             const Icon = [ShieldCheck, Lock, XCircle, BadgeCheck][i];
             return (
-              <div
-                key={t.label}
-                data-trust
-                className="rounded-2xl border border-ink-3 bg-ink-2 p-6"
-              >
-                <Icon size={20} className="text-violet-l" aria-hidden />
-                <h3 className="mt-4 font-semibold text-white">{t.label}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-pale">{t.note}</p>
-              </div>
+              <Card key={t.label} data-trust variant="cell">
+                <Icon size={20} className="text-accent" aria-hidden />
+                <h3 className="mt-4 font-semibold text-fg">{t.label}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-copy">{t.note}</p>
+              </Card>
             );
           })}
         </Reveal>
@@ -315,11 +318,11 @@ export default function Home() {
             </Button>
           </Card>
 
-          <Card className="relative border-violet bg-accent-soft-2 p-8">
+          <Card className="relative border-accent bg-accent-soft-2 p-8">
             <Badge className="absolute -top-3 left-8">
               Saves {rupees(PRICE.yearlySaving)}
             </Badge>
-            <p className="text-sm font-semibold text-violet">Yearly</p>
+            <p className="text-sm font-semibold text-accent">Yearly</p>
             <p className="mt-3">
               <span className="num text-5xl font-bold text-fg">
                 {rupees(PRICE.yearly)}
@@ -348,7 +351,7 @@ export default function Home() {
           </div>
           <p className="mt-6 text-center text-sm text-copy">
             Not sure which fits?{" "}
-            <Link href="/get-started" className="font-semibold text-violet underline underline-offset-4">
+            <Link href="/get-started" className="font-semibold text-accent underline underline-offset-4">
               Answer four questions
             </Link>{" "}
             and we will tell you where to start.
@@ -361,9 +364,12 @@ export default function Home() {
         <Reveal>
           <SectionHead eyebrow="Questions" title="The ones people ask on the first call" />
         </Reveal>
-        <Reveal selector="[data-faq]" className="mt-12 grid gap-5 lg:grid-cols-2">
+        <Reveal
+          selector="[data-faq]"
+          className="mt-12 grid overflow-hidden rounded-2xl border border-edge lg:grid-cols-2"
+        >
           {FAQS.slice(0, 4).map((f) => (
-            <Card key={f.q} data-faq>
+            <Card key={f.q} data-faq variant="cell">
               <h3 className="font-semibold text-fg">{f.q}</h3>
               <p className="mt-3 text-sm leading-relaxed text-copy">{f.a}</p>
             </Card>
@@ -378,35 +384,33 @@ export default function Home() {
       </Section>
 
       {/* 13 · AIDA:action · Cialdini:reciprocity — the RM waiver ask, straight from the brief */}
-      <section className="relative overflow-hidden bg-ink py-24 text-white md:py-32">
+      <section className="relative overflow-hidden py-28 md:py-36">
+        {/* Grid floor and bloom, borrowed from the reference. Decorative only. */}
+        <div aria-hidden className="gridfloor absolute inset-0" />
         <div
           aria-hidden
-          className="pointer-events-none absolute bottom-[-16rem] left-1/2 h-[30rem] w-[46rem] -translate-x-1/2 rounded-full opacity-40 blur-[110px]"
+          className="pointer-events-none absolute bottom-[-18rem] left-1/2 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full opacity-40 blur-[110px]"
           style={{
             background:
-              "radial-gradient(circle, var(--color-violet) 0%, rgba(108,76,241,0.3) 50%, transparent 70%)",
+              "radial-gradient(circle, var(--color-violet) 0%, transparent 70%)",
           }}
         />
         <div className="shell relative text-center">
           <Reveal>
-            <h2 className="mx-auto max-w-3xl text-[clamp(1.9rem,4.4vw,3rem)] font-semibold">
+            <h2 className="text-fade mx-auto max-w-3xl text-[clamp(2rem,4.6vw,3.2rem)] font-medium">
               Your salary already arrived. The question is what it does next.
             </h2>
-            <p className="mx-auto mt-6 max-w-xl leading-relaxed text-pale">
+            <p className="mx-auto mt-6 max-w-xl leading-relaxed text-copy">
               If your relationship manager introduced you, the{" "}
               {rupees(PRICE.onboarding)} onboarding fee is already waived. Book
               your first advisor call and start there.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button href="/get-started" variant="onInk" size="lg">
+              <Button href="/get-started" size="lg">
                 Get started
                 <ArrowRight size={18} />
               </Button>
-              <Button
-                href="/contact"
-                size="lg"
-                className="border border-ink-3 bg-transparent text-white hover:border-violet-l hover:bg-ink-2"
-              >
+              <Button href="/contact" variant="secondary" size="lg">
                 Book a call
               </Button>
             </div>

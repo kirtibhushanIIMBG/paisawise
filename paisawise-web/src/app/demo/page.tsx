@@ -35,12 +35,12 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="border-t border-edge bg-ink py-20 text-white md:py-24">
+      <section className="border-t border-edge bg-panel-alt py-20 text-white md:py-24">
         <div className="shell text-center">
           <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.6vw,2.5rem)] font-semibold">
             Yours would look like this by the end of week one
           </h2>
-          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-pale">
+          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-copy">
             Linking takes about fifteen minutes. The first advisor call happens in
             your opening month, and the {rupees(PRICE.onboarding)} onboarding fee
             is waived if your relationship manager sent you.
@@ -53,7 +53,7 @@ export default function DemoPage() {
             <Button
               href="/pricing"
               size="lg"
-              className="border border-ink-3 bg-transparent text-white hover:border-violet-l hover:bg-ink-2"
+              className="border border-edge bg-transparent text-white hover:border-accent hover:bg-panel"
             >
               See pricing
             </Button>

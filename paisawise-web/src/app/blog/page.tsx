@@ -37,7 +37,7 @@ export default function BlogIndexPage() {
           <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-white">
             Money advice that knows what rent costs in a metro
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-pale">
+          <p className="mt-6 text-lg leading-relaxed text-copy">
             Four pieces on the two problems every salaried professional we speak
             to describes: no clear view of where the money goes, and no
             confidence about where to put what is left.
@@ -47,7 +47,7 @@ export default function BlogIndexPage() {
 
       <Section className="py-14 md:py-20">
         {/* Lead post, given the width its argument needs */}
-        <Card className="group relative overflow-hidden p-0 transition-colors duration-200 hover:border-violet">
+        <Card className="group relative overflow-hidden p-0 transition-colors duration-200 hover:border-accent">
           <div className="grid md:grid-cols-[1.15fr_0.85fr]">
             <div className="p-7 md:p-10">
               <div className="flex flex-wrap items-center gap-3">
@@ -63,7 +63,7 @@ export default function BlogIndexPage() {
               <div className="mt-6">
                 <Meta post={featured} />
               </div>
-              <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-violet">
+              <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent">
                 Read the post
                 <ArrowRight
                   className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
@@ -98,7 +98,7 @@ export default function BlogIndexPage() {
             <Card
               key={post.slug}
               as="article"
-              className="group relative flex h-full flex-col transition-colors duration-200 hover:border-violet"
+              className="group relative flex h-full flex-col transition-colors duration-200 hover:border-accent"
             >
               <Badge tone="neutral" className="self-start">
                 {post.category}
@@ -112,7 +112,7 @@ export default function BlogIndexPage() {
               <div className="mt-6 flex items-end justify-between gap-4">
                 <Meta post={post} />
                 <ArrowUpRight
-                  className="h-5 w-5 shrink-0 text-violet transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  className="h-5 w-5 shrink-0 text-accent transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </div>

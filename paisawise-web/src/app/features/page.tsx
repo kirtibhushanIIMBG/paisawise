@@ -52,7 +52,7 @@ export default function FeaturesPage() {
               <Reveal key={f.slug}>
                 <Card className="grid gap-8 p-8 md:grid-cols-[auto_1fr] md:p-10">
                   <div className="flex items-start gap-5 md:flex-col md:items-center">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-violet">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-accent">
                       <Icon size={24} />
                     </span>
                     <span className="num text-sm font-bold text-dim md:mt-1">
@@ -61,7 +61,7 @@ export default function FeaturesPage() {
                   </div>
                   <div>
                     <h2 className="text-2xl font-semibold text-fg">{f.title}</h2>
-                    <p className="mt-2 text-lg text-violet">{f.short}</p>
+                    <p className="mt-2 text-lg text-accent">{f.short}</p>
                     <p className="mt-4 max-w-2xl leading-relaxed text-copy">
                       {f.body}
                     </p>

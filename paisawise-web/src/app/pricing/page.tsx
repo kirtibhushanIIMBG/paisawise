@@ -51,11 +51,11 @@ export default function PricingPage() {
           </Reveal>
 
           <Reveal>
-            <Card className="relative h-full border-violet bg-accent-soft-2 p-8 md:p-10">
+            <Card className="relative h-full border-accent bg-accent-soft-2 p-8 md:p-10">
               <Badge className="absolute -top-3 left-8">
                 Saves {rupees(PRICE.yearlySaving)}
               </Badge>
-              <p className="text-sm font-semibold text-violet">Yearly</p>
+              <p className="text-sm font-semibold text-accent">Yearly</p>
               <p className="mt-4">
                 <span className="num text-6xl font-bold text-fg">
                   {rupees(PRICE.yearly)}
@@ -81,7 +81,7 @@ export default function PricingPage() {
                 A one-time {rupees(PRICE.onboarding)} onboarding fee
               </span>{" "}
               covers account linking and your first financial review.{" "}
-              <span className="font-semibold text-violet">
+              <span className="font-semibold text-accent">
                 It is waived if your bank relationship manager introduced you.
               </span>
             </p>
@@ -96,7 +96,7 @@ export default function PricingPage() {
           <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {FEATURES.map((f) => (
               <li key={f.slug} className="flex gap-3">
-                <Check size={18} className="mt-0.5 shrink-0 text-mint" aria-hidden />
+                <Check size={18} className="mt-0.5 shrink-0 text-positive" aria-hidden />
                 <span>
                   <span className="block font-medium text-fg">{f.title}</span>
                   <span className="block text-sm text-copy">{f.short}</span>
@@ -140,7 +140,7 @@ export default function PricingPage() {
         <Reveal className="mt-8">
           <p className="text-copy">
             More questions are answered on the{" "}
-            <Link href="/faq" className="font-semibold text-violet underline underline-offset-4">
+            <Link href="/faq" className="font-semibold text-accent underline underline-offset-4">
               FAQ page
             </Link>
             .
@@ -148,13 +148,13 @@ export default function PricingPage() {
         </Reveal>
       </Section>
 
-      <section className="bg-ink py-20 text-white md:py-28">
+      <section className="bg-panel-alt py-20 text-white md:py-28">
         <div className="shell text-center">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.8vw,2.6rem)] font-semibold">
               Not sure which plan fits?
             </h2>
-            <p className="mx-auto mt-5 max-w-xl leading-relaxed text-pale">
+            <p className="mx-auto mt-5 max-w-xl leading-relaxed text-copy">
               Four questions and we will tell you where to start, and whether
               investing should wait a couple of months.
             </p>
@@ -166,7 +166,7 @@ export default function PricingPage() {
               <Button
                 href="/contact"
                 size="lg"
-                className="border border-ink-3 bg-transparent text-white hover:border-violet-l hover:bg-ink-2"
+                className="border border-edge bg-transparent text-white hover:border-accent hover:bg-panel"
               >
                 Talk to someone
               </Button>

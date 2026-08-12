@@ -75,7 +75,7 @@ export function Wordmark({
       )}
     >
       <span className={onInk ? "text-white" : "text-fg"}>Paisa</span>
-      <span className={onInk ? "text-violet-l" : "text-violet"}>Wise</span>
+      <span className={onInk ? "text-accent" : "text-accent"}>Wise</span>
     </span>
   );
 }
@@ -98,7 +98,7 @@ export function Logo({
           <span
             className={cn(
               "mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em]",
-              onInk ? "text-pale" : "text-dim",
+              onInk ? "text-copy" : "text-dim",
             )}
           >
             Your personal finance guide

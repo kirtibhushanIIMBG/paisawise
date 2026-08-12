@@ -19,9 +19,11 @@ const BUTTON_BASE =
   "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 const BUTTON_VARIANT: Record<string, string> = {
-  primary: "bg-violet text-white hover:bg-violet-d",
-  secondary: "border border-edge bg-panel text-fg hover:border-violet hover:text-violet",
-  ghost: "text-copy hover:text-violet",
+  primary: "shine bg-violet text-white hover:bg-violet-d",
+  secondary:
+    "shine border border-edge-strong bg-panel-alt text-fg hover:border-accent hover:text-accent",
+  ghost: "text-copy hover:text-accent",
+  /* A white button stays light on hover in both themes. */
   onInk: "bg-white text-ink hover:bg-violet-t",
 };
 
@@ -56,22 +58,33 @@ export function Button({
 
 /* ------------------------------------------------------------------ Card */
 
+/**
+ * `panel` is the free-standing rounded card. `cell` is a square tile that
+ * belongs to the page's hairline grid: it draws only a right and bottom edge,
+ * so a row of them tiles into the frame rails without doubling borders.
+ */
 export function Card({
   className,
   children,
+  variant = "panel",
   as: Tag = "div",
   ...rest
 }: {
   className?: string;
   children: React.ReactNode;
+  variant?: "panel" | "cell" | "glass";
   as?: React.ElementType;
 } & React.HTMLAttributes<HTMLElement>) {
+  const variants = {
+    panel: "rounded-2xl border border-edge bg-panel p-6",
+    cell: "border-b border-r border-edge bg-panel/40 p-7 hover:bg-panel",
+    glass:
+      "rounded-3xl border border-edge bg-panel/70 p-7 backdrop-blur-xl " +
+      "[background-image:radial-gradient(80%_60%_at_50%_0%,var(--color-accent-soft-2),transparent)]",
+  };
   return (
     <Tag
-      className={cn(
-        "rounded-2xl border border-edge bg-panel p-6 transition-colors duration-200",
-        className,
-      )}
+      className={cn("transition-colors duration-200", variants[variant], className)}
       {...rest}
     >
       {children}
@@ -81,26 +94,42 @@ export function Card({
 
 /* --------------------------------------------------------------- Section */
 
+/**
+ * A section is a cell in the page grid: it closes with a hairline so the
+ * vertical rails from the layout frame read as a continuous structure.
+ * `bleed` opts out of the inner padding for sections that draw their own
+ * edge-to-edge sub-grid.
+ */
 export function Section({
   id,
   className,
   tone = "surface",
+  bleed = false,
   children,
 }: {
   id?: string;
   className?: string;
   tone?: "surface" | "ink" | "alt";
+  bleed?: boolean;
   children: React.ReactNode;
 }) {
   const toneClass =
     tone === "ink"
-      ? "bg-ink text-white"
+      ? "bg-panel-alt text-fg"
       : tone === "alt"
-        ? "bg-panel-alt"
+        ? "bg-panel/50"
         : "bg-bg";
   return (
-    <section id={id} className={cn("py-20 md:py-28", toneClass, className)}>
-      <div className="shell">{children}</div>
+    <section
+      id={id}
+      className={cn(
+        "relative border-b border-edge",
+        !bleed && "py-20 md:py-28",
+        toneClass,
+        className,
+      )}
+    >
+      {bleed ? children : <div className="shell">{children}</div>}
     </section>
   );
 }
@@ -131,25 +160,20 @@ export function SectionHead({
       )}
     >
       {eyebrow ? (
-        <p className={cn("eyebrow mb-4", onInk && "text-violet-l")}>{eyebrow}</p>
+        <p className={cn("eyebrow mb-4", onInk && "text-accent")}>{eyebrow}</p>
       ) : null}
+      {/* Display type is medium weight and falls away toward the bottom-right,
+          matching the reference. Body copy never takes the fade. */}
       <h2
         className={cn(
-          "text-[clamp(1.9rem,4vw,2.9rem)] font-semibold",
-          onInk ? "text-white" : "text-fg",
+          "text-[clamp(2rem,4.2vw,3.1rem)] font-medium",
+          onInk ? "text-white" : "text-fade",
         )}
       >
         {title}
       </h2>
       {lede ? (
-        <p
-          className={cn(
-            "mt-5 text-lg leading-relaxed",
-            onInk ? "text-pale" : "text-copy",
-          )}
-        >
-          {lede}
-        </p>
+        <p className="mt-5 text-lg leading-relaxed text-copy">{lede}</p>
       ) : null}
     </div>
   );
@@ -167,8 +191,8 @@ export function Badge({
   className?: string;
 }) {
   const tones = {
-    violet: "bg-accent-soft text-violet",
-    mint: "bg-mint/12 text-mint",
+    violet: "bg-accent-soft text-accent",
+    mint: "bg-positive/12 text-positive",
     neutral: "bg-panel-alt text-copy border border-edge",
   };
   return (
@@ -210,15 +234,13 @@ export function Stat({
     <div>
       <div
         className={cn(
-          "num text-[clamp(1.6rem,3vw,2.2rem)] font-bold leading-none",
-          onInk ? "text-white" : "text-fg",
+          "num text-[clamp(1.7rem,3.2vw,2.4rem)] font-semibold leading-none",
+          onInk ? "text-white" : "text-fade",
         )}
       >
         {value}
       </div>
-      <div className={cn("mt-2 text-sm", onInk ? "text-pale" : "text-copy")}>
-        {label}
-      </div>
+      <div className="mt-2 text-sm text-copy">{label}</div>
     </div>
   );
 }

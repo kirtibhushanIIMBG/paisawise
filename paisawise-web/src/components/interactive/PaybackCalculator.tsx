@@ -68,7 +68,7 @@ function Track({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="text-sm font-semibold text-pale">
+        <label htmlFor={id} className="text-sm font-semibold text-copy">
           {label}
         </label>
         <output htmlFor={id} className="num text-lg font-bold text-white">
@@ -85,12 +85,12 @@ function Track({
         onValueChange={([v]) => onChange(v)}
         aria-label={label}
       >
-        <Slider.Track className="relative h-1.5 w-full grow rounded-full bg-ink-3">
+        <Slider.Track className="relative h-1.5 w-full grow rounded-full bg-panel-alt">
           <Slider.Range className="absolute h-full rounded-full bg-violet-l" />
         </Slider.Track>
-        <Slider.Thumb className="block h-5 w-5 rounded-full border-2 border-violet-l bg-white shadow-lg transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" />
+        <Slider.Thumb className="block h-5 w-5 rounded-full border-2 border-accent bg-white shadow-lg transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" />
       </Slider.Root>
-      <p className="mt-2 text-xs text-muted">{hint}</p>
+      <p className="mt-2 text-xs text-dim">{hint}</p>
     </div>
   );
 }
@@ -109,18 +109,18 @@ export function PaybackCalculator({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-3xl border border-ink-3 bg-ink text-white",
+        "overflow-hidden rounded-3xl border border-edge bg-panel-alt text-white",
         className,
       )}
     >
       <div className="grid gap-0 lg:grid-cols-[1fr_1.05fr]">
         {/* controls */}
-        <div className="border-b border-ink-3 p-8 lg:border-b-0 lg:border-r lg:p-10">
-          <p className="eyebrow text-violet-l">Work it out yourself</p>
+        <div className="border-b border-edge p-8 lg:border-b-0 lg:border-r lg:p-10">
+          <p className="eyebrow text-accent">Work it out yourself</p>
           <h3 className="mt-3 text-2xl font-semibold text-white">
             Does {rupees(PRICE.monthly)} a month pay for itself?
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-pale">
+          <p className="mt-3 text-sm leading-relaxed text-copy">
             Drag your salary and the share you think PaisaWise could help you keep.
             The arithmetic is the same one your advisor will walk you through.
           </p>
@@ -155,31 +155,31 @@ export function PaybackCalculator({ className }: { className?: string }) {
         <div className="p-8 lg:p-10">
           <dl className="space-y-6">
             <div className="flex items-baseline justify-between gap-4">
-              <dt className="text-sm text-pale">You could keep</dt>
+              <dt className="text-sm text-copy">You could keep</dt>
               <dd
-                className="num text-[clamp(2rem,5vw,2.75rem)] font-bold leading-none text-mint"
+                className="num text-[clamp(2rem,5vw,2.75rem)] font-bold leading-none text-positive"
                 data-testid="calc-saving"
               >
                 {rupees(saving)}
               </dd>
             </div>
 
-            <div className="flex items-baseline justify-between gap-4 border-t border-ink-3 pt-6">
-              <dt className="text-sm text-pale">PaisaWise costs</dt>
+            <div className="flex items-baseline justify-between gap-4 border-t border-edge pt-6">
+              <dt className="text-sm text-copy">PaisaWise costs</dt>
               <dd className="num text-xl font-semibold text-white">
                 {rupees(PRICE.monthly)}
-                <span className="ml-2 text-sm font-normal text-muted">
+                <span className="ml-2 text-sm font-normal text-dim">
                   about {rupeesExact(PRICE.perDay)} a day
                 </span>
               </dd>
             </div>
 
-            <div className="flex items-baseline justify-between gap-4 border-t border-ink-3 pt-6">
-              <dt className="text-sm text-pale">Net, every month</dt>
+            <div className="flex items-baseline justify-between gap-4 border-t border-edge pt-6">
+              <dt className="text-sm text-copy">Net, every month</dt>
               <dd
                 className={cn(
                   "num text-2xl font-bold",
-                  worthIt ? "text-mint" : "text-pale",
+                  worthIt ? "text-positive" : "text-copy",
                 )}
                 data-testid="calc-net"
               >
@@ -188,11 +188,11 @@ export function PaybackCalculator({ className }: { className?: string }) {
             </div>
           </dl>
 
-          <div className="mt-8 rounded-2xl bg-ink-2 p-6">
+          <div className="mt-8 rounded-2xl bg-panel p-6">
             {worthIt ? (
               <p className="text-lg font-semibold text-white">
                 That is{" "}
-                <span className="num text-mint" data-testid="calc-multiple">
+                <span className="num text-positive" data-testid="calc-multiple">
                   {multiple.toFixed(1)}×
                 </span>{" "}
                 what it costs you.
@@ -203,7 +203,7 @@ export function PaybackCalculator({ className }: { className?: string }) {
                 advisor would tell you the same thing on the first call.
               </p>
             )}
-            <p className="mt-2 text-sm text-pale">
+            <p className="mt-2 text-sm text-copy">
               Over a year, that is{" "}
               <span className="num font-semibold text-white">
                 {rupees(result.yearlyNet)}
@@ -212,7 +212,7 @@ export function PaybackCalculator({ className }: { className?: string }) {
             </p>
           </div>
 
-          <IllustrationNote className="mt-5 text-muted" />
+          <IllustrationNote className="mt-5 text-dim" />
         </div>
       </div>
     </div>

@@ -41,12 +41,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Applies the stored theme before paint so there is no flash of the wrong one. */
+/**
+ * Dark is the default presentation, so `dark` ships on the server-rendered
+ * html tag and this script only ever *removes* it. That way the default
+ * survives JavaScript being off, and there is no flash either way.
+ */
 const THEME_SCRIPT = `
 try {
-  var t = localStorage.getItem('pw-theme');
-  if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark');
+  if (localStorage.getItem('pw-theme') === 'light') {
+    document.documentElement.classList.remove('dark');
   }
 } catch (e) {}
 `;
@@ -55,7 +58,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" suppressHydrationWarning>
+    <html lang="en-IN" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
@@ -66,9 +69,12 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        {/* The rails. Everything on every route sits inside this frame. */}
+        <div className="frame min-h-screen">
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

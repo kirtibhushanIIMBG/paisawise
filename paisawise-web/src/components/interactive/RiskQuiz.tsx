@@ -92,7 +92,7 @@ export function RiskQuiz() {
           {(step > 0 || done) && (
             <button
               onClick={reset}
-              className="inline-flex items-center gap-1.5 text-sm text-copy transition-colors hover:text-violet"
+              className="inline-flex items-center gap-1.5 text-sm text-copy transition-colors hover:text-accent"
             >
               <RotateCcw size={14} />
               Start over
@@ -134,7 +134,7 @@ export function RiskQuiz() {
                 onClick={() => choose(o.score)}
                 className={cn(
                   "group flex w-full items-center justify-between gap-4 rounded-2xl border border-edge bg-bg px-5 py-4 text-left transition-all duration-200",
-                  "hover:border-violet hover:bg-accent-soft",
+                  "hover:border-accent hover:bg-accent-soft",
                 )}
               >
                 <span>
@@ -145,7 +145,7 @@ export function RiskQuiz() {
                 </span>
                 <ArrowRight
                   size={17}
-                  className="shrink-0 text-dim transition-transform group-hover:translate-x-1 group-hover:text-violet"
+                  className="shrink-0 text-dim transition-transform group-hover:translate-x-1 group-hover:text-accent"
                   aria-hidden
                 />
               </button>
@@ -155,7 +155,7 @@ export function RiskQuiz() {
           {step > 0 ? (
             <button
               onClick={() => setStep(step - 1)}
-              className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-copy transition-colors hover:text-violet"
+              className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-copy transition-colors hover:text-accent"
             >
               <ArrowLeft size={15} />
               Back
@@ -183,7 +183,7 @@ export function RiskQuiz() {
               <ul className="mt-4 space-y-3">
                 {persona.focus.map((f) => (
                   <li key={f} className="flex gap-3 text-sm text-copy">
-                    <Check size={16} className="mt-0.5 shrink-0 text-mint" aria-hidden />
+                    <Check size={16} className="mt-0.5 shrink-0 text-positive" aria-hidden />
                     {f}
                   </li>
                 ))}
@@ -202,7 +202,7 @@ export function RiskQuiz() {
           </div>
 
           {/* lead capture, inert mock */}
-          <div className="mt-8 rounded-2xl border border-violet bg-accent-soft p-6">
+          <div className="mt-8 rounded-2xl border border-accent bg-accent-soft p-6">
             {!submitted ? (
               <form
                 onSubmit={(e) => {
@@ -226,7 +226,7 @@ export function RiskQuiz() {
                     type="email"
                     required
                     placeholder="you@example.com"
-                    className="num flex-1 rounded-full border border-edge bg-panel px-5 py-3 text-sm text-fg outline-none placeholder:text-dim focus-visible:border-violet"
+                    className="num flex-1 rounded-full border border-edge bg-panel px-5 py-3 text-sm text-fg outline-none placeholder:text-dim focus-visible:border-accent"
                   />
                   <Button type="submit">Send my result</Button>
                 </div>
@@ -236,7 +236,7 @@ export function RiskQuiz() {
               </form>
             ) : (
               <div className="flex items-start gap-3">
-                <Check size={20} className="mt-0.5 shrink-0 text-mint" aria-hidden />
+                <Check size={20} className="mt-0.5 shrink-0 text-positive" aria-hidden />
                 <div>
                   <p className="font-semibold text-fg">That would normally be on its way.</p>
                   <p className="mt-1 text-sm text-copy">

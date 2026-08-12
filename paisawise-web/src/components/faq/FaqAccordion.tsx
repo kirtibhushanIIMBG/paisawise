@@ -69,7 +69,7 @@ export function FaqAccordion({
                     "flex w-full items-start justify-between gap-5 px-5 py-5 text-left md:px-7 md:py-6",
                     "text-base font-semibold text-fg transition-colors duration-200",
                     "[transition-timing-function:var(--ease-out-expo)]",
-                    "hover:text-violet data-[state=open]:text-violet",
+                    "hover:text-accent data-[state=open]:text-accent",
                   )}
                 >
                   <span className="pr-2">{item.q}</span>
@@ -77,7 +77,7 @@ export function FaqAccordion({
                     aria-hidden="true"
                     className={cn(
                       "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
-                      "border border-edge text-violet transition-transform duration-200",
+                      "border border-edge text-accent transition-transform duration-200",
                       "[transition-timing-function:var(--ease-out-expo)]",
                       "group-data-[state=open]:rotate-45 group-data-[state=open]:bg-accent-soft",
                     )}

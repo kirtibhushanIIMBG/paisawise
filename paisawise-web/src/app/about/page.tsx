@@ -77,7 +77,7 @@ export default function AboutPage() {
             Good financial guidance should not depend on how much money you
             already have.
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-pale">
+          <p className="mt-6 text-lg leading-relaxed text-copy">
             A salaried professional earning a solid income in an Indian city
             gets a product brochure. Someone with a crore gets a person who
             knows their name. PaisaWise exists to close that gap for the first
@@ -96,7 +96,7 @@ export default function AboutPage() {
               variant="ghost"
               size="lg"
               href="/contact"
-              className="border border-edge text-white hover:text-violet-l"
+              className="border border-edge text-white hover:text-accent"
             >
               Book a call
             </Button>
@@ -175,7 +175,7 @@ export default function AboutPage() {
             return (
               <Card key={belief.title} className="bg-panel">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
-                  <Icon className="h-5 w-5 text-violet" aria-hidden="true" />
+                  <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
                 </span>
                 <h3 className="mt-5 text-xl font-semibold text-fg">{belief.title}</h3>
                 <p className="mt-3 leading-relaxed text-copy">{belief.body}</p>
@@ -202,12 +202,12 @@ export default function AboutPage() {
             <Card key={person.name} className="flex h-full flex-col">
               <span
                 aria-hidden="true"
-                className="num inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-lg font-bold text-violet"
+                className="num inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-lg font-bold text-accent"
               >
                 {person.initials}
               </span>
               <h3 className="mt-5 text-lg font-semibold text-fg">{person.name}</h3>
-              <p className="mt-1 text-sm font-semibold text-violet">{person.role}</p>
+              <p className="mt-1 text-sm font-semibold text-accent">{person.role}</p>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-copy">{person.bio}</p>
             </Card>
           ))}
@@ -223,7 +223,7 @@ export default function AboutPage() {
               You are the one doing the saving. We just make it obvious what to
               do next.
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-pale">
+            <p className="mt-5 text-lg leading-relaxed text-copy">
               Answer four questions and see the plan we would build for you. It
               takes about two minutes and costs nothing.
             </p>
@@ -237,7 +237,7 @@ export default function AboutPage() {
               variant="ghost"
               size="lg"
               href="/contact"
-              className="border border-edge text-white hover:text-violet-l"
+              className="border border-edge text-white hover:text-accent"
             >
               Book a call
             </Button>

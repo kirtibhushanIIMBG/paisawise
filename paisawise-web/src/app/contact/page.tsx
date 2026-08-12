@@ -40,7 +40,7 @@ export default function ContactPage() {
             Three ways to reach us. One of them saves you{" "}
             <span className="num">{rupees(PRICE.onboarding)}</span>.
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-pale">
+          <p className="mt-6 text-lg leading-relaxed text-copy">
             Most people arrive here through a bank relationship manager after a
             branch visit. If that is you, start with the first option. If it is
             not, the other two work just as well.
@@ -50,12 +50,12 @@ export default function ContactPage() {
 
       {/* Door 1: the RM channel. Primary lead source, so it gets the weight. */}
       <Section className="py-14 md:py-20">
-        <Card className="overflow-hidden border-violet/30 bg-panel p-0">
+        <Card className="overflow-hidden border-accent/30 bg-panel p-0">
           <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
             <div className="p-7 md:p-10">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
-                  <Building2 className="h-5 w-5 text-violet" aria-hidden="true" />
+                  <Building2 className="h-5 w-5 text-accent" aria-hidden="true" />
                 </span>
                 <Badge tone="mint">
                   <Check className="h-3.5 w-3.5" aria-hidden="true" />
@@ -78,7 +78,7 @@ export default function ContactPage() {
               <ol className="mt-8 space-y-4">
                 {RM_STEPS.map((step, index) => (
                   <li key={step} className="flex gap-4">
-                    <span className="num mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-violet">
+                    <span className="num mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
                       {index + 1}
                     </span>
                     <span className="leading-relaxed text-copy">{step}</span>
@@ -112,7 +112,7 @@ export default function ContactPage() {
               <hr className="my-7 border-edge" />
               <p className="eyebrow">Written enquiries</p>
               <p className="mt-4 flex items-center gap-2 text-copy">
-                <Mail className="h-4 w-4 shrink-0 text-violet" aria-hidden="true" />
+                <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
                 hello@paisawise.example
               </p>
               <p className="mt-3 text-sm text-dim">
@@ -147,7 +147,7 @@ export default function ContactPage() {
           <div className="space-y-5">
             <Card className="bg-panel">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
-                <CalendarClock className="h-5 w-5 text-violet" aria-hidden="true" />
+                <CalendarClock className="h-5 w-5 text-accent" aria-hidden="true" />
               </span>
               <h3 className="mt-5 text-xl font-semibold text-fg">
                 Book an advisor call
@@ -160,7 +160,7 @@ export default function ContactPage() {
                 {CALL_COVERS.map((line) => (
                   <li key={line} className="flex gap-3 text-[0.95rem] leading-relaxed text-copy">
                     <Check
-                      className="mt-1 h-4 w-4 shrink-0 text-mint"
+                      className="mt-1 h-4 w-4 shrink-0 text-positive"
                       aria-hidden="true"
                     />
                     <span>{line}</span>

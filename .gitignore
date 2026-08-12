@@ -48,3 +48,6 @@ npm-debug.log*
 yarn-error.log*
 .vercel
 *.tsbuildinfo
+
+# Office lock/temp files
+~$*

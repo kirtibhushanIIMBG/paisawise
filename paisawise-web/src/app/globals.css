@@ -24,6 +24,26 @@
   --color-violet-t2: #f5f2ff;
   --color-mint: #12b981;
 
+  /* Near-black field. The site's default presentation is dark: a hairline grid
+     drawn on a near-black ground, with violet as the single accent hue. The
+     brand colours above still drive the accent, so the deck and the site agree.
+     Named for what they are rather than by Tailwind scale, which is banned. */
+  --color-void: #09090b;
+  --color-void-2: #0e0e12;
+  --color-void-3: #131318;
+  --color-hairline: #212127;
+  --color-hairline-2: #2c2c34;
+  --color-quiet: #a1a1aa;
+  --color-faint: #71717a;
+  --color-mint-l: #34d399;
+
+  /* Chart steps for the dark surface. Snapped with the dataviz validator
+     against the #0e0e12 cell fill, not eyeballed: the previous dark steps
+     dropped to 1.76:1 on this ground and disappeared. */
+  --color-plot: #8b74f0;
+  --color-plot-soft: #4a4080;
+  --color-plot-ref: #7c7c8a;
+
   --font-display: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
@@ -39,11 +59,13 @@
   --panel: var(--color-card);
   --panel-alt: var(--color-card-alt);
   --edge: var(--color-line);
+  --edge-strong: #d7d2e8;
   --copy: var(--color-body);
   --dim: var(--color-muted);
   --accent: var(--color-violet);
   --accent-soft: var(--color-violet-t);
   --accent-soft-2: var(--color-violet-t2);
+  --positive: var(--color-mint);
 
   /* Chart tokens. Spending categories are nominal, so every bar takes the same
      single hue: a value-ramp across nominal categories double-encodes bar
@@ -55,24 +77,29 @@
   --chart-axis: var(--color-muted);
 }
 
+/* The default presentation. Sections are cells in a hairline grid drawn on a
+   near-black ground; `--edge` is the grid line and carries most of the layout,
+   so it is a real colour rather than a faint alpha. */
 .dark {
-  --bg: var(--color-ink);
+  --bg: var(--color-void);
   --fg: #ffffff;
-  --panel: var(--color-ink-2);
-  --panel-alt: #1d1934;
-  --edge: var(--color-ink-3);
-  --copy: var(--color-pale);
-  --dim: var(--color-muted);
+  --panel: var(--color-void-2);
+  --panel-alt: var(--color-void-3);
+  --edge: var(--color-hairline);
+  --edge-strong: var(--color-hairline-2);
+  --copy: var(--color-quiet);
+  --dim: var(--color-faint);
   --accent: var(--color-violet-l);
-  --accent-soft: #2a2350;
-  --accent-soft-2: #241f3d;
+  --accent-soft: #221d40;
+  --accent-soft-2: #191634;
+  --positive: var(--color-mint-l);
 
-  /* Dark-mode chart steps are chosen against the ink surface, not flipped. */
-  --chart-series: var(--color-violet-l);
-  --chart-series-soft: #3d3470;
-  --chart-ref: #6f679a;
-  --chart-grid: var(--color-ink-3);
-  --chart-axis: var(--color-muted);
+  /* Chosen against the cell fill, not flipped from light. See @theme above. */
+  --chart-series: var(--color-plot);
+  --chart-series-soft: var(--color-plot-soft);
+  --chart-ref: var(--color-plot-ref);
+  --chart-grid: var(--color-hairline);
+  --chart-axis: var(--color-faint);
 }
 
 @theme inline {
@@ -81,11 +108,13 @@
   --color-panel: var(--panel);
   --color-panel-alt: var(--panel-alt);
   --color-edge: var(--edge);
+  --color-edge-strong: var(--edge-strong);
   --color-copy: var(--copy);
   --color-dim: var(--dim);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-2: var(--accent-soft-2);
+  --color-positive: var(--positive);
 }
 
 @layer base {
@@ -95,6 +124,10 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
   }
   body {
     background: var(--bg);
@@ -155,6 +188,81 @@
       transparent 0
     );
     background-size: 22px 22px;
+  }
+
+  /* ---------------------------------------------------------------- frame
+     The page is drawn as a grid. Two vertical rails run the full height at the
+     content edges, and every section closes with a horizontal hairline, so
+     sections read as cells rather than as floating cards. This is the single
+     structural motif the whole layout hangs on. */
+  .frame {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    border-inline: 1px solid var(--edge);
+  }
+  /* Sections sit inside the rails, so the shell only pads. */
+  .frame .shell {
+    max-width: none;
+  }
+
+  /* Headline treatment: solid at the start, falling away toward the
+     bottom-right. Applied to display text only, never to body copy. */
+  .text-fade {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--fg) 25%,
+      color-mix(in srgb, var(--fg) 42%, var(--bg)) 78%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* A clipped gradient drops the text from the a11y tree in some engines
+       and clips descenders; both are fixed by padding the box. */
+    padding-block: 0.12em;
+  }
+
+  /* Soft violet bloom behind hero and product frames. Atmospheric only. */
+  .bloom::before {
+    content: "";
+    position: absolute;
+    inset: -30% -10% auto -10%;
+    height: 26rem;
+    pointer-events: none;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      color-mix(in srgb, var(--color-violet) 38%, transparent) 0%,
+      transparent 72%
+    );
+    filter: blur(90px);
+    z-index: 0;
+  }
+
+  /* Top-edge highlight that makes a dark pill read as raised. */
+  .shine {
+    box-shadow:
+      inset 0 1px 0 0 color-mix(in srgb, #ffffff 22%, transparent),
+      0 1px 2px 0 rgb(0 0 0 / 0.4);
+  }
+
+  /* Recessive dot field, used behind full-bleed CTA panels. */
+  .dotfield {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--edge-strong) 1px,
+      transparent 0
+    );
+    background-size: 28px 28px;
+    mask-image: radial-gradient(70% 60% at 50% 45%, #000 10%, transparent 75%);
+  }
+
+  /* Perspective grid for the closing panel, borrowed from the reference. */
+  .gridfloor {
+    background-image:
+      linear-gradient(to right, var(--edge) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--edge) 1px, transparent 1px);
+    background-size: 62px 62px;
+    mask-image: radial-gradient(60% 70% at 50% 40%, #000 5%, transparent 78%);
   }
 }
 

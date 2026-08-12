@@ -51,3 +51,6 @@ yarn-error.log*
 
 # Office lock/temp files
 ~$*
+
+# Local-only dev tooling (agentation feedback toolbar). Never pushed.
+paisawise-web/src/components/dev/

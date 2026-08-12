@@ -6,7 +6,6 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CursorGlow } from "@/components/motion/CursorGlow";
 import { ScrollFx } from "@/components/motion/ScrollFx";
-import { AgentationToolbar } from "@/components/dev/AgentationToolbar";
 
 /**
  * Clash Display carries headings. It has the rupee glyph but NO tabular
@@ -80,7 +79,6 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </div>
-        <AgentationToolbar />
       </body>
     </html>
   );

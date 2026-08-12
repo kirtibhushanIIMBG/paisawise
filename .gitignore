@@ -1,0 +1,50 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+build/
+next-env.d.ts
+paisawise-web/.next/
+paisawise-web/out/
+
+# testing
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# production renders / scratch
+*.pdf
+render/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# editor
+.vscode/
+.idea/
+*.swp
+
+# env
+.env
+.env*.local
+
+# misc
+*.log
+npm-debug.log*
+yarn-error.log*
+.vercel
+*.tsbuildinfo

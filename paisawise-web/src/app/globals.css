@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   PaisaWise design tokens.
+   Palette is inherited verbatim from the pitch deck (build_deck.py). Do not
+   introduce a colour that is not in this block.
+   Mint is reserved for positives only: gains, checkmarks, success.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #171526;
+  --color-ink-2: #241f3d;
+  --color-ink-3: #3a3163;
+  --color-surface: #f6f5fa;
+  --color-card: #ffffff;
+  --color-card-alt: #fbfafd;
+  --color-line: #e6e3f0;
+  --color-body: #5a5474;
+  --color-muted: #9a94b8;
+  --color-pale: #c9c3e4;
+  --color-violet: #6c4cf1;
+  --color-violet-l: #9b85ff;
+  --color-violet-t: #efeaff;
+  --color-violet-t2: #f5f2ff;
+  --color-mint: #12b981;
+
+  --font-display: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Semantic layer. Dark mode remaps these; component classes never hard-code a
+   raw brand colour for surfaces or text. */
+:root {
+  --bg: var(--color-surface);
+  --fg: var(--color-ink);
+  --panel: var(--color-card);
+  --panel-alt: var(--color-card-alt);
+  --edge: var(--color-line);
+  --copy: var(--color-body);
+  --dim: var(--color-muted);
+  --accent: var(--color-violet);
+  --accent-soft: var(--color-violet-t);
+  --accent-soft-2: var(--color-violet-t2);
+}
+
+.dark {
+  --bg: var(--color-ink);
+  --fg: #ffffff;
+  --panel: var(--color-ink-2);
+  --panel-alt: #1d1934;
+  --edge: var(--color-ink-3);
+  --copy: var(--color-pale);
+  --dim: var(--color-muted);
+  --accent: var(--color-violet-l);
+  --accent-soft: #2a2350;
+  --accent-soft-2: #241f3d;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-panel: var(--panel);
+  --color-panel-alt: var(--panel-alt);
+  --color-edge: var(--edge);
+  --color-copy: var(--copy);
+  --color-dim: var(--dim);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-2: var(--accent-soft-2);
+}
+
+@layer base {
+  * {
+    border-color: var(--edge);
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--color-violet);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* Every rupee figure, chart label and animated counter uses this.
+     Clash Display has no tnum, so numerals must fall back to Inter. */
+  .num {
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+  .shell {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .grain {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--color-violet) 22%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+}
+
+/* Motion is opt-out at the platform level, not per-component. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

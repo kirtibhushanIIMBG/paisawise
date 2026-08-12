@@ -18,6 +18,7 @@
   --color-muted: #9a94b8;
   --color-pale: #c9c3e4;
   --color-violet: #6c4cf1;
+  --color-violet-d: #5b3fd6;
   --color-violet-l: #9b85ff;
   --color-violet-t: #efeaff;
   --color-violet-t2: #f5f2ff;
@@ -43,6 +44,15 @@
   --accent: var(--color-violet);
   --accent-soft: var(--color-violet-t);
   --accent-soft-2: var(--color-violet-t2);
+
+  /* Chart tokens. Spending categories are nominal, so every bar takes the same
+     single hue: a value-ramp across nominal categories double-encodes bar
+     length as colour. Identity comes from the axis labels, not the fill. */
+  --chart-series: var(--color-violet);
+  --chart-series-soft: #d9cfff;
+  --chart-ref: var(--color-muted);
+  --chart-grid: var(--color-line);
+  --chart-axis: var(--color-muted);
 }
 
 .dark {
@@ -56,6 +66,13 @@
   --accent: var(--color-violet-l);
   --accent-soft: #2a2350;
   --accent-soft-2: #241f3d;
+
+  /* Dark-mode chart steps are chosen against the ink surface, not flipped. */
+  --chart-series: var(--color-violet-l);
+  --chart-series-soft: #3d3470;
+  --chart-ref: #6f679a;
+  --chart-grid: var(--color-ink-3);
+  --chart-axis: var(--color-muted);
 }
 
 @theme inline {

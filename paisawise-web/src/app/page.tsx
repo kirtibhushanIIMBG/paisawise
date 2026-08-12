@@ -4,6 +4,11 @@ import { Hero } from "@/components/sections/Hero";
 import { PhoneShowcase } from "@/components/sections/PhoneShowcase";
 import { PaybackCalculator } from "@/components/interactive/PaybackCalculator";
 import { Reveal, Counter } from "@/components/motion/Reveal";
+import {
+  ScatteredAccounts,
+  GenericAdvice,
+  DashboardPreview,
+} from "@/components/graphics/Illustrations";
 import { Button, Card, Section, SectionHead, Badge } from "@/components/ui/primitives";
 import {
   COMPARISON,
@@ -73,13 +78,17 @@ export default function Home() {
               title: "The advice you get is written for everyone",
               body: "Free apps hand the same five tips to five million people. None of it knows that you front-load the month, or that your rent moved last quarter, or that you have been sitting on a surplus since June without investing it.",
             },
-          ].map((p) => (
-            <Card key={p.n} data-pain className="border-edge p-8">
-              <span className="num text-sm font-bold text-accent">{p.n}</span>
-              <h3 className="mt-4 text-2xl font-semibold text-fg">{p.title}</h3>
-              <p className="mt-4 leading-relaxed text-copy">{p.body}</p>
-            </Card>
-          ))}
+          ].map((p) => {
+            const Art = p.n === "01" ? ScatteredAccounts : GenericAdvice;
+            return (
+              <Card key={p.n} data-pain className="flex flex-col border-edge p-8">
+                <span className="num text-sm font-bold text-accent">{p.n}</span>
+                <h3 className="mt-4 text-2xl font-semibold text-fg">{p.title}</h3>
+                <p className="mt-4 flex-1 leading-relaxed text-copy">{p.body}</p>
+                <Art className="mt-8 h-48 w-full" />
+              </Card>
+            );
+          })}
         </Reveal>
 
         <Reveal className="mt-8">
@@ -139,19 +148,32 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      {/* 6 · AIDA:desire — show the product working */}
+      {/* 6 · AIDA:desire — show the product working.
+             The preview does the persuading; the copy only frames it. */}
       <Section tone="alt">
-        <Reveal className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHead
-            eyebrow="Live demo"
-            title="Look at a real month before you pay for one"
-            lede="The demo below is a full working dashboard with a sample month loaded. Switch months, watch the categories move, see the alert fire."
-            className="max-w-2xl"
-          />
-          <Button href="/demo" size="lg">
-            Open the demo
-            <ArrowRight size={18} />
-          </Button>
+        <Reveal className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <SectionHead
+              eyebrow="Live demo"
+              title="Look at a real month before you pay for one"
+              lede="A full working dashboard with a sample month loaded. Switch months, watch the categories move, see the alert fire."
+            />
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href="/demo" size="lg">
+                Open the demo
+                <ArrowRight size={18} />
+              </Button>
+              <Button href="/pricing" variant="secondary" size="lg">
+                See pricing
+              </Button>
+            </div>
+            <p className="mt-6 text-sm text-dim">
+              No sign-up, no card, no bank connection to look around.
+            </p>
+          </div>
+          <div data-fx="parallax">
+            <DashboardPreview />
+          </div>
         </Reveal>
       </Section>
 

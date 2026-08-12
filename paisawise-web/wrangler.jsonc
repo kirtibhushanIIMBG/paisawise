@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "paisawise",
+  "compatibility_date": "2026-08-01",
+
+  // The site is a static export (next.config.ts sets output: "export"), so
+  // Cloudflare serves the out/ directory as assets. There is no Worker script
+  // and no server runtime: every route is prerendered HTML.
+  "assets": {
+    "directory": "./out",
+
+    // Serve the exported 404.html for unknown paths, rather than Cloudflare's
+    // generic error page.
+    "not_found_handling": "404-page"
+  }
+}

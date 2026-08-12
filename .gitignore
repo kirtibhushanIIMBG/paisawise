@@ -54,3 +54,6 @@ yarn-error.log*
 
 # Local-only dev tooling (agentation feedback toolbar). Never pushed.
 paisawise-web/src/components/dev/
+
+# Wrangler local state
+paisawise-web/.wrangler/

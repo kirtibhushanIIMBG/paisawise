@@ -73,7 +73,7 @@ export default function AboutPage() {
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="accent">About PaisaWise</Badge>
-          <h1 className="mt-6 text-[clamp(2.2rem,5.5vw,3.6rem)] font-semibold text-fg">
+          <h1 className="mt-6 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
             Good financial guidance should not depend on how much money you
             already have.
           </h1>

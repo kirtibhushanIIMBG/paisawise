@@ -66,6 +66,22 @@
      theme takes a darker green for text. */
   --color-emerald-d: #047857;
 
+  /* ------------------------------------------------------- secondary text
+     `--dim` is the site's caption step: hints under the sliders, transaction
+     dates, chart axis labels, the "Illustration, not a guarantee." note. It
+     is body text, so it owes 4.5:1, and the two hues it used to point at
+     never cleared it. Measured against the worst surface each theme puts it
+     on -- white #ffffff in light, panel-alt #131318 in dark:
+
+       #9a94b8 on #ffffff  2.88:1  fail   ->  #6f6890  5.17:1  pass
+       #71717a on #131318  3.83:1  fail   ->  #82828c  4.87:1  pass
+
+     Both keep the hue of the step they replace, and both stay clearly
+     recessive against `--copy` (6.55:1 light, 7.76:1 dark) so the two-tier
+     text hierarchy still reads. */
+  --color-muted-aa: #6f6890;
+  --color-faint-aa: #82828c;
+
   /* Chart steps for the dark surface. Snapped with the dataviz validator
      against the #0e0e12 cell fill, not eyeballed: the previous dark steps
      dropped to 1.76:1 on this ground and disappeared. */
@@ -103,7 +119,7 @@
   --edge: var(--color-line);
   --edge-strong: #d7d2e8;
   --copy: var(--color-body);
-  --dim: var(--color-muted);
+  --dim: var(--color-muted-aa);
   /* `accent` is the text-safe step, `accent-fill` the solid step for buttons
      and marks. They differ because gold cannot be both on a white ground. */
   --accent: var(--color-gold-ink);
@@ -115,13 +131,46 @@
   --warning: var(--color-coral-d);
   --on-accent: var(--color-ink);
 
+  /* Where `.text-fade` bottoms out. It was a flat 42% in both themes, which
+     put the tail of the h1 -- the words "all go?" -- at 2.54:1 here and
+     3.97:1 in dark. Both fail AA, and the headline is the one piece of text
+     on the page that cannot afford to. Ink on a light ground loses contrast
+     much faster than white on a dark one, so the two themes get their own
+     floor rather than a shared compromise that would flatten the dark fade
+     for no reason. */
+  --fade-end: 64%;
+
+  /* ------------------------------------------------------- hero scrim
+     Stops for the ellipse that protects the hero copy from the photographic
+     backdrop. Only the core sits behind text; the outer stop releases fast so
+     the rest of the frame shows the photograph.
+
+     Light needs a stronger core than dark. Dark mode puts white text over a
+     photo, and almost any photo is darker than white; light mode puts ink over
+     one, and a dark photo lands right on top of the ink. So the ground has to
+     be lifted harder here than it has to be dropped there. */
+  --hero-scrim-core: 97%;
+  --hero-scrim-mid: 80%;
+  --hero-scrim-outer: 14%;
+  /* The flat wash beneath the ellipse. Light needs far less of it than dark.
+     Mixing a mid-tone photograph toward #f6f5fa lifts its blacks and flattens
+     it into milk; mixing toward near-black only deepens it. The same 20% read
+     as atmospheric in dark and as washed-out here. */
+  --hero-wash: 7%;
+  /* Light still loses the punch the wash takes out, so give it back on the
+     plate itself rather than by thinning the scrim further -- thinning it
+     would darken the ground under the ink and cost headline contrast. */
+  --hero-plate-filter: contrast(1.06) saturate(1.06);
+
   /* Chart tokens. The single-hue series is the brand gold, darkened to the
      step that clears 3:1 against a white card. */
   --chart-series: var(--color-gold-plot);
   --chart-series-soft: #f0dcb4;
-  --chart-ref: var(--color-muted);
+  /* Axis ticks are text and owe 4.5:1; the reference line is a graphical
+     object and owes 3:1. `--color-muted` cleared neither on a white card. */
+  --chart-ref: var(--color-muted-aa);
   --chart-grid: var(--color-line);
-  --chart-axis: var(--color-muted);
+  --chart-axis: var(--color-muted-aa);
 }
 
 /* The default presentation. Sections are cells in a hairline grid drawn on a
@@ -135,7 +184,7 @@
   --edge: var(--color-hairline);
   --edge-strong: var(--color-hairline-2);
   --copy: var(--color-quiet);
-  --dim: var(--color-faint);
+  --dim: var(--color-faint-aa);
   --accent: var(--color-gold-l);
   --accent-fill: var(--color-gold);
   --accent-fill-h: var(--color-gold-l);
@@ -144,13 +193,28 @@
   --positive: var(--color-mint-l);
   --warning: var(--color-coral);
   --on-accent: var(--color-ink);
+  /* Retuned when the real photography landed. The placeholder plates were
+     dark, so the ground behind the headline sat at L=0.012; the actual shots
+     carry bright walls and windows and lifted it to L=0.025, which dropped
+     the faded end of the h1 to 3.74:1.
+
+     Most of the correction goes into `--fade-end` rather than the scrim core.
+     Pushing the core alone would have needed ~99% -- effectively painting the
+     photograph out from behind the headline -- to buy the same contrast that
+     six points of fade buys for free. */
+  --fade-end: 56%;
+  --hero-scrim-core: 97%;
+  --hero-scrim-mid: 82%;
+  --hero-scrim-outer: 34%;
+  --hero-wash: 20%;
+  --hero-plate-filter: none;
 
   /* Chosen against the cell fill, not flipped from light. See @theme above. */
   --chart-series: var(--color-gold-l);
   --chart-series-soft: var(--color-plot-soft);
   --chart-ref: var(--color-plot-ref);
   --chart-grid: var(--color-hairline);
-  --chart-axis: var(--color-faint);
+  --chart-axis: var(--color-faint-aa);
 }
 
 @theme inline {
@@ -199,8 +263,12 @@
     letter-spacing: -0.02em;
     line-height: 1.05;
   }
+  /* The ring takes `--accent`, the text-safe gold step, not `--accent-fill`.
+     A focus indicator owes 3:1 against what surrounds it, and solid gold on
+     the light surfaces is 2.28:1 -- the ring was there and barely visible in
+     light mode. `--accent` is 4.87:1 light and 10.55:1 dark. */
   :focus-visible {
-    outline: 2px solid var(--accent-fill);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -267,7 +335,7 @@
     background-image: linear-gradient(
       to bottom right,
       var(--fg) 25%,
-      color-mix(in srgb, var(--fg) 42%, var(--bg)) 78%
+      color-mix(in srgb, var(--fg) var(--fade-end), var(--bg)) 78%
     );
     -webkit-background-clip: text;
     background-clip: text;

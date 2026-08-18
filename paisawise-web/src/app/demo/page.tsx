@@ -30,8 +30,15 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16" aria-labelledby="dashboard-heading">
         <div className="shell">
+          {/* The dashboard's card titles are h3. Without this the page ran
+              h1 -> h3, and a screen reader's heading list showed a gap. It is
+              visually hidden because the section above already says it in
+              display type. */}
+          <h2 id="dashboard-heading" className="sr-only">
+            Sample dashboard
+          </h2>
           <Dashboard />
         </div>
       </section>

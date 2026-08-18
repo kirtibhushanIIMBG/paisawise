@@ -100,19 +100,30 @@ export function Dashboard() {
     <div className="space-y-6">
       {/* controls */}
       <div className="flex flex-wrap items-center justify-between gap-4">
+        {/*
+          A segmented filter, not a tab set. It carried role="tablist" and
+          role="tab", which promises a matching role="tabpanel" and arrow-key
+          navigation between the tabs; neither existed, so a screen reader
+          announced "tab 1 of 3" and then found no panel to move to, and the
+          keyboard contract the role advertises was missing. These are
+          pressable filter buttons, so they say that instead -- which is
+          honest, needs no roving tabindex, and keeps Tab working normally.
+        */}
         <div
           className="inline-flex rounded-full border border-edge bg-panel p-1"
-          role="tablist"
+          role="group"
           aria-label="Choose month"
         >
           {MONTHS.map((m) => (
             <button
               key={m.key}
-              role="tab"
-              aria-selected={m.key === monthKey}
+              type="button"
+              aria-pressed={m.key === monthKey}
               onClick={() => setMonthKey(m.key)}
               className={cn(
-                "rounded-full px-5 py-2 text-sm font-semibold transition-colors",
+                /* min-h-11 rather than more padding: the pill keeps its shape
+                   and still clears the 44px touch minimum on a phone. */
+                "inline-flex min-h-11 items-center rounded-full px-5 text-sm font-semibold transition-colors",
                 m.key === monthKey
                   ? "bg-accent-fill text-on-accent"
                   : "text-copy hover:text-accent",
@@ -124,9 +135,10 @@ export function Dashboard() {
         </div>
 
         <button
+          type="button"
           onClick={() => setShowTable((v) => !v)}
           aria-pressed={showTable}
-          className="inline-flex items-center gap-2 rounded-full border border-edge px-4 py-2 text-sm font-medium text-copy transition-colors hover:border-accent hover:text-accent"
+          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-edge px-4 text-sm font-medium text-copy transition-colors hover:border-accent hover:text-accent"
         >
           <Table2 size={15} />
           {showTable ? "Show charts" : "Show table"}

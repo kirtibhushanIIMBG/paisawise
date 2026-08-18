@@ -56,7 +56,7 @@ export function CursorGlow() {
           ry(e.clientY);
 
           const interactive = (e.target as Element | null)?.closest?.(
-            "a, button, input, select, textarea, [role='tab'], [role='slider']",
+            "a, button, input, select, textarea, [role='slider'], [role='radio']",
           );
           gsap.to(r, {
             scale: interactive ? 1.9 : 1,

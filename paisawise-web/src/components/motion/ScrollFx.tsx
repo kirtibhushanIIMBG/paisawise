@@ -72,7 +72,9 @@ export function ScrollFx() {
         });
       });
 
-      return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+      /* No manual teardown here. gsap.matchMedia reverts everything created
+         inside this block, and killing ScrollTrigger.getAll() took the
+         Reveal components' triggers down with it. */
     });
 
     return () => mm.revert();

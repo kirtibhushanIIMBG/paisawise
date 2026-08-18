@@ -51,8 +51,10 @@ export function Button({
       </Link>
     );
   }
+  /* Default to "button". An HTML button inside a form submits it unless told
+     otherwise, which is never what the callers here want by default. */
   return (
-    <button className={classes} {...rest}>
+    <button type="button" className={classes} {...rest}>
       {children}
     </button>
   );
@@ -165,10 +167,14 @@ export function SectionHead({
         <p className={cn("eyebrow mb-4", onInk && "text-accent")}>{eyebrow}</p>
       ) : null}
       {/* Display type is medium weight and falls away toward the bottom-right,
-          matching the reference. Body copy never takes the fade. */}
+          matching the reference. Body copy never takes the fade.
+
+          Capped below the hero on purpose. These sat at 49.6px against a 52px
+          h1 -- a ratio of 1.04, so the page opened with no dominant line and
+          every section shouted as loudly as the hook. 58/44 is 1.32. */}
       <h2
         className={cn(
-          "text-[clamp(2rem,4.2vw,3.1rem)] font-medium",
+          "text-[clamp(2rem,4.2vw,2.75rem)] font-medium",
           onInk ? "text-white" : "text-fade",
         )}
       >

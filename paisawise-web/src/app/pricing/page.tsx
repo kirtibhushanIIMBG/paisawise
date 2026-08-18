@@ -30,12 +30,14 @@ export default function PricingPage() {
 
       {/* AIDA:action — the two plans */}
       <Section>
-        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+        {/* min-w-0: grid items default to min-width:auto, so a single line that
+            cannot shrink drags the whole track past the viewport. */}
+        <div className="mx-auto grid max-w-4xl gap-6 [&>*]:min-w-0 md:grid-cols-2">
           <Reveal>
-            <Card className="h-full p-8 md:p-10">
+            <Card className="h-full p-6 sm:p-8 md:p-10">
               <p className="text-sm font-semibold text-dim">Monthly</p>
               <p className="mt-4">
-                <span className="num text-6xl font-bold text-fg">
+                <span className="num text-5xl font-bold text-fg sm:text-6xl">
                   {rupees(PRICE.monthly)}
                 </span>
                 <span className="ml-2 text-copy">/month</span>
@@ -51,13 +53,13 @@ export default function PricingPage() {
           </Reveal>
 
           <Reveal>
-            <Card className="relative h-full border-accent bg-accent-soft-2 p-8 md:p-10">
+            <Card className="relative h-full border-accent bg-accent-soft-2 p-6 sm:p-8 md:p-10">
               <Badge className="absolute -top-3 left-8">
                 Saves {rupees(PRICE.yearlySaving)}
               </Badge>
               <p className="text-sm font-semibold text-accent">Yearly</p>
               <p className="mt-4">
-                <span className="num text-6xl font-bold text-fg">
+                <span className="num text-5xl font-bold text-fg sm:text-6xl">
                   {rupees(PRICE.yearly)}
                 </span>
                 <span className="ml-2 text-copy">/year</span>

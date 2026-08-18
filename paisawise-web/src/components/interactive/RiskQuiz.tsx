@@ -91,6 +91,7 @@ export function RiskQuiz() {
           </span>
           {(step > 0 || done) && (
             <button
+              type="button"
               onClick={reset}
               className="inline-flex items-center gap-1.5 text-sm text-copy transition-colors hover:text-accent"
             >
@@ -131,6 +132,7 @@ export function RiskQuiz() {
             {question.options.map((o) => (
               <button
                 key={o.value}
+                type="button"
                 onClick={() => choose(o.score)}
                 className={cn(
                   "group flex w-full items-center justify-between gap-4 rounded-2xl border border-edge bg-bg px-5 py-4 text-left transition-all duration-200",
@@ -154,6 +156,7 @@ export function RiskQuiz() {
 
           {step > 0 ? (
             <button
+              type="button"
               onClick={() => setStep(step - 1)}
               className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-copy transition-colors hover:text-accent"
             >

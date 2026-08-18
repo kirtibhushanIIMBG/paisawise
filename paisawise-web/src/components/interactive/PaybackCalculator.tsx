@@ -8,40 +8,74 @@ import { rupees, rupeesExact } from "@/lib/format";
 import { IllustrationNote } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 
-/** Counts to a target with an ease-out. Respects reduced motion. */
-function useCounter(target: number, duration = 420) {
-  const [value, setValue] = useState(target);
-  const from = useRef(target);
-  const raf = useRef<number | undefined>(undefined);
+const COUNT_MS = 420;
+
+/**
+ * A number that eases to its target by writing straight to the DOM.
+ *
+ * This used to be a hook holding the in-flight value in state, which meant
+ * three of them each ran their own rAF loop calling setState -- so dragging a
+ * slider re-rendered the whole calculator up to three times a frame. A short
+ * drag produced 116 text mutations in the result panel.
+ *
+ * Nothing downstream reads the intermediate value: `worthIt` and the yearly
+ * figure are derived from `result`, not from the animation. So the tween has
+ * no business being React state at all. This is the same approach `Counter` in
+ * motion/Reveal.tsx already takes.
+ *
+ * The first render prints the formatted target, so the server HTML and the
+ * client agree and there is no hydration mismatch.
+ */
+function Ticker({
+  value,
+  format,
+  className,
+  ...rest
+}: {
+  value: number;
+  format: (v: number) => string;
+  className?: string;
+} & React.HTMLAttributes<HTMLSpanElement>) {
+  const node = useRef<HTMLSpanElement>(null);
+  /** Where the next tween starts: what is on screen right now. */
+  const shown = useRef(value);
+  const fmt = useRef(format);
+  fmt.current = format;
 
   useEffect(() => {
+    const el = node.current;
+    if (!el) return;
+    const origin = shown.current;
+    const delta = value - origin;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      from.current = target;
-      setValue(target);
+
+    if (reduce || delta === 0) {
+      shown.current = value;
+      el.textContent = fmt.current(value);
       return;
     }
+
+    let raf = 0;
     const start = performance.now();
-    const origin = from.current;
-    const delta = target - origin;
-
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
+      const t = Math.min(1, (now - start) / COUNT_MS);
       const eased = 1 - Math.pow(1 - t, 3);
-      const next = origin + delta * eased;
-      setValue(next);
-      if (t < 1) raf.current = requestAnimationFrame(tick);
-      else from.current = target;
+      shown.current = origin + delta * eased;
+      el.textContent = fmt.current(shown.current);
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else shown.current = value;
     };
-    raf.current = requestAnimationFrame(tick);
-    return () => {
-      if (raf.current) cancelAnimationFrame(raf.current);
-      from.current = value;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target, duration]);
+    raf = requestAnimationFrame(tick);
+    /* Interrupting mid-tween leaves `shown` at whatever is painted, so the
+       next one picks up from there rather than snapping back. */
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
 
-  return value;
+  return (
+    <span ref={node} className={className} {...rest}>
+      {format(value)}
+    </span>
+  );
 }
 
 function Track({
@@ -66,31 +100,54 @@ function Track({
   id: string;
 }) {
   return (
+    /*
+      Naming and hit area both live on the Thumb, not the Root.
+
+      Radix puts role="slider" on the Thumb, so an aria-label on Slider.Root
+      named a plain div and the control itself was announced as an unnamed
+      slider. The visible caption is a <span> rather than a <label> for the
+      same reason: Slider.Root is not a labelable element, so `for` never
+      bound to anything. aria-labelledby carries the caption and
+      aria-valuetext replaces the raw number with the formatted one, so a
+      screen reader hears "Your monthly take-home, Rs 1,20,000" and not
+      "120000".
+
+      The thumb stays 20px because that is the design, but ::before extends
+      the hit area to 44px so it can actually be dragged with a thumb.
+    */
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="text-sm font-semibold text-copy">
+        <span id={`${id}-label`} className="text-sm font-semibold text-copy">
           {label}
-        </label>
-        <output htmlFor={id} className="num text-lg font-bold text-fg">
-          {format(value)}
-        </output>
+        </span>
+        <output className="num text-lg font-bold text-fg">{format(value)}</output>
       </div>
       <Slider.Root
-        id={id}
         className="relative mt-4 flex h-5 w-full touch-none select-none items-center"
         value={[value]}
         min={min}
         max={max}
         step={step}
         onValueChange={([v]) => onChange(v)}
-        aria-label={label}
       >
         <Slider.Track className="relative h-1.5 w-full grow rounded-full bg-panel-alt">
           <Slider.Range className="absolute h-full rounded-full bg-accent-fill" />
         </Slider.Track>
-        <Slider.Thumb className="block h-5 w-5 rounded-full border-2 border-accent bg-white shadow-lg transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" />
+        <Slider.Thumb
+          id={id}
+          aria-labelledby={`${id}-label`}
+          aria-valuetext={format(value)}
+          aria-describedby={`${id}-hint`}
+          className={cn(
+            "relative block h-5 w-5 rounded-full border-2 border-accent bg-white shadow-lg",
+            "transition-transform hover:scale-110",
+            "before:absolute before:-inset-3 before:content-['']",
+          )}
+        />
       </Slider.Root>
-      <p className="mt-2 text-xs text-dim">{hint}</p>
+      <p id={`${id}-hint`} className="mt-2 text-xs text-dim">
+        {hint}
+      </p>
     </div>
   );
 }
@@ -100,10 +157,6 @@ export function PaybackCalculator({ className }: { className?: string }) {
   const [rate, setRate] = useState(CALC_DEFAULTS.rate);
 
   const result = payback(salary, rate, PRICE.monthly);
-  const saving = useCounter(result.monthlySaving);
-  const net = useCounter(result.net);
-  const multiple = useCounter(result.multiple);
-
   const worthIt = result.net > 0;
 
   return (
@@ -156,11 +209,12 @@ export function PaybackCalculator({ className }: { className?: string }) {
           <dl className="space-y-6">
             <div className="flex items-baseline justify-between gap-4">
               <dt className="text-sm text-copy">You could keep</dt>
-              <dd
-                className="num text-[clamp(2rem,5vw,2.75rem)] font-bold leading-none text-positive"
-                data-testid="calc-saving"
-              >
-                {rupees(saving)}
+              <dd className="num text-[clamp(2rem,5vw,2.75rem)] font-bold leading-none text-positive">
+                <Ticker
+                  value={result.monthlySaving}
+                  format={rupees}
+                  data-testid="calc-saving"
+                />
               </dd>
             </div>
 
@@ -181,9 +235,8 @@ export function PaybackCalculator({ className }: { className?: string }) {
                   "num text-2xl font-bold",
                   worthIt ? "text-positive" : "text-copy",
                 )}
-                data-testid="calc-net"
               >
-                {rupees(net)}
+                <Ticker value={result.net} format={rupees} data-testid="calc-net" />
               </dd>
             </div>
           </dl>
@@ -192,9 +245,12 @@ export function PaybackCalculator({ className }: { className?: string }) {
             {worthIt ? (
               <p className="text-lg font-semibold text-fg">
                 That is{" "}
-                <span className="num text-positive" data-testid="calc-multiple">
-                  {multiple.toFixed(1)}×
-                </span>{" "}
+                <Ticker
+                  value={result.multiple}
+                  format={(v) => `${v.toFixed(1)}×`}
+                  className="num text-positive"
+                  data-testid="calc-multiple"
+                />{" "}
                 what it costs you.
               </p>
             ) : (

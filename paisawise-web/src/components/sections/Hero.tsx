@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Play, TrendingUp, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/primitives";
+import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { PRICE } from "@/lib/site";
 import { rupees, rupeesExact } from "@/lib/format";
 import { MONTHS, monthTotals, RECENT_TRANSACTIONS } from "@/lib/demo-data";
@@ -141,15 +142,20 @@ export function Hero() {
       className="bloom relative overflow-hidden border-b border-edge"
       aria-labelledby="hero-heading"
     >
+      {/* Photography sits underneath everything: the dot field, the gold
+          bloom from `.bloom`, and the copy all stack over it. */}
+      <HeroBackdrop />
       <div aria-hidden className="dotfield absolute inset-0 opacity-40" />
 
       <div className="shell relative z-10 grid items-center gap-14 py-20 md:py-28 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
         <div>
           {/* Sized so "So where does it all go?" holds one line at lg and up:
-              the two lines are the hook, and a stranded "go?" kills it. */}
+              the two lines are the hook, and a stranded "go?" kills it. At the
+              3.625rem ceiling that line measures 564px in a 589px column --
+              25px of slack. 3.75rem clears it by 5px, which is luck, not slack. */}
           <h1
             id="hero-heading"
-            className="text-fade max-w-2xl text-[clamp(2.3rem,4.6vw,3.25rem)] font-medium leading-[1.06]"
+            className="text-fade max-w-2xl text-[clamp(2.3rem,4.6vw,3.625rem)] font-medium leading-[1.06]"
           >
             <span className="block overflow-hidden">
               <span data-hero="line" className="block">
@@ -203,8 +209,15 @@ export function Hero() {
 
         <div data-hero="panel" data-fx="parallax" className="relative">
           <ProductPanel />
-          <p className="mt-3 text-center text-xs italic text-dim">
-            Sample data, shown for illustration.
+          {/* This caption is the one piece of hero text with no surface of its
+              own -- it sits directly on the photograph, outside the scrim's
+              reach, where `text-dim` measured 2.2:1. It gets its own ground
+              rather than a darker ink, so it stays a caption and stays
+              legible whatever the plate behind it happens to be. */}
+          <p className="mt-3 text-center">
+            <span className="inline-block rounded-full bg-bg/95 px-3 py-1 text-xs italic text-dim backdrop-blur-sm">
+              Sample data, shown for illustration.
+            </span>
           </p>
         </div>
       </div>

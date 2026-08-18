@@ -77,7 +77,9 @@ export default function PricingPage() {
         </div>
 
         <Reveal className="mx-auto mt-8 max-w-4xl">
-          <Card className="bg-panel-alt">
+          {/* Horizontal inset tracks the plan cards above -- the two share a
+              left edge, so a different one reads as a misalignment. */}
+          <Card className="bg-panel-alt px-6 sm:px-8 md:px-10">
             <p className="text-copy">
               <span className="font-semibold text-fg">
                 A one-time {rupees(PRICE.onboarding)} onboarding fee

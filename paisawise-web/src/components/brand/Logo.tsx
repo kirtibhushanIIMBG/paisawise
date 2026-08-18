@@ -100,7 +100,10 @@ export function Logo({
         {showTagline ? (
           <span
             className={cn(
-              "mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em]",
+              // 0.6rem is 9.6px. Uppercase at 0.18em tracking is already hard
+              // work to read; below 12px it stops being text and becomes
+              // texture, so this is the floor rather than a chosen size.
+              "mt-1 text-[0.75rem] font-semibold uppercase tracking-[0.16em]",
               onInk ? "text-copy" : "text-dim",
             )}
           >

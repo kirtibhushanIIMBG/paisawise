@@ -18,6 +18,34 @@ licence strictly demands.
 
 All are cropped to 16:9 and resized to 2000x1125, progressive JPEG, under 250 KB each.
 
+## Product-section plates
+
+Four more, one per step of the pinned product reveal, cycled with the phone
+screen. Same Pexels licence.
+
+| Plate | Pexels ID | Step it belongs to | Note |
+|---|---|---|---|
+| `product-01.jpg` | [8837784](https://www.pexels.com/photo/8837784/) | Everything in one view | mirrored horizontally |
+| `product-02.jpg` | [7351633](https://www.pexels.com/photo/7351633/) | A budget from your own history | |
+| `product-03.jpg` | [4427852](https://www.pexels.com/photo/4427852/) | Alerts while it still matters | |
+| `product-04.jpg` | [6937665](https://www.pexels.com/photo/6937665/) | A certified advisor, every month | |
+
+These are 4:5 portrait at 900x1125 and about 100 KB each -- an order of
+magnitude smaller than the hero plates, because the card they sit in is never
+wider than roughly 420 CSS px even on a 2x display. All four are mounted at
+once and crossfaded by opacity, so all four load; keeping them small is what
+makes that affordable.
+
+**Every one is cropped with its subject in the left half.** The phone stands on
+the right of the plate, so a centred subject gets its face covered. Two of the
+four were re-cropped for exactly this reason, and one was swapped outright.
+Rejected along the way: several otherwise good frames of budget planning that
+had US dollar bills in shot, which is not a small thing on a page priced in
+rupees.
+
+The manifest is `PLATES` at the top of
+`src/components/sections/PhoneShowcase.tsx`.
+
 ## Why stock and not AI
 
 An earlier pass generated these with Gemini. Those images carried Google's visible

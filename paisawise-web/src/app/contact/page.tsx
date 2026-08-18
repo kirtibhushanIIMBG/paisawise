@@ -144,8 +144,10 @@ export default function ContactPage() {
             </div>
           </div>
 
+          {/* md:p-8 matches ContactForm: below lg these stack under the form
+              on a shared left edge, and p-6 there read as a step inwards. */}
           <div className="space-y-5">
-            <Card className="bg-panel">
+            <Card className="bg-panel md:p-8">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
                 <CalendarClock className="h-5 w-5 text-accent" aria-hidden="true" />
               </span>
@@ -176,7 +178,7 @@ export default function ContactPage() {
               </p>
             </Card>
 
-            <Card className="bg-panel">
+            <Card className="bg-panel md:p-8">
               <h3 className="text-base font-semibold text-fg">
                 Before you write to us
               </h3>

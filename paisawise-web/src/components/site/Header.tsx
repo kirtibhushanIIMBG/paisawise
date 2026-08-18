@@ -233,7 +233,11 @@ export function Header() {
       )}
     >
       <div className="shell flex h-18 items-center justify-between gap-6 py-3">
-        <Link href="/" aria-label="PaisaWise home" className="shrink-0">
+        <Link
+          href="/"
+          aria-label="PaisaWise home"
+          className="flex min-h-11 shrink-0 items-center"
+        >
           <Logo />
         </Link>
 

@@ -365,7 +365,9 @@ export default function Home() {
         </Reveal>
 
         <Reveal className="mx-auto mt-8 max-w-4xl">
-          <div className="rounded-2xl border border-edge bg-panel-alt p-6">
+          {/* px-8 to match the plan cards above: the two boxes share a left
+              edge, so a 24px inset under a 32px one reads as a misalignment. */}
+          <div className="rounded-2xl border border-edge bg-panel-alt px-8 py-6">
             <p className="text-sm text-copy">
               <span className="font-semibold text-fg">
                 {rupees(PRICE.onboarding)} onboarding fee

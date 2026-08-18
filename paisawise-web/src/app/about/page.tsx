@@ -192,7 +192,7 @@ export default function AboutPage() {
           title="Small team, one product"
           lede="Four people, split between the software that reads your accounts and the advisors who sit on the calls."
         />
-        <p className="mt-5 max-w-2xl rounded-xl border border-edge bg-panel-alt px-4 py-3 text-sm text-dim">
+        <p className="mt-5 max-w-2xl rounded-xl border border-edge bg-panel-alt px-6 py-4 text-sm text-dim">
           PaisaWise is a fictional company built for a college assignment. The
           people below are invented, and so are their backgrounds.
         </p>

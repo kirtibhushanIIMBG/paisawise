@@ -153,7 +153,7 @@ export function Dashboard() {
           { label: "Left over", value: totals.saved, tone: "text-positive" },
           { label: "Budget set", value: totals.budget, tone: "" },
         ].map((k) => (
-          <div key={k.label} className="rounded-2xl border border-edge bg-panel p-5">
+          <div key={k.label} className="rounded-2xl border border-edge bg-panel p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-dim">
               {k.label}
             </p>
@@ -168,7 +168,7 @@ export function Dashboard() {
       {totals.over.length > 0 ? (
         <div
           role="status"
-          className="flex flex-wrap items-start gap-3 rounded-2xl border border-warning/40 bg-warning/10 p-5"
+          className="flex flex-wrap items-start gap-3 rounded-2xl border border-warning/40 bg-warning/10 p-6"
         >
           <AlertTriangle size={20} className="mt-0.5 shrink-0 text-warning" aria-hidden />
           <div className="flex-1">

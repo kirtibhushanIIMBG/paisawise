@@ -133,7 +133,9 @@ export function Section({
         className,
       )}
     >
-      {bleed ? children : <div className="shell">{children}</div>}
+      {/* z-10 lifts content above the decorative pseudo-elements (.ticks,
+          .rails, .veil), which sit at z-0 on the section itself. */}
+      {bleed ? children : <div className="shell relative z-10">{children}</div>}
     </section>
   );
 }
@@ -172,10 +174,14 @@ export function SectionHead({
           Capped below the hero on purpose. These sat at 49.6px against a 52px
           h1 -- a ratio of 1.04, so the page opened with no dominant line and
           every section shouted as loudly as the hook. 58/44 is 1.32. */}
+      {/* `onInk` used to hardcode text-white. Its only surface is tone="ink",
+          which maps to bg-panel-alt -- #131318 in dark but #fbfafd in light,
+          so the heading was white on near-white and measured 1.12:1 there.
+          The surface follows the theme, so the text has to as well. */}
       <h2
         className={cn(
           "text-[clamp(2rem,4.2vw,2.75rem)] font-medium",
-          onInk ? "text-white" : "text-fade",
+          onInk ? "text-fg" : "text-fade",
         )}
       >
         {title}

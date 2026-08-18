@@ -54,7 +54,7 @@ function ProductPanel() {
               <AlertTriangle size={12} />
               Over by <span className="num">{rupees(TOTALS.spent - TOTALS.budget)}</span>
             </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-positive/12 px-2.5 py-1 text-xs font-semibold text-positive">
+            <span className="inline-flex items-center gap-1 rounded-full bg-positive/8 px-2.5 py-1 text-xs font-semibold text-positive">
               <TrendingUp size={12} />
               <span className="num">{rupees(TOTALS.saved)}</span> saved
             </span>

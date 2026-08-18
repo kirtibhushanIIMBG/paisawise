@@ -3,6 +3,7 @@ import { ArrowRight, Check, X, Star, ShieldCheck, Lock, BadgeCheck, XCircle } fr
 import { Hero } from "@/components/sections/Hero";
 import { PhoneShowcase } from "@/components/sections/PhoneShowcase";
 import { PaybackCalculator } from "@/components/interactive/PaybackCalculator";
+import { SectionPhoto } from "@/components/sections/SectionPhoto";
 import { Reveal, Counter } from "@/components/motion/Reveal";
 import {
   ScatteredAccounts,
@@ -57,7 +58,7 @@ export default function Home() {
       </section>
 
       {/* 3 · PAS:AGITATE · Cialdini:loss-aversion — no CTA, tension must not resolve here */}
-      <Section>
+      <Section className="veil ticks">
         <Reveal>
           <SectionHead
             eyebrow="The problem"
@@ -118,7 +119,7 @@ export default function Home() {
       <PhoneShowcase />
 
       {/* 5 · SB7:plan · Cialdini:commitment — three steps makes the change feel small */}
-      <Section>
+      <Section className="meshgrid">
         <Reveal>
           <SectionHead
             eyebrow="How it works"
@@ -150,7 +151,7 @@ export default function Home() {
 
       {/* 6 · AIDA:desire — show the product working.
              The preview does the persuading; the copy only frames it. */}
-      <Section tone="alt">
+      <Section tone="alt" className="veil-r">
         <Reveal className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <SectionHead
@@ -178,7 +179,7 @@ export default function Home() {
       </Section>
 
       {/* 7 · AIDA:desire · Cialdini:consistency — the visitor proves the value themselves */}
-      <Section>
+      <Section className="ticks">
         <Reveal>
           <SectionHead
             eyebrow="The math"
@@ -192,7 +193,8 @@ export default function Home() {
       </Section>
 
       {/* 8 · objection handling — the free-app question, answered head on */}
-      <Section tone="alt">
+      <Section tone="alt" className="meshgrid-b veil">
+        <SectionPhoto src="/hero/section-plan.jpg" position="70% 45%" />
         <Reveal>
           <SectionHead
             eyebrow="Why not a free app"
@@ -241,7 +243,7 @@ export default function Home() {
       </Section>
 
       {/* 9 · Cialdini:social-proof — labelled illustrative, see the note below */}
-      <Section>
+      <Section className="veil-r ticks">
         <Reveal>
           <SectionHead
             eyebrow="Members"
@@ -286,7 +288,8 @@ export default function Home() {
       </Section>
 
       {/* 10 · risk reversal · Cialdini:authority */}
-      <Section tone="ink" className="bg-panel-alt">
+      <Section tone="ink" className="bg-panel-alt rails">
+        <SectionPhoto src="/hero/section-advisor.jpg" position="72% 40%" />
         <Reveal>
           <SectionHead
             eyebrow="Security"
@@ -313,7 +316,7 @@ export default function Home() {
       </Section>
 
       {/* 11 · AIDA:action — pricing, the first hard CTA */}
-      <Section>
+      <Section className="veil ticks">
         <Reveal>
           <SectionHead
             eyebrow="Pricing"
@@ -382,7 +385,7 @@ export default function Home() {
       </Section>
 
       {/* 12 · residual objections */}
-      <Section tone="alt">
+      <Section tone="alt" className="veil-r">
         <Reveal>
           <SectionHead eyebrow="Questions" title="The ones people ask on the first call" />
         </Reveal>

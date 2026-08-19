@@ -59,7 +59,13 @@ function questionsFor(id: GroupId) {
 export default function FaqPage() {
   return (
     <>
-      <Section tone="ink" className="relative overflow-hidden">
+      <Section
+        tone="ink"
+        className="relative overflow-hidden"
+        photo="/hero/page-faq.jpg"
+        photoPosition="50% 45%"
+        photoVariant="masthead"
+      >
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="accent">Questions</Badge>
@@ -118,7 +124,11 @@ export default function FaqPage() {
       })}
 
       {/* Risk reversal restated in short form, straight from TRUST_POINTS */}
-      <Section className="py-14 md:py-20">
+      <Section
+        className="py-14 md:py-20"
+        photo="/hero/section-advisor.jpg"
+        photoPosition="72% 40%"
+      >
         <SectionHead
           eyebrow="The short version"
           title="Four promises the answers above keep coming back to"
@@ -134,7 +144,7 @@ export default function FaqPage() {
       </Section>
 
       {/* AIDA:ACTION · closing CTA points at the human, not the checkout */}
-      <Section tone="ink">
+      <Section tone="ink" photo="/hero/section-rm.jpg" photoPosition="55% 40%">
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
             <h2 className="text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-fg">

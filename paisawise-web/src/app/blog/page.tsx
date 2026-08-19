@@ -30,7 +30,13 @@ function Meta({ post }: { post: (typeof POSTS)[number] }) {
 export default function BlogIndexPage() {
   return (
     <>
-      <Section tone="ink" className="relative overflow-hidden">
+      <Section
+        tone="ink"
+        className="relative overflow-hidden"
+        photo="/hero/page-blog.jpg"
+        photoPosition="50% 50%"
+        photoVariant="masthead"
+      >
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="accent">Writing</Badge>
@@ -48,6 +54,17 @@ export default function BlogIndexPage() {
       <Section className="py-14 md:py-20">
         {/* Lead post, given the width its argument needs */}
         <Card className="group relative overflow-hidden p-0 transition-colors duration-200 hover:border-accent">
+          {/* Cover. Decorative: the headline underneath already says what the
+              post is, so alt text here would only be read out twice. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={featured.cover}
+            alt=""
+            aria-hidden
+            width={1600}
+            height={900}
+            className="h-44 w-full border-b border-edge object-cover md:h-56"
+          />
           <div className="grid md:grid-cols-[1.15fr_0.85fr]">
             <div className="p-7 md:p-10">
               <div className="flex flex-wrap items-center gap-3">
@@ -98,30 +115,48 @@ export default function BlogIndexPage() {
             <Card
               key={post.slug}
               as="article"
-              className="group relative flex h-full flex-col transition-colors duration-200 hover:border-accent"
+              className="group relative flex h-full flex-col overflow-hidden p-0 transition-colors duration-200 hover:border-accent"
             >
-              <Badge tone="neutral" className="self-start">
-                {post.category}
-              </Badge>
-              <h2 className="mt-4 text-xl font-semibold leading-snug text-fg">
-                <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0">
-                  {post.title}
-                </Link>
-              </h2>
-              <p className="mt-3 flex-1 leading-relaxed text-copy">{post.excerpt}</p>
-              <div className="mt-6 flex items-end justify-between gap-4">
-                <Meta post={post} />
-                <ArrowUpRight
-                  className="h-5 w-5 shrink-0 text-accent transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  aria-hidden="true"
-                />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={post.cover}
+                alt=""
+                aria-hidden
+                loading="lazy"
+                decoding="async"
+                width={1600}
+                height={900}
+                className="h-40 w-full border-b border-edge object-cover"
+              />
+              <div className="flex flex-1 flex-col p-6">
+                <Badge tone="neutral" className="self-start">
+                  {post.category}
+                </Badge>
+                <h2 className="mt-4 text-xl font-semibold leading-snug text-fg">
+                  <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0">
+                    {post.title}
+                  </Link>
+                </h2>
+                <p className="mt-3 flex-1 leading-relaxed text-copy">{post.excerpt}</p>
+                <div className="mt-6 flex items-end justify-between gap-4">
+                  <Meta post={post} />
+                  <ArrowUpRight
+                    className="h-5 w-5 shrink-0 text-accent transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
             </Card>
           ))}
         </div>
       </Section>
 
-      <Section tone="alt" className="py-14 md:py-20">
+      <Section
+        tone="alt"
+        className="py-14 md:py-20"
+        photo="/hero/section-plan.jpg"
+        photoPosition="70% 45%"
+      >
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
           <SectionHead
             title="Reading about it is the easy half"

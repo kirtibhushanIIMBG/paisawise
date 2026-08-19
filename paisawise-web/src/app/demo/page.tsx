@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SectionPhoto } from "@/components/sections/SectionPhoto";
 import { ArrowRight } from "lucide-react";
 import { Dashboard } from "@/components/interactive/Dashboard";
 import { Button, Badge } from "@/components/ui/primitives";
@@ -14,8 +15,9 @@ export const metadata: Metadata = {
 export default function DemoPage() {
   return (
     <>
-      <section className="border-b border-edge bg-panel-alt py-14 md:py-20">
-        <div className="shell">
+      <section className="relative overflow-hidden border-b border-edge bg-panel-alt py-14 md:py-20">
+        <SectionPhoto src="/hero/page-demo.jpg" position="55% 50%" variant="masthead" />
+        <div className="shell relative z-10">
           <Badge tone="neutral">Sample data, no sign-up</Badge>
           <h1 className="mt-5 max-w-3xl text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
             A real month, before you pay for one
@@ -43,8 +45,9 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="border-t border-edge bg-panel-alt py-20 text-fg md:py-24">
-        <div className="shell text-center">
+      <section className="relative overflow-hidden border-t border-edge bg-panel-alt py-20 text-fg md:py-24">
+        <SectionPhoto src="/hero/section-advisor.jpg" position="72% 40%" />
+        <div className="shell relative z-10 text-center">
           <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.6vw,2.5rem)] font-semibold">
             Yours would look like this by the end of week one
           </h2>

@@ -116,7 +116,13 @@ const CLAUSES: Clause[] = [
 export default function TermsPage() {
   return (
     <>
-      <Section tone="ink" className="py-14 md:py-20">
+      <Section
+        tone="ink"
+        className="py-14 md:py-20"
+        photo="/hero/page-legal.jpg"
+        photoPosition="50% 55%"
+        photoVariant="masthead"
+      >
         <div className="max-w-3xl">
           <Badge tone="accent">Legal</Badge>
           <h1 className="mt-6 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import * as React from "react";
+import { SectionPhoto } from "@/components/sections/SectionPhoto";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------- Button */
@@ -109,12 +110,23 @@ export function Section({
   className,
   tone = "surface",
   bleed = false,
+  photo,
+  photoPosition,
+  photoVariant,
   children,
 }: {
   id?: string;
   className?: string;
   tone?: "surface" | "ink" | "alt";
   bleed?: boolean;
+  /**
+   * A photographic band behind the section. It is a prop rather than a child
+   * because the band has to sit outside `.shell` -- passed as a child it would
+   * be clipped to the shell box and leave the section's vertical padding bare.
+   */
+  photo?: string;
+  photoPosition?: string;
+  photoVariant?: "band" | "masthead";
   children: React.ReactNode;
 }) {
   const toneClass =
@@ -129,10 +141,18 @@ export function Section({
       className={cn(
         "relative border-b border-edge",
         !bleed && "py-20 md:py-28",
+        photo && "overflow-hidden",
         toneClass,
         className,
       )}
     >
+      {photo ? (
+        <SectionPhoto
+          src={photo}
+          position={photoPosition}
+          variant={photoVariant}
+        />
+      ) : null}
       {/* z-10 lifts content above the decorative pseudo-elements (.ticks,
           .rails, .veil), which sit at z-0 on the section itself. */}
       {bleed ? children : <div className="shell relative z-10">{children}</div>}

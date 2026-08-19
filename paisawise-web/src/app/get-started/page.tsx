@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SectionPhoto } from "@/components/sections/SectionPhoto";
 import { RiskQuiz } from "@/components/interactive/RiskQuiz";
 
 export const metadata: Metadata = {
@@ -10,8 +11,9 @@ export const metadata: Metadata = {
 export default function GetStartedPage() {
   return (
     <>
-      <section className="border-b border-edge bg-panel-alt py-14 md:py-20">
-        <div className="shell max-w-3xl">
+      <section className="relative overflow-hidden border-b border-edge bg-panel-alt py-14 md:py-20">
+        <SectionPhoto src="/hero/page-start.jpg" position="50% 50%" variant="masthead" />
+        <div className="shell relative z-10 max-w-3xl">
           <p className="eyebrow">Four questions</p>
           <h1 className="mt-4 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
             Where should you start?

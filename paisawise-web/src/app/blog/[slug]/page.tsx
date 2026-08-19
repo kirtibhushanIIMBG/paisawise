@@ -95,7 +95,12 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <Section tone="ink" className="relative overflow-hidden py-14 md:py-20">
+      <Section
+        tone="ink"
+        className="relative overflow-hidden py-14 md:py-20"
+        photo={post.cover}
+        photoVariant="masthead"
+      >
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Link
@@ -163,27 +168,40 @@ export default async function BlogPostPage({
             <Card
               key={next.slug}
               as="article"
-              className="group relative flex h-full flex-col transition-colors duration-200 hover:border-accent"
+              className="group relative flex h-full flex-col overflow-hidden p-0 transition-colors duration-200 hover:border-accent"
             >
-              <Badge tone="neutral" className="self-start">
-                {next.category}
-              </Badge>
-              <h3 className="mt-4 text-lg font-semibold leading-snug text-fg">
-                <Link href={`/blog/${next.slug}`} className="after:absolute after:inset-0">
-                  {next.title}
-                </Link>
-              </h3>
-              <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-copy">
-                {next.excerpt}
-              </p>
-              <p className="num mt-5 text-sm text-dim">
-                {next.readingMinutes} min read
-              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={next.cover}
+                alt=""
+                aria-hidden
+                loading="lazy"
+                decoding="async"
+                width={1600}
+                height={900}
+                className="h-32 w-full border-b border-edge object-cover"
+              />
+              <div className="flex flex-1 flex-col p-6 md:p-8">
+                <Badge tone="neutral" className="self-start">
+                  {next.category}
+                </Badge>
+                <h3 className="mt-4 text-lg font-semibold leading-snug text-fg">
+                  <Link href={`/blog/${next.slug}`} className="after:absolute after:inset-0">
+                    {next.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-copy">
+                  {next.excerpt}
+                </p>
+                <p className="num mt-5 text-sm text-dim">
+                  {next.readingMinutes} min read
+                </p>
+              </div>
             </Card>
           ))}
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center gap-4 rounded-2xl border border-edge bg-panel p-7 md:p-9">
+        <div className="mt-12 flex flex-wrap items-center gap-4 rounded-2xl border border-edge bg-panel p-6 md:p-8">
           <div className="flex-1 min-w-[16rem]">
             <h2 className="text-xl font-semibold text-fg md:text-2xl">
               Want this applied to your own numbers?

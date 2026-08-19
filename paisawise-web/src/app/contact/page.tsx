@@ -32,7 +32,13 @@ const CALL_COVERS = [
 export default function ContactPage() {
   return (
     <>
-      <Section tone="ink" className="relative overflow-hidden">
+      <Section
+        tone="ink"
+        className="relative overflow-hidden"
+        photo="/hero/page-contact.jpg"
+        photoPosition="45% 45%"
+        photoVariant="masthead"
+      >
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="accent">Contact</Badge>
@@ -51,6 +57,16 @@ export default function ContactPage() {
       {/* Door 1: the RM channel. Primary lead source, so it gets the weight. */}
       <Section className="py-14 md:py-20">
         <Card className="overflow-hidden border-accent/30 bg-panel p-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/hero/section-rm.jpg"
+            alt=""
+            aria-hidden
+            width={1800}
+            height={750}
+            className="h-40 w-full border-b border-edge object-cover md:h-52"
+            style={{ objectPosition: "50% 40%" }}
+          />
           <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
             <div className="p-7 md:p-10">
               <div className="flex items-center gap-3">

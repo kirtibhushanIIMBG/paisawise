@@ -29,6 +29,8 @@ export type BlogPost = {
   author: string;
   authorRole: string;
   category: string;
+  /** Cover photograph, in public/hero. See HERO-IMAGES.md for sources. */
+  cover: string;
   /** True when the body contains a modelled rupee figure. */
   illustrative: boolean;
   body: BlogBlock[];
@@ -45,6 +47,7 @@ export const POSTS: BlogPost[] = [
     author: "Meera Nair",
     authorRole: "Co-founder",
     category: "Spending",
+    cover: "/hero/post-spending.jpg",
     illustrative: true,
     body: [
       {
@@ -110,6 +113,7 @@ export const POSTS: BlogPost[] = [
     author: "Farah Qureshi",
     authorRole: "Head of advisory",
     category: "Budgeting",
+    cover: "/hero/post-budget.jpg",
     illustrative: true,
     body: [
       {
@@ -171,6 +175,7 @@ export const POSTS: BlogPost[] = [
     author: "Farah Qureshi",
     authorRole: "Head of advisory",
     category: "Investing",
+    cover: "/hero/post-sip.jpg",
     illustrative: false,
     body: [
       {
@@ -233,6 +238,7 @@ export const POSTS: BlogPost[] = [
     author: "Meera Nair",
     authorRole: "Co-founder",
     category: "Saving",
+    cover: "/hero/post-emergency.jpg",
     illustrative: true,
     body: [
       {

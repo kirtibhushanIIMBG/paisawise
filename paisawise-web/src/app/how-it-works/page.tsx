@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SectionPhoto } from "@/components/sections/SectionPhoto";
 import { ArrowRight, Clock, Lock, Video } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button, Card, Section, SectionHead } from "@/components/ui/primitives";
@@ -44,8 +45,9 @@ const DETAIL = [
 export default function HowItWorksPage() {
   return (
     <>
-      <section className="border-b border-edge bg-panel-alt py-14 md:py-20">
-        <div className="shell max-w-3xl">
+      <section className="relative overflow-hidden border-b border-edge bg-panel-alt py-14 md:py-20">
+        <SectionPhoto src="/hero/page-how.jpg" position="50% 50%" variant="masthead" />
+        <div className="shell relative z-10 max-w-3xl">
           <p className="eyebrow">How it works</p>
           <h1 className="mt-4 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
             Fifteen minutes to set up. Then it runs.
@@ -86,7 +88,7 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      <Section tone="alt">
+      <Section tone="alt" photo="/hero/section-plan.jpg" photoPosition="70% 45%">
         <Reveal>
           <SectionHead
             eyebrow="The detail"
@@ -117,7 +119,7 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      <Section>
+      <Section photo="/hero/section-rm.jpg" photoPosition="55% 40%">
         <Reveal>
           <div className="rounded-3xl border border-edge bg-panel p-9 text-center md:p-14">
             <h2 className="mx-auto max-w-2xl text-[clamp(1.6rem,3.4vw,2.3rem)] font-semibold text-fg">

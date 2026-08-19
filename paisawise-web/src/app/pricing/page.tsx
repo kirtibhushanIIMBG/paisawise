@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SectionPhoto } from "@/components/sections/SectionPhoto";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { PaybackCalculator } from "@/components/interactive/PaybackCalculator";
@@ -15,8 +16,9 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <section className="border-b border-edge bg-panel-alt py-14 md:py-20">
-        <div className="shell max-w-3xl">
+      <section className="relative overflow-hidden border-b border-edge bg-panel-alt py-14 md:py-20">
+        <SectionPhoto src="/hero/page-pricing.jpg" position="50% 50%" variant="masthead" />
+        <div className="shell relative z-10 max-w-3xl">
           <p className="eyebrow">Pricing</p>
           <h1 className="mt-4 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
             One plan. The advisor is never an upsell.
@@ -112,7 +114,7 @@ export default function PricingPage() {
       </Section>
 
       {/* Cialdini:consistency — the visitor does the arithmetic themselves */}
-      <Section tone="alt">
+      <Section tone="alt" photo="/hero/section-plan.jpg" photoPosition="70% 45%">
         <Reveal>
           <SectionHead
             eyebrow="The math"
@@ -152,8 +154,9 @@ export default function PricingPage() {
         </Reveal>
       </Section>
 
-      <section className="bg-panel-alt py-20 text-fg md:py-28">
-        <div className="shell text-center">
+      <section className="relative overflow-hidden bg-panel-alt py-20 text-fg md:py-28">
+        <SectionPhoto src="/hero/section-advisor.jpg" position="72% 40%" />
+        <div className="shell relative z-10 text-center">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.8vw,2.6rem)] font-semibold">
               Not sure which plan fits?

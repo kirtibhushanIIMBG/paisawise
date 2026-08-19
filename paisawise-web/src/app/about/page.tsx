@@ -69,7 +69,13 @@ export default function AboutPage() {
   return (
     <>
       {/* SB7:GUIDE · mission stated as a sentence about the customer */}
-      <Section tone="ink" className="relative overflow-hidden">
+      <Section
+        tone="ink"
+        className="relative overflow-hidden"
+        photo="/hero/page-about.jpg"
+        photoPosition="50% 45%"
+        photoVariant="masthead"
+      >
         <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
         <div className="relative max-w-3xl">
           <Badge tone="accent">About PaisaWise</Badge>
@@ -138,6 +144,19 @@ export default function AboutPage() {
           </div>
 
           <div className="space-y-4">
+            {/* The branch consultation the paragraph on the left describes. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero/section-advisor.jpg"
+              alt=""
+              aria-hidden
+              loading="lazy"
+              decoding="async"
+              width={1800}
+              height={750}
+              className="h-44 w-full rounded-2xl border border-edge object-cover md:h-52"
+              style={{ objectPosition: "60% 40%" }}
+            />
             <Card className="bg-panel-alt">
               <p className="eyebrow">The gap, stated plainly</p>
               <p className="mt-4 text-lg font-semibold leading-snug text-fg">
@@ -215,7 +234,7 @@ export default function AboutPage() {
       </Section>
 
       {/* AIDA:ACTION · hard CTA, same primary verb as every other page */}
-      <Section tone="ink">
+      <Section tone="ink" photo="/hero/page-about.jpg" photoPosition="70% 45%">
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
             <Mark className="h-10 w-10" />

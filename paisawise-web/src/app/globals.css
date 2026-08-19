@@ -160,6 +160,12 @@
   /* Section bands sit behind body copy, so they take more scrim than the
      hero does, and light takes more again for the reason above. */
   --band-scrim: 88%;
+  /* Page mastheads take less. Their copy lives in a max-w-3xl column with the
+     gradient over it, so the flat wash only has to seat the frame in the
+     theme -- and at 88% here it did not seat it, it deleted it. Measured
+     against the render: the pricing masthead reached the screen at a mean
+     delta of 0.66 out of 255, which is below the film grain. */
+  --masthead-scrim: 72%;
   /* Light still loses the punch the wash takes out, so give it back on the
      plate itself rather than by thinning the scrim further -- thinning it
      would darken the ground under the ink and cost headline contrast. */
@@ -211,6 +217,7 @@
   --hero-scrim-outer: 34%;
   --hero-wash: 20%;
   --band-scrim: 80%;
+  --masthead-scrim: 60%;
   --hero-plate-filter: none;
 
   /* Chosen against the cell fill, not flipped from light. See @theme above. */

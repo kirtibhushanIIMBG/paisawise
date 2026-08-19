@@ -82,14 +82,24 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" suppressHydrationWarning>
+    /* The font variables go on <html>, not <body>.
+
+       `--font-display` is declared in @theme, which lands on :root, and its
+       value is `var(--font-inter-tight), …`. A custom property is substituted
+       where it is *computed* — so with the next/font classes on <body>, the
+       variable it points at did not exist at :root, `--font-display` resolved
+       to the guaranteed-invalid value, and every heading silently fell back to
+       the system sans. The tracking still applied, so it looked deliberate. */
+    <html
+      lang="en-IN"
+      className={`${interTight.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body
-        className={`${interTight.variable} ${inter.variable} noise antialiased`}
-      >
+      <body className="noise antialiased">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-action focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-on-action"

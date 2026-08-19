@@ -63,13 +63,18 @@ export function Mark({
   );
 }
 
-export function Wordmark({
-  className,
-  onInk = false,
-}: {
-  className?: string;
-  onInk?: boolean;
-}) {
+/*
+  No `onInk` here, unlike Mark. It used to force `text-white` on the first
+  half, and its one caller with onInk set is the footer -- whose ground is
+  `bg-panel-alt`, near-black in dark but #fbfafd in light. "Paisa" measured
+  1.04:1 there: not faint, gone. `text-fg` is already the theme-aware ink, and
+  the second half never varied at all, so the prop was choosing between a bug
+  and the right answer.
+
+  Mark keeps its own onInk because that swaps a fixed logo colourway rather
+  than an interface colour, and must not follow the theme.
+*/
+export function Wordmark({ className }: { className?: string }) {
   return (
     <span
       className={cn(
@@ -77,8 +82,8 @@ export function Wordmark({
         className,
       )}
     >
-      <span className={onInk ? "text-white" : "text-fg"}>Paisa</span>
-      <span className={onInk ? "text-accent" : "text-accent"}>Wise</span>
+      <span className="text-fg">Paisa</span>
+      <span className="text-accent">Wise</span>
     </span>
   );
 }
@@ -96,7 +101,7 @@ export function Logo({
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <Mark className="h-9 w-9 shrink-0" onInk={onInk} />
       <span className="flex flex-col">
-        <Wordmark onInk={onInk} />
+        <Wordmark />
         {showTagline ? (
           <span
             className={cn(

@@ -9,6 +9,7 @@ import {
   IllustrationNote,
   Section,
 } from "@/components/ui/primitives";
+import { PageMasthead } from "@/components/sections/PageMasthead";
 import { POSTS, formatPostDate, getPost, otherPosts } from "@/lib/blog";
 import type { BlogBlock } from "@/lib/blog";
 
@@ -48,7 +49,7 @@ const hasFigure = (text: string) => /\d/.test(text);
 function Block({ block }: { block: BlogBlock }) {
   if (block.type === "h2") {
     return (
-      <h2 className="mt-12 text-[clamp(1.4rem,2.6vw,1.85rem)] font-semibold text-fg">
+      <h2 className="mt-12 text-[clamp(1.4rem,2.6vw,1.85rem)] font-medium text-fg">
         {block.content}
       </h2>
     );
@@ -95,39 +96,31 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <Section
-        tone="ink"
-        className="relative overflow-hidden py-14 md:py-20"
+      <PageMasthead
         photo={post.cover}
-        photoVariant="masthead"
-      >
-        <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
-        <div className="relative max-w-3xl">
+        eyebrow={
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-copy transition-colors duration-200 hover:text-fg"
+            className="inline-flex items-center gap-2 font-medium text-copy transition-colors duration-200 hover:text-fg"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             All posts
           </Link>
-          <div className="mt-7">
-            <Badge tone="accent">{post.category}</Badge>
-          </div>
-          <h1 className="mt-5 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">
-            {post.title}
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-copy">{post.excerpt}</p>
-          <div className="num mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-copy">
-            <span className="font-semibold text-fg">{post.author}</span>
-            <span aria-hidden="true">·</span>
-            <span>{post.authorRole}</span>
-            <span aria-hidden="true">·</span>
-            <span>{formatPostDate(post.date)}</span>
-            <span aria-hidden="true">·</span>
-            <span>{post.readingMinutes} min read</span>
-          </div>
+        }
+        title={post.title}
+        lede={post.excerpt}
+      >
+        <div className="num flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-copy">
+          <Badge tone="accent">{post.category}</Badge>
+          <span className="font-medium text-fg">{post.author}</span>
+          <span aria-hidden="true">·</span>
+          <span>{post.authorRole}</span>
+          <span aria-hidden="true">·</span>
+          <span>{formatPostDate(post.date)}</span>
+          <span aria-hidden="true">·</span>
+          <span>{post.readingMinutes} min read</span>
         </div>
-      </Section>
+      </PageMasthead>
 
       <Section className="py-14 md:py-20">
         <article className="max-w-[46rem]">
@@ -150,7 +143,7 @@ export default async function BlogPostPage({
           <div className="mt-8 flex flex-wrap items-center justify-between gap-6">
             <div>
               <p className="text-sm text-dim">Written by</p>
-              <p className="mt-1 font-semibold text-fg">{post.author}</p>
+              <p className="mt-1 font-medium text-fg">{post.author}</p>
               <p className="text-sm text-copy">{post.authorRole}, PaisaWise</p>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-dim">
@@ -162,7 +155,7 @@ export default async function BlogPostPage({
       </Section>
 
       <Section tone="alt" className="py-14 md:py-20">
-        <h2 className="text-2xl font-semibold text-fg">Read next</h2>
+        <h2 className="text-2xl font-medium text-fg">Read next</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {more.map((next) => (
             <Card
@@ -185,7 +178,7 @@ export default async function BlogPostPage({
                 <Badge tone="neutral" className="self-start">
                   {next.category}
                 </Badge>
-                <h3 className="mt-4 text-lg font-semibold leading-snug text-fg">
+                <h3 className="mt-4 text-lg font-medium leading-snug text-fg">
                   <Link href={`/blog/${next.slug}`} className="after:absolute after:inset-0">
                     {next.title}
                   </Link>
@@ -203,7 +196,7 @@ export default async function BlogPostPage({
 
         <div className="mt-12 flex flex-wrap items-center gap-4 rounded-2xl border border-edge bg-panel p-6 md:p-8">
           <div className="flex-1 min-w-[16rem]">
-            <h2 className="text-xl font-semibold text-fg md:text-2xl">
+            <h2 className="text-xl font-medium text-fg md:text-2xl">
               Want this applied to your own numbers?
             </h2>
             <p className="mt-2 leading-relaxed text-copy">

@@ -1,51 +1,56 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   PaisaWise design tokens.
-   Palette is inherited verbatim from the pitch deck (build_deck.py). Do not
-   introduce a colour that is not in this block.
-   Mint is reserved for positives only: gains, checkmarks, success.
+   PaisaWise design tokens — Halo edition.
+
+   The page is a light, near-white field (#F5F5F5) carrying large rounded
+   plates: photographic and video cards, deep-violet copy cards, and pill
+   buttons. Light is the default presentation because that is what the design
+   is; dark is a genuine second theme rather than an afterthought, retuned to
+   the same shapes rather than inverted mechanically.
+
+   Gold is the theme, as it was before: it fills the primary pill, carries the
+   eyebrows and marks, and drives the charts. The layout is the reference's;
+   the colour is PaisaWise's.
 --------------------------------------------------------------------------- */
 @theme {
+  /* ------------------------------------------------------------ neutrals */
+  /* The Halo ground and its immediate neighbours. */
+  --color-field: #f5f5f5;
+  --color-field-2: #ededed;
+  --color-white: #ffffff;
+  --color-card-alt: #fbfafd;
+  /* The deck's ink. Not pure black: everything on this site that reads as
+     "black" is this slightly violet near-black, which is what keeps gold from
+     looking like a warning label on it. */
   --color-ink: #171526;
   --color-ink-2: #241f3d;
-  --color-ink-3: #3a3163;
-  --color-surface: #f6f5fa;
-  --color-card: #ffffff;
-  --color-card-alt: #fbfafd;
-  --color-line: #e6e3f0;
-  --color-body: #5a5474;
-  --color-muted: #9a94b8;
-  --color-pale: #c9c3e4;
-  --color-violet: #6c4cf1;
-  --color-violet-d: #5b3fd6;
-  --color-violet-l: #9b85ff;
-  --color-violet-t: #efeaff;
-  --color-violet-t2: #f5f2ff;
-  --color-mint: #12b981;
+  --color-ink-soft: #5a5474;
+  --color-ink-dim: #6f6890;
+  --color-rule: #e6e3f0;
+  --color-rule-2: #d7d2e8;
 
-  /* Near-black field. The site's default presentation is dark: a hairline grid
-     drawn on a near-black ground, with gold as the single accent hue. The
-     brand colours above still drive the accent, so the deck and the site agree.
-     Named for what they are rather than by Tailwind scale, which is banned. */
+  /* Near-black field for the dark theme, from the deck. */
   --color-void: #09090b;
   --color-void-2: #0e0e12;
   --color-void-3: #131318;
   --color-hairline: #212127;
   --color-hairline-2: #2c2c34;
   --color-quiet: #a1a1aa;
-  --color-faint: #71717a;
-  --color-mint-l: #34d399;
+  --color-faint-aa: #82828c;
 
-  /* ------------------------------------------------------------------ gold
-     The brand accent. Gold is the savings instrument in India, which is a
-     sharper fit for a money coach than the violet it replaces.
+  /* The deep copy card the layout leans on. It is the deck's ink rather than
+     the reference's violet, so gold sits on it the way it does everywhere
+     else on the site. In dark it lifts a step instead of dropping, or it
+     would disappear into the ground. */
+  --color-slab: #171526;
+  --color-slab-lift: #1f1b33;
 
-     Gold is a light hue, so it needs two steps rather than one. On the
-     near-black ground it is bright and high contrast; on white it has to
-     darken sharply to stay readable as text. Measured against #ffffff:
-     #e0a020 is 2.28:1 and fails, #946108 is 5.29:1 and passes. Buttons
-     therefore take ink text on gold (7.87:1), never white (2.28:1). */
+  /* --------------------------------------------------------------- gold
+     Gold is a light hue, so it needs two steps. On the near-white field it
+     must darken sharply to stay readable as text: measured against #f5f5f5,
+     #e0a020 is 2.19:1 and fails, #946108 is 5.08:1 and passes. Buttons take
+     ink on gold (7.87:1), never white (2.28:1). */
   --color-gold: #e0a020;
   --color-gold-l: #f0b23a;
   --color-gold-d: #c88a12;
@@ -54,47 +59,17 @@
   --color-gold-t2: #fefaf1;
   --color-gold-plot: #b87a0b;
 
-  /* Warning is its own status colour, not the accent.
-     Over-budget used to borrow the brand hue, which was tolerable when the
-     brand was violet and is not now that it is amber: a caution state and
-     the brand must not be the same colour. Coral reads as caution and sits
-     28 degrees off the gold. */
+  /* Status hues. Caution is coral so it never collides with the gold accent. */
   --color-coral: #ff7a5c;
   --color-coral-d: #b03a0a;
-
-  /* Light-mode positive. #12b981 is only 2.54:1 on white, so the light
-     theme takes a darker green for text. */
+  --color-mint: #12b981;
+  --color-mint-l: #34d399;
   --color-emerald-d: #047857;
 
-  /* ------------------------------------------------------- secondary text
-     `--dim` is the site's caption step: hints under the sliders, transaction
-     dates, chart axis labels, the "Illustration, not a guarantee." note. It
-     is body text, so it owes 4.5:1, and the two hues it used to point at
-     never cleared it. Measured against the worst surface each theme puts it
-     on -- white #ffffff in light, panel-alt #131318 in dark:
-
-       #9a94b8 on #ffffff  2.88:1  fail   ->  #6f6890  5.17:1  pass
-       #71717a on #131318  3.83:1  fail   ->  #82828c  4.87:1  pass
-
-     Both keep the hue of the step they replace, and both stay clearly
-     recessive against `--copy` (6.55:1 light, 7.76:1 dark) so the two-tier
-     text hierarchy still reads. */
-  --color-muted-aa: #6f6890;
-  --color-faint-aa: #82828c;
-
-  /* Chart steps for the dark surface. Snapped with the dataviz validator
-     against the #0e0e12 cell fill, not eyeballed: the previous dark steps
-     dropped to 1.76:1 on this ground and disappeared. */
-  --color-plot: #8b74f0;
-  --color-plot-soft: #4a4080;
-  --color-plot-ref: #7c7c8a;
-
-  /* Categorical steps, one per spending category, assigned in fixed order and
-     bound to the category key rather than to bar position. The chart sorts by
-     size and the order changes month to month, so keying colour to rank would
-     repaint a category as it moved. Snapped with the dataviz validator against
-     both the dark cell fill and the white light-mode card: worst adjacent CVD
-     separation is dE 13.8 against a target of 8. */
+  /* Categorical steps, one per spending category, bound to the category key
+     rather than to bar position — the chart sorts by size and the order
+     changes month to month. Snapped against both the white card and the
+     dark plum cell. */
   --color-cat-1: #a161e0;
   --color-cat-2: #dd5400;
   --color-cat-3: #00a795;
@@ -102,89 +77,119 @@
   --color-cat-5: #d44996;
   --color-cat-6: #0088f2;
 
-  --font-display: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
+  /* ---------------------------------------------------------------- type
+     Inter Tight carries display. It is the closest free neutral grotesque to
+     the reference: same tight, slightly condensed grotesque colour, and it
+     holds up at the -0.03/-0.04em tracking the look depends on. Inter carries
+     body and every numeral. */
+  --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1rem;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Semantic layer. Dark mode remaps these; component classes never hard-code a
-   raw brand colour for surfaces or text. */
+/* Semantic layer. Component classes never hard-code a raw brand colour for
+   surfaces or text; the two themes below are the only place they are bound. */
 :root {
-  --bg: var(--color-surface);
+  --bg: var(--color-field);
   --fg: var(--color-ink);
-  --panel: var(--color-card);
+  --panel: var(--color-white);
   --panel-alt: var(--color-card-alt);
-  --edge: var(--color-line);
-  --edge-strong: #d7d2e8;
-  --copy: var(--color-body);
-  --dim: var(--color-muted-aa);
-  /* `accent` is the text-safe step, `accent-fill` the solid step for buttons
-     and marks. They differ because gold cannot be both on a white ground. */
+  --edge: var(--color-rule);
+  --edge-strong: var(--color-rule-2);
+  --copy: var(--color-ink-soft);
+  --dim: var(--color-ink-dim);
+
+  /* `accent` is the text-safe gold step, `accent-fill` the solid step for
+     marks and chart series. They differ because gold cannot be both on a
+     near-white ground. */
   --accent: var(--color-gold-ink);
   --accent-fill: var(--color-gold);
   --accent-fill-h: var(--color-gold-d);
   --accent-soft: var(--color-gold-t);
   --accent-soft-2: var(--color-gold-t2);
-  --positive: var(--color-emerald-d);
-  --warning: var(--color-coral-d);
   --on-accent: var(--color-ink);
 
-  /* Where `.text-fade` bottoms out. It was a flat 42% in both themes, which
-     put the tail of the h1 -- the words "all go?" -- at 2.54:1 here and
-     3.97:1 in dark. Both fail AA, and the headline is the one piece of text
-     on the page that cannot afford to. Ink on a light ground loses contrast
-     much faster than white on a dark one, so the two themes get their own
-     floor rather than a shared compromise that would flatten the dark fade
-     for no reason. */
-  --fade-end: 64%;
+  /* The primary action. A gold pill with ink on it — the deck's button,
+     in the reference's shape. White on gold is 2.28:1 and is never used. */
+  --action: var(--color-gold);
+  --action-h: var(--color-gold-d);
+  --on-action: var(--color-ink);
+  /* The circle inside a pill button, and the arrow in it. Ink on gold, so the
+     circle reads as a punched hole rather than as a second colour. */
+  --action-dot: var(--color-ink);
+  --on-action-dot: #ffffff;
 
-  /* ------------------------------------------------------- hero scrim
-     Stops for the ellipse that protects the hero copy from the photographic
-     backdrop. Only the core sits behind text; the outer stop releases fast so
-     the rest of the frame shows the photograph.
+  /* The deep copy card the design lays on the field. */
+  --ink-card: var(--color-slab);
+  --on-ink-card: #ffffff;
+  --on-ink-card-copy: rgb(255 255 255 / 0.62);
 
-     Light needs a stronger core than dark. Dark mode puts white text over a
-     photo, and almost any photo is darker than white; light mode puts ink over
-     one, and a dark photo lands right on top of the ink. So the ground has to
-     be lifted harder here than it has to be dropped there. */
-  --hero-scrim-core: 97%;
-  --hero-scrim-mid: 80%;
-  --hero-scrim-outer: 14%;
-  /* The flat wash beneath the ellipse. Light needs far less of it than dark.
-     Mixing a mid-tone photograph toward #f6f5fa lifts its blacks and flattens
-     it into milk; mixing toward near-black only deepens it. The same 20% read
-     as atmospheric in dark and as washed-out here. */
-  --hero-wash: 7%;
-  /* Section bands sit behind body copy, so they take more scrim than the
-     hero does, and light takes more again for the reason above. */
-  --band-scrim: 88%;
-  /* Page mastheads take less. Their copy lives in a max-w-3xl column with the
-     gradient over it, so the flat wash only has to seat the frame in the
-     theme -- and at 88% here it did not seat it, it deleted it. Measured
-     against the render: the pricing masthead reached the screen at a mean
-     delta of 0.66 out of 255, which is below the film grain. */
-  --masthead-scrim: 72%;
-  /* Light still loses the punch the wash takes out, so give it back on the
-     plate itself rather than by thinning the scrim further -- thinning it
-     would darken the ground under the ink and cost headline contrast. */
-  --hero-plate-filter: contrast(1.06) saturate(1.06);
+  --positive: var(--color-emerald-d);
+  --warning: var(--color-coral-d);
 
-  /* Chart tokens. The single-hue series is the brand gold, darkened to the
-     step that clears 3:1 against a white card. */
+  /* Scrim strength for the media plates.
+
+     This is not a "light needs more than dark" rule, which is what it was
+     first written as. What decides it is the plate: these clips are pale
+     lavender throughout, so the light theme is laying ink on a light ground
+     and barely needs help, while the dark theme is laying WHITE on that same
+     light ground and needs the wash to do real work. Measured on the hero
+     plate at the headline, against the copy colour of each theme:
+
+       light, ink #171526 on the washed plate    11.8:1
+       dark, white on 22%                         1.9:1   fail
+       dark, white on 68%                         8.4:1
+
+     Hence the two numbers below are far apart, and the dark one is the big
+     one — the opposite of what a photographic band needs. */
+  --plate-wash: 30%;
+  /* Copy laid directly on a media plate.
+
+     It cannot just take `--fg` / `--copy`: those are tuned against the
+     theme's own flat ground, and a plate is not that ground. The clips are
+     pale in BOTH themes, so light can reuse its ink steps unchanged while
+     dark cannot reuse its greys — measured on the hero plate, `--copy`
+     (#a1a1aa) came in at 2.51:1 there and fails. */
+  --plate-fg: var(--color-ink);
+  --plate-copy: var(--color-ink-soft);
+  --masthead-scrim: 94%;
+  --band-scrim: 62%;
+  --plate-filter: contrast(1.04) saturate(1.05);
+
+  /* --------------------------------------------------------- gold tint
+     The stock clips ship lavender: measured across the hero plate, 87% of the
+     saturated pixels sit between 230 and 270 degrees. This rotates them onto
+     the brand.
+
+     155deg is measured, not guessed. CSS hue-rotate is a linear matrix
+     approximation rather than a true HSL rotation, so the input and output
+     angles do not match — sampling the rendered frame at each step gave:
+
+       130deg -> 20 degrees   peach
+       145deg -> 30 degrees   amber
+       155deg -> 40 degrees   gold      <- #e0a020 is 38.6
+       165deg -> 50 degrees   yellow-green
+       175deg -> 60 degrees   olive
+
+     Applied ONLY to these clips, never to the photography. The same rotation
+     over a picture of a person turns skin green, which is why this is a prop
+     on the plate rather than a blanket filter on every image. */
+  --media-gold: hue-rotate(155deg) saturate(1.35) brightness(1.03);
+
+  /* Charts. The single-hue series is gold darkened to the step that clears
+     3:1 on a white card. */
   --chart-series: var(--color-gold-plot);
   --chart-series-soft: #f0dcb4;
-  /* Axis ticks are text and owe 4.5:1; the reference line is a graphical
-     object and owes 3:1. `--color-muted` cleared neither on a white card. */
-  --chart-ref: var(--color-muted-aa);
-  --chart-grid: var(--color-line);
-  --chart-axis: var(--color-muted-aa);
+  --chart-ref: var(--color-ink-dim);
+  --chart-grid: var(--color-rule);
+  --chart-axis: var(--color-ink-dim);
 }
 
-/* The default presentation. Sections are cells in a hairline grid drawn on a
-   near-black ground; `--edge` is the grid line and carries most of the layout,
-   so it is a real colour rather than a faint alpha. */
+/* The second theme. Same shapes, same plates, same rounded geometry — the
+   ground goes to a deep violet-black that shares the hue family of the
+   `--ink-card` plate, so the cards still belong to the page. */
 .dark {
   --bg: var(--color-void);
   --fg: #ffffff;
@@ -194,36 +199,43 @@
   --edge-strong: var(--color-hairline-2);
   --copy: var(--color-quiet);
   --dim: var(--color-faint-aa);
+
   --accent: var(--color-gold-l);
   --accent-fill: var(--color-gold);
   --accent-fill-h: var(--color-gold-l);
   --accent-soft: #3a2a08;
   --accent-soft-2: #2a1f06;
+  --on-accent: var(--color-ink);
+
+  /* The pill stays gold in both themes: it is the brand mark as much as it is
+     a control, and gold on near-black is the pairing the deck already made. */
+  --action: var(--color-gold);
+  --action-h: var(--color-gold-l);
+  --on-action: var(--color-ink);
+  --action-dot: var(--color-ink);
+  --on-action-dot: #ffffff;
+
+  /* The ink card would vanish into a near-black ground, so here it lifts
+     instead of dropping. Same role, same copy colours, one step up. */
+  --ink-card: var(--color-slab-lift);
+  --on-ink-card: #ffffff;
+  --on-ink-card-copy: rgb(255 255 255 / 0.6);
+
   --positive: var(--color-mint-l);
   --warning: var(--color-coral);
-  --on-accent: var(--color-ink);
-  /* Retuned when the real photography landed. The placeholder plates were
-     dark, so the ground behind the headline sat at L=0.012; the actual shots
-     carry bright walls and windows and lifted it to L=0.025, which dropped
-     the faded end of the h1 to 3.74:1.
 
-     Most of the correction goes into `--fade-end` rather than the scrim core.
-     Pushing the core alone would have needed ~99% -- effectively painting the
-     photograph out from behind the headline -- to buy the same contrast that
-     six points of fade buys for free. */
-  --fade-end: 56%;
-  --hero-scrim-core: 97%;
-  --hero-scrim-mid: 82%;
-  --hero-scrim-outer: 34%;
-  --hero-wash: 20%;
-  --band-scrim: 80%;
-  --masthead-scrim: 60%;
-  --hero-plate-filter: none;
+  --plate-wash: 68%;
+  /* Brighter than `--copy` by design: on the washed plate this measures
+     5.1:1 where `--copy` measured 2.51:1. */
+  --plate-fg: #ffffff;
+  --plate-copy: #e4e4e7;
+  --masthead-scrim: 82%;
+  --band-scrim: 56%;
+  --plate-filter: saturate(1);
 
-  /* Chosen against the cell fill, not flipped from light. See @theme above. */
   --chart-series: var(--color-gold-l);
-  --chart-series-soft: var(--color-plot-soft);
-  --chart-ref: var(--color-plot-ref);
+  --chart-series-soft: #4a4080;
+  --chart-ref: #7c7c8a;
   --chart-grid: var(--color-hairline);
   --chart-axis: var(--color-faint-aa);
 }
@@ -242,9 +254,18 @@
   --color-accent-fill-h: var(--accent-fill-h);
   --color-accent-soft: var(--accent-soft);
   --color-accent-soft-2: var(--accent-soft-2);
+  --color-action: var(--action);
+  --color-action-h: var(--action-h);
+  --color-on-action: var(--on-action);
+  --color-action-dot: var(--action-dot);
+  --color-on-action-dot: var(--on-action-dot);
+  --color-ink-card: var(--ink-card);
+  --color-on-ink-card: var(--on-ink-card);
   --color-positive: var(--positive);
   --color-warning: var(--warning);
   --color-on-accent: var(--on-accent);
+  --color-plate-fg: var(--plate-fg);
+  --color-plate-copy: var(--plate-copy);
 }
 
 @layer base {
@@ -266,22 +287,28 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+  /* Display type is tight-tracked and never heavier than 600. The negative
+     tracking is the single thing that makes this typeface read as the
+     reference does, so it lives here rather than per-component. */
   h1,
   h2,
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.06;
   }
-  /* The ring takes `--accent`, the text-safe gold step, not `--accent-fill`.
-     A focus indicator owes 3:1 against what surrounds it, and solid gold on
-     the light surfaces is 2.28:1 -- the ring was there and barely visible in
-     light mode. `--accent` is 4.87:1 light and 10.55:1 dark. */
+  h1 {
+    letter-spacing: -0.04em;
+  }
+  /* A focus indicator owes 3:1 against what surrounds it. Solid gold is
+     2.19:1 on the light field, so the ring takes `--accent`, the text-safe
+     step: 5.08:1 light and 10.55:1 dark. */
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 999px;
   }
   ::selection {
     background: var(--accent-fill);
@@ -291,165 +318,169 @@
 
 @layer utilities {
   /* Every rupee figure, chart label and animated counter uses this.
-     Clash Display has no tnum, so numerals must fall back to Inter. */
+     Display faces vary in numeral width, so numerals fall back to Inter. */
   .num {
     font-family: var(--font-sans);
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1;
   }
+
+  /* The content column. 88rem matches the reference; the old 76rem frame and
+     its rails are gone, because this design carries structure with plates and
+     whitespace rather than with hairlines. */
   .shell {
     width: 100%;
-    max-width: 76rem;
+    max-width: 88rem;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
   }
   @media (min-width: 768px) {
     .shell {
       padding-inline: 2rem;
     }
   }
-  .eyebrow {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .grain {
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      color-mix(in srgb, var(--accent-fill) 22%, transparent) 1px,
-      transparent 0
-    );
-    background-size: 22px 22px;
-  }
-
-  /* ---------------------------------------------------------------- frame
-     The page is drawn as a grid. Two vertical rails run the full height at the
-     content edges, and every section closes with a horizontal hairline, so
-     sections read as cells rather than as floating cards. This is the single
-     structural motif the whole layout hangs on. */
-  .frame {
+  /* A narrower measure for pages that are mostly prose. */
+  .shell-tight {
     width: 100%;
-    max-width: 76rem;
+    max-width: 72rem;
     margin-inline: auto;
-    border-inline: 1px solid var(--edge);
-  }
-  /* Sections sit inside the rails, so the shell only pads. */
-  .frame .shell {
-    max-width: none;
+    padding-inline: 1.5rem;
   }
 
-  /* Headline treatment: solid at the start, falling away toward the
-     bottom-right. Applied to display text only, never to body copy. */
-  .text-fade {
-    background-image: linear-gradient(
-      to bottom right,
-      var(--fg) 25%,
-      color-mix(in srgb, var(--fg) var(--fade-end), var(--bg)) 78%
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--dim);
+  }
+
+  /* ------------------------------------------------------------- marquee
+     Two infinite marquees, both translating 0 -> -50% over a track that
+     renders its items twice, which is what makes the loop seamless. Speed is
+     the only thing that separates them: brands run faster than backers.
+
+     Motion is opt-out at the platform level below, but an infinite marquee is
+     exactly what that setting is for, so it stops here too rather than
+     merely running at 0.001ms. */
+  @keyframes halo-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: halo-marquee var(--marquee-duration, 22s) linear infinite;
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
     );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    /* A clipped gradient drops the text from the a11y tree in some engines
-       and clips descenders; both are fixed by padding the box. */
-    padding-block: 0.12em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
   }
 
-  /* Soft brand bloom behind hero and product frames. Atmospheric only. */
-  .bloom::before {
-    content: "";
-    position: absolute;
-    inset: -30% -10% auto -10%;
-    height: 26rem;
-    pointer-events: none;
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      color-mix(in srgb, var(--accent-fill) 38%, transparent) 0%,
-      transparent 72%
-    );
-    filter: blur(90px);
-    z-index: 0;
+  /* --------------------------------------------------- animated plates
+     Ambient motion drawn in the browser rather than filmed: gold on the
+     theme's own ground, a few hundred bytes of SVG, and no CDN in the path.
+
+     The landing page carries the video plates. These are deliberately a
+     different family of motion — orbit, flow, breathe, pulse — so the product
+     pages read as related to it rather than as a repeat of it.
+
+     Every one of them is decorative, sits behind copy, and stops dead under
+     `prefers-reduced-motion` via the platform rule at the bottom of this
+     file. They animate transform and opacity only, so none of them costs a
+     layout or a paint. */
+  @keyframes plate-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes plate-spin-back {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+  /* A pulse of light running the length of a rail. The dash pattern is longer
+     than the path, so one dash crosses and the gap holds the rest of the
+     cycle — that is what makes it read as a single travelling packet rather
+     than as a marching-ants border. */
+  @keyframes plate-run {
+    from {
+      stroke-dashoffset: 340;
+    }
+    to {
+      stroke-dashoffset: -340;
+    }
+  }
+  /* Bars breathing against their own baseline. */
+  @keyframes plate-breathe {
+    0%,
+    100% {
+      transform: scaleY(0.42);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  /* A ring leaving the centre and fading as it goes. */
+  @keyframes plate-ping {
+    from {
+      transform: scale(0.25);
+      opacity: 0.55;
+    }
+    to {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  .plate-anim {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  /* A travelling packet has no meaningful still frame: stopped, it parks at
+     the start of its rail and reads as a stray dash rather than as motion
+     that has been turned off. The rails stay, the packets go. */
+  @media (prefers-reduced-motion: reduce) {
+    .plate-packet {
+      opacity: 0 !important;
+    }
+  }
+  .plate-anim-bottom {
+    transform-box: fill-box;
+    transform-origin: bottom;
   }
 
-  /* Top-edge highlight that makes a dark pill read as raised. */
-  .shine {
-    box-shadow:
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 22%, transparent),
-      0 1px 2px 0 rgb(0 0 0 / 0.4);
-  }
+  /* Film grain over the page. A large area of one flat colour reads as
+     plastic; grain gives the surface something to catch. Generated by an
+     inline feTurbulence — ~300 bytes and resolution-independent, where a
+     tileable noise PNG is 50-200KB and goes soft on a high-DPI screen.
 
-  /* Recessive dot field, used behind full-bleed CTA panels. */
-  .dotfield {
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      var(--edge-strong) 1px,
-      transparent 0
-    );
-    background-size: 28px 28px;
-    mask-image: radial-gradient(70% 60% at 50% 45%, #000 10%, transparent 75%);
-  }
-
-  /* ------------------------------------------------- section atmosphere
-     Everything below is decorative and drawn from the same motif as the
-     rails: hairlines, ticks and one soft bloom of the accent. It exists
-     because the page had all of its visual interest in the hero and then
-     ran as flat bands for nine sections.
-
-     Rules these all obey, so they can be applied freely:
-     · pointer-events:none, and z-index 0 under the content layer (Section
-       lifts its .shell to z-10).
-     · Built from --edge / --accent-fill, so they invert with the theme
-       instead of assuming a dark ground.
-     · No filter:blur(). One blurred layer is cheap; nine down a page is
-       not. The soft edges are baked into the gradient stops instead.
-     · Masked to fade out, so nothing collides with a section hairline. */
-
-  /* Film grain over the whole page.
-
-     The flat near-black bands were the actual complaint: a large area of one
-     solid colour reads as plastic, and no amount of edge decoration fixes the
-     middle of it. Grain does, because it gives the surface a texture to catch.
-
-     Generated by an inline SVG feTurbulence as a data URI -- roughly 300 bytes
-     and resolution-independent, where a tileable noise PNG is 50-200KB and
-     goes soft on a high-DPI screen. baseFrequency drives grain size (0.8 is
-     film-like) and numOctaves detail (4; higher costs render time for nothing
-     visible).
-
-     `soft-light` rather than `normal`, so it modulates what is underneath
-     instead of laying grey speckle on top, and z-index 5 keeps it under the
-     sticky header (z-50) and the motion layers (z-60/70). */
+     Normal blending in both themes: soft-light and overlay both collapse
+     toward the backdrop at either extreme and render as nothing. Light needs
+     more of it, because the same grain shifts a pale surface less. */
   .noise::after {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 5;
     pointer-events: none;
-    opacity: 0.035;
-    mix-blend-mode: soft-light;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  /* Light mode has less latitude: the same grain over a near-white ground
-     shows as dirt rather than texture. */
-  /* Blend mode matters more than opacity here. soft-light and overlay both
-     collapse toward the backdrop when the backdrop is near-black, so on this
-     ground they render as nothing at all -- measured at 0.00 variance across
-     every opacity. Normal blending is what actually lifts the surface. */
-  /* Blend mode matters more than opacity. Measured by A/B-ing the layer off
-     and diffing the render, mean delta out of 255:
-
-                    dark      light
-       overlay      0.17      0.02     <- collapses toward the backdrop
-       soft-light   0.69      0.02        at both extremes; invisible
-       screen       4.92      0.05
-       normal @.03  2.57      1.12
-
-     normal is the only one that registers on a near-black AND a near-white
-     ground, so both themes use it. Light needs more of it to read, because
-     the same grain shifts a pale surface less than a dark one. */
   :root .noise::after {
-    opacity: 0.05;
+    opacity: 0.035;
     mix-blend-mode: normal;
   }
   .dark .noise::after {
@@ -457,143 +488,21 @@
     mix-blend-mode: normal;
   }
 
-  /* Two-axis hairline grid, faded from one edge. `.rails` is verticals only;
-     this is the full field, for the sections that can carry more. */
-  .meshgrid::before {
+  /* A single soft bloom of the accent behind a plate. Atmospheric only, and
+     low alpha: meant to be felt rather than seen. */
+  .bloom::before {
     content: "";
     position: absolute;
-    inset: 0;
-    z-index: 0;
+    inset: -20% -10% auto -10%;
+    height: 24rem;
     pointer-events: none;
-    background-image:
-      linear-gradient(to right, var(--edge) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--edge) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(80% 70% at 50% 0%, #000 0%, transparent 78%);
-  }
-  .meshgrid-b::before {
-    mask-image: radial-gradient(80% 70% at 50% 100%, #000 0%, transparent 78%);
-  }
-
-  /* Corner ticks. Marks where a section hairline crosses the frame rail,
-     which is the grid logic the whole layout already runs on. */
-  .ticks::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    --tick: 7px;
-    --hair: 1px;
-    background-image:
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong)),
-      linear-gradient(var(--edge-strong), var(--edge-strong));
-    background-size:
-      var(--tick) var(--hair), var(--hair) var(--tick),
-      var(--tick) var(--hair), var(--hair) var(--tick),
-      var(--tick) var(--hair), var(--hair) var(--tick),
-      var(--tick) var(--hair), var(--hair) var(--tick);
-    background-position:
-      24px 24px, 24px 24px,
-      calc(100% - 24px) 24px, calc(100% - 24px) 24px,
-      24px calc(100% - 24px), 24px calc(100% - 24px),
-      calc(100% - 24px) calc(100% - 24px), calc(100% - 24px) calc(100% - 24px);
-    background-repeat: no-repeat;
-  }
-
-  /* Blueprint rails. Faint verticals on the content column, masked so they
-     never touch the section hairlines above and below. */
-  .rails::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image: linear-gradient(to right, var(--edge) 1px, transparent 1px);
-    background-size: 25% 100%;
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 18%,
-      #000 82%,
-      transparent 100%
-    );
-  }
-
-  /* A single soft bloom of the accent, anchored to one corner. Low alpha:
-     this is meant to be felt rather than seen. `-r` mirrors it so alternate
-     sections can lean opposite ways and the page gains a rhythm. */
-  .veil::after,
-  .veil-r::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .veil::after {
     background: radial-gradient(
-      52% 60% at 12% 8%,
-      color-mix(in srgb, var(--accent-fill) 13%, transparent) 0%,
-      color-mix(in srgb, var(--accent-fill) 5%, transparent) 38%,
-      transparent 72%
+      50% 50% at 50% 50%,
+      color-mix(in srgb, var(--accent-fill) 20%, transparent) 0%,
+      transparent 70%
     );
-  }
-  .veil-r::after {
-    background: radial-gradient(
-      52% 60% at 88% 92%,
-      color-mix(in srgb, var(--accent-fill) 13%, transparent) 0%,
-      color-mix(in srgb, var(--accent-fill) 5%, transparent) 38%,
-      transparent 72%
-    );
-  }
-
-  /* Hairline hatch for the dead space outside the frame rails. At 1920 that
-     is ~350px of nothing on each side; this gives it a surface without
-     putting anything near the content. */
-  .gutter-hatch::before,
-  .gutter-hatch::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: calc((100vw - 76rem) / 2);
+    filter: blur(90px);
     z-index: 0;
-    pointer-events: none;
-    background-image: repeating-linear-gradient(
-      -45deg,
-      var(--edge) 0 1px,
-      transparent 1px 11px
-    );
-    opacity: 0.5;
-    mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
-  }
-  .gutter-hatch::before {
-    left: 0;
-  }
-  .gutter-hatch::after {
-    right: 0;
-  }
-  @media (max-width: 1300px) {
-    .gutter-hatch::before,
-    .gutter-hatch::after {
-      display: none;
-    }
-  }
-
-  /* Perspective grid for the closing panel, borrowed from the reference. */
-  .gridfloor {
-    background-image:
-      linear-gradient(to right, var(--edge) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--edge) 1px, transparent 1px);
-    background-size: 62px 62px;
-    mask-image: radial-gradient(60% 70% at 50% 40%, #000 5%, transparent 78%);
   }
 }
 

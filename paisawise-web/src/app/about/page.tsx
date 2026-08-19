@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { ArrowRight, Eye, HandCoins, Lock, UserRound } from "lucide-react";
-import { Badge, Button, Card, Section, SectionHead } from "@/components/ui/primitives";
+import { Eye, HandCoins, Lock, UserRound } from "lucide-react";
+import { Button, Card, Section, SectionHead } from "@/components/ui/primitives";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { MediaPanel } from "@/components/sections/MediaPanel";
+import { AnimatedPlate } from "@/components/sections/AnimatedPlate";
+import { Marquee, CREDENTIAL_BRANDS } from "@/components/sections/Marquee";
+import { Reveal } from "@/components/motion/Reveal";
 import { Mark } from "@/components/brand/Logo";
 import { PRICE } from "@/lib/site";
 import { rupees } from "@/lib/format";
@@ -69,45 +74,99 @@ export default function AboutPage() {
   return (
     <>
       {/* SB7:GUIDE · mission stated as a sentence about the customer */}
-      <Section
-        tone="ink"
-        className="relative overflow-hidden"
+      <PageMasthead
         photo="/hero/page-about.jpg"
         photoPosition="50% 45%"
-        photoVariant="masthead"
-      >
-        <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
-        <div className="relative max-w-3xl">
-          <Badge tone="accent">About PaisaWise</Badge>
-          <h1 className="mt-6 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
-            Good financial guidance should not depend on how much money you
-            already have.
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-copy">
+        eyebrow="About PaisaWise"
+        title="Good financial guidance should not depend on how much money you already have."
+        lede={
+          <>
             A salaried professional earning a solid income in an Indian city
             gets a product brochure. Someone with a crore gets a person who
             knows their name. PaisaWise exists to close that gap for the first
             group, at{" "}
-            <span className="num font-semibold text-fg">
+            <span className="num font-medium text-fg">
               {rupees(PRICE.monthly)}
             </span>{" "}
             a month.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button variant="onInk" size="lg" href="/get-started">
-              Get started
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="lg"
-              href="/contact"
-              className="border border-edge text-fg hover:text-accent"
-            >
-              Book a call
-            </Button>
-          </div>
+          </>
+        }
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button size="lg" href="/get-started" arrow>
+            Get started
+          </Button>
+          <Button variant="secondary" size="lg" href="/contact">
+            Book a call
+          </Button>
         </div>
+      </PageMasthead>
+
+      <Section className="pb-10 md:pb-12">
+        <Reveal className="grid items-start gap-12 md:grid-cols-2">
+          <div>
+            <h2 className="text-[clamp(2rem,4.4vw,3rem)] font-medium text-fg">
+              Why we
+              <br />
+              built it.
+            </h2>
+            <div className="mt-8">
+              <Button href="/features" arrow>
+                See the product
+              </Button>
+            </div>
+          </div>
+          <p className="text-2xl leading-relaxed text-copy md:text-3xl">
+            Two gaps, and everything in the product traces back to one of them:
+            you cannot see where the money goes, and the advice you can get was
+            written for somebody else.
+          </p>
+        </Reveal>
+      </Section>
+
+      <Section className="py-10 md:py-12">
+        <Reveal selector="[data-plate]" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <MediaPanel
+            data-plate
+            image="/hero/section-rm.jpg"
+            imagePosition="55% 40%"
+            scrim="strong"
+            rounded="rounded-2xl"
+            className="flex min-h-80 flex-col justify-between p-7 sm:col-span-2"
+          >
+            <h3 className="text-2xl font-medium leading-snug text-plate-fg">
+              It starts at the branch
+            </h3>
+            <p className="max-w-xs text-base text-plate-copy">
+              A decent salary and three accounts walks in, and leaves twenty
+              minutes later with a fixed deposit and a brochure.
+            </p>
+          </MediaPanel>
+
+          <Card data-plate variant="ink" className="flex min-h-80 flex-col justify-between">
+            <h3 className="text-2xl font-medium leading-snug text-white">
+              You are the
+              <br />
+              customer.
+            </h3>
+            <p className="text-base text-white/60">
+              Subscriptions pay for PaisaWise. No ads, and no commission from any
+              fund house.
+            </p>
+          </Card>
+
+          <Card data-plate variant="ink" className="flex min-h-80 flex-col justify-between">
+            <h3 className="text-2xl font-medium leading-snug text-white">
+              Read-only,
+              <br />
+              always.
+            </h3>
+            <p className="text-base text-white/60">
+              It is in the product design rather than the terms page, because it
+              is what people worry about on day one.
+            </p>
+          </Card>
+        </Reveal>
       </Section>
 
       {/* SB7:GUIDE · empathy. Name the problem before naming the product. */}
@@ -159,7 +218,7 @@ export default function AboutPage() {
             />
             <Card className="bg-panel-alt">
               <p className="eyebrow">The gap, stated plainly</p>
-              <p className="mt-4 text-lg font-semibold leading-snug text-fg">
+              <p className="mt-4 text-lg font-medium leading-snug text-fg">
                 You can see your spending, or you can get personal advice.
                 Getting both has usually meant hiring a wealth manager.
               </p>
@@ -188,7 +247,7 @@ export default function AboutPage() {
           title="Four things we will not trade away"
           lede="Product decisions get argued out against this list. When a feature and a principle disagree, the feature loses."
         />
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-12 grid gap-4 md:grid-cols-2">
           {BELIEFS.map((belief) => {
             const Icon = belief.icon;
             return (
@@ -196,11 +255,24 @@ export default function AboutPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
                   <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
                 </span>
-                <h3 className="mt-5 text-xl font-semibold text-fg">{belief.title}</h3>
+                <h3 className="mt-5 text-xl font-medium text-fg">{belief.title}</h3>
                 <p className="mt-3 leading-relaxed text-copy">{belief.body}</p>
               </Card>
             );
           })}
+        </div>
+      </Section>
+
+      <Section className="py-10 md:py-12">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-4">
+          <p className="text-base leading-relaxed text-copy">
+            Built on regulated rails
+            <br />
+            and certified advice.
+          </p>
+          <div className="md:col-span-3">
+            <Marquee items={CREDENTIAL_BRANDS} duration="30s" itemClassName="mx-10 text-copy" />
+          </div>
         </div>
       </Section>
 
@@ -216,17 +288,17 @@ export default function AboutPage() {
           people below are invented, and so are their backgrounds.
         </p>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TEAM.map((person) => (
             <Card key={person.name} className="flex h-full flex-col">
               <span
                 aria-hidden="true"
-                className="num inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-lg font-bold text-accent"
+                className="num inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-lg font-medium text-accent"
               >
                 {person.initials}
               </span>
-              <h3 className="mt-5 text-lg font-semibold text-fg">{person.name}</h3>
-              <p className="mt-1 text-sm font-semibold text-accent">{person.role}</p>
+              <h3 className="mt-5 text-lg font-medium text-fg">{person.name}</h3>
+              <p className="mt-1 text-sm font-medium text-accent">{person.role}</p>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-copy">{person.bio}</p>
             </Card>
           ))}
@@ -234,34 +306,35 @@ export default function AboutPage() {
       </Section>
 
       {/* AIDA:ACTION · hard CTA, same primary verb as every other page */}
-      <Section tone="ink" photo="/hero/page-about.jpg" photoPosition="70% 45%">
-        <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-2xl">
-            <Mark className="h-10 w-10" />
-            <h2 className="mt-6 text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-fg">
-              You are the one doing the saving. We just make it obvious what to
-              do next.
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-copy">
-              Answer four questions and see the plan we would build for you. It
-              takes about two minutes and costs nothing.
-            </p>
+      <Section>
+        <AnimatedPlate variant="orbit" tone="ink" className="px-7 py-16 md:px-14 md:py-20">
+          <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-2xl">
+              <Mark className="h-10 w-10" onInk />
+              <h2 className="mt-6 text-[clamp(1.9rem,4vw,2.8rem)] font-medium text-white">
+                You are the one doing the saving. We just make it obvious what to
+                do next.
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-white/60">
+                Answer four questions and see the plan we would build for you. It
+                takes about two minutes and costs nothing.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col gap-3 sm:flex-row md:flex-col">
+              <Button size="lg" href="/get-started" arrow>
+                Get started
+              </Button>
+              <Button
+                variant="ghost"
+                size="lg"
+                href="/contact"
+                className="border border-white/25 text-white hover:bg-white/10"
+              >
+                Book a call
+              </Button>
+            </div>
           </div>
-          <div className="flex shrink-0 flex-col gap-3 sm:flex-row md:flex-col">
-            <Button variant="onInk" size="lg" href="/get-started">
-              Get started
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="lg"
-              href="/contact"
-              className="border border-edge text-fg hover:text-accent"
-            >
-              Book a call
-            </Button>
-          </div>
-        </div>
+        </AnimatedPlate>
       </Section>
     </>
   );

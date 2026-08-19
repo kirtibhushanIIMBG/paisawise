@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AlertTriangle } from "lucide-react";
-import { Badge, Button, Section } from "@/components/ui/primitives";
+import { Button, Section } from "@/components/ui/primitives";
+import { PageMasthead } from "@/components/sections/PageMasthead";
 import { PRICE } from "@/lib/site";
 import { rupees } from "@/lib/format";
 
@@ -116,28 +117,19 @@ const CLAUSES: Clause[] = [
 export default function TermsPage() {
   return (
     <>
-      <Section
-        tone="ink"
-        className="py-14 md:py-20"
-        photo="/hero/page-legal.jpg"
-        photoPosition="50% 55%"
-        photoVariant="masthead"
-      >
-        <div className="max-w-3xl">
-          <Badge tone="accent">Legal</Badge>
-          <h1 className="mt-6 text-[clamp(2rem,4.8vw,3.2rem)] font-semibold text-fg">
-            Terms of use
-          </h1>
-          <p className="num mt-5 text-sm text-copy">Last updated {LAST_UPDATED}</p>
-        </div>
-      </Section>
+      <PageMasthead
+        motion="orbit"
+        eyebrow="Legal"
+        title="Terms of use"
+        lede={<span className="num">Last updated {LAST_UPDATED}</span>}
+      />
 
       <Section className="py-14 md:py-20">
         <div className="max-w-[46rem]">
           <div className="flex gap-4 rounded-2xl border border-edge bg-accent-soft p-5 md:p-6">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
             <div>
-              <p className="font-semibold text-fg">
+              <p className="font-medium text-fg">
                 This is coursework, and it is not a legal agreement
               </p>
               <p className="mt-2 leading-relaxed text-copy">
@@ -154,7 +146,7 @@ export default function TermsPage() {
           <div className="mt-10 space-y-11">
             {CLAUSES.map((clause) => (
               <section key={clause.heading}>
-                <h2 className="text-[clamp(1.25rem,2.4vw,1.6rem)] font-semibold text-fg">
+                <h2 className="text-[clamp(1.25rem,2.4vw,1.6rem)] font-medium text-fg">
                   {clause.heading}
                 </h2>
                 {clause.paras.map((para) => (
@@ -193,7 +185,7 @@ export default function TermsPage() {
               Pricing in plain language sits on the{" "}
               <Link
                 href="/pricing"
-                className="font-semibold text-accent underline-offset-4 hover:underline"
+                className="font-medium text-accent underline-offset-4 hover:underline"
               >
                 pricing page
               </Link>

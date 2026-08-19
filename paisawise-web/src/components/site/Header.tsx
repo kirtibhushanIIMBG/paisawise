@@ -10,13 +10,13 @@ import { NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
- * Dark ships on the server-rendered html tag, so `true` is the only initial
- * value that matches the first paint. Starting at `false` rendered the wrong
- * icon and the wrong aria-label for a frame on every load. The effect below
- * still corrects it for the minority who stored `light`.
+ * Light ships on the server-rendered html tag, so `false` is the only initial
+ * value that matches the first paint. Starting at `true` would render the
+ * wrong icon and the wrong aria-label for a frame on every load. The effect
+ * below still corrects it for the minority who stored `dark`.
  */
 function ThemeToggle() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     setDark(document.documentElement.classList.contains("dark"));
@@ -38,7 +38,7 @@ function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-      className="grid h-11 w-11 place-items-center rounded-full border border-edge text-copy transition-colors hover:border-accent hover:text-accent"
+      className="grid h-11 w-11 place-items-center rounded-full border border-edge text-copy transition-colors duration-200 hover:border-fg hover:text-fg"
     >
       {dark ? <Sun size={17} /> : <Moon size={17} />}
     </button>
@@ -143,7 +143,7 @@ function NavMenu({
           }
           setOpen((v) => !v);
         }}
-        className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-[0.95rem] font-medium text-copy transition-colors hover:text-accent aria-expanded:text-accent"
+        className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-base font-medium text-copy transition-colors duration-200 hover:text-fg aria-expanded:text-fg"
       >
         {label}
         <ChevronDown
@@ -164,7 +164,7 @@ function NavMenu({
             : "invisible translate-y-1 opacity-0",
         )}
       >
-        <div className="rounded-2xl border border-edge bg-panel p-2 shadow-xl shadow-black/40">
+        <div className="rounded-2xl border border-edge bg-panel p-2 shadow-xl shadow-black/10">
           {items.map((child) => (
             <Link
               key={child.href}
@@ -173,9 +173,9 @@ function NavMenu({
               tabIndex={open ? undefined : -1}
               aria-hidden={open ? undefined : true}
               onClick={() => setOpen(false)}
-              className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-accent-soft"
+              className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-panel-alt"
             >
-              <div className="text-sm font-semibold text-fg">{child.label}</div>
+              <div className="text-sm font-medium text-fg">{child.label}</div>
               <div className="mt-0.5 text-xs text-dim">{child.note}</div>
             </Link>
           ))}
@@ -226,13 +226,17 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-colors duration-300",
+        "sticky top-0 z-50 transition-colors duration-300",
+        /* The bar carries no rule of its own. Unscrolled it is the field, so
+           the nav appears to float on the page the way the reference does;
+           scrolled it takes a translucent ground so content passing beneath
+           it does not collide with the links. */
         scrolled
-          ? "border-edge bg-bg/85 backdrop-blur-xl"
-          : "border-transparent bg-bg",
+          ? "border-b border-edge bg-bg/80 backdrop-blur-xl"
+          : "bg-transparent",
       )}
     >
-      <div className="shell flex h-18 items-center justify-between gap-6 py-3">
+      <div className="shell flex h-20 items-center justify-between gap-6 py-3">
         <Link
           href="/"
           aria-label="PaisaWise home"
@@ -241,7 +245,7 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="Main">
           {NAV.map((item) =>
             "children" in item ? (
               <NavMenu key={item.label} label={item.label} items={item.children} />
@@ -251,8 +255,8 @@ export function Header() {
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
                 className={cn(
-                  "rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors hover:text-accent",
-                  pathname === item.href ? "text-accent" : "text-copy",
+                  "rounded-full px-4 py-2 text-base font-medium transition-colors duration-200 hover:text-fg",
+                  pathname === item.href ? "text-fg" : "text-copy",
                 )}
               >
                 {item.label}
@@ -265,10 +269,10 @@ export function Header() {
           <div className="hidden sm:block">
             <ThemeToggle />
           </div>
-          <Button href="/contact" variant="secondary" size="sm" className="hidden md:inline-flex">
+          <Button href="/contact" variant="ghost" size="sm" className="hidden md:inline-flex">
             Book a call
           </Button>
-          <Button href="/get-started" size="sm" className="hidden sm:inline-flex">
+          <Button href="/get-started" size="md" className="hidden sm:inline-flex">
             Get started
           </Button>
           <button
@@ -278,7 +282,7 @@ export function Header() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-nav"
-            className="grid h-11 w-11 place-items-center rounded-full border border-edge text-fg lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-edge text-fg transition-colors duration-200 hover:border-fg lg:hidden"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -302,8 +306,8 @@ export function Header() {
                 href={link.href}
                 aria-current={pathname === link.href ? "page" : undefined}
                 className={cn(
-                  "rounded-xl px-3 py-3 text-base font-medium transition-colors hover:bg-accent-soft",
-                  pathname === link.href ? "text-accent" : "text-fg",
+                  "rounded-xl px-3 py-3 text-base font-medium transition-colors hover:bg-panel-alt",
+                  pathname === link.href ? "text-fg" : "text-copy",
                 )}
               >
                 {link.label}

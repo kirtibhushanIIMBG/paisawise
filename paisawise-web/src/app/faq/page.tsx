@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { ArrowRight, CreditCard, MessagesSquare, ShieldCheck } from "lucide-react";
+import { CreditCard, MessagesSquare, ShieldCheck } from "lucide-react";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
-import { Badge, Button, Card, Section, SectionHead } from "@/components/ui/primitives";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { AnimatedPlate } from "@/components/sections/AnimatedPlate";
+import { MediaPanel } from "@/components/sections/MediaPanel";
+import { Reveal } from "@/components/motion/Reveal";
+import { Button, Card, Section, SectionHead } from "@/components/ui/primitives";
 import { FAQS, PRICE, TRUST_POINTS } from "@/lib/site";
 import { rupees } from "@/lib/format";
 
@@ -59,39 +63,49 @@ function questionsFor(id: GroupId) {
 export default function FaqPage() {
   return (
     <>
-      <Section
-        tone="ink"
-        className="relative overflow-hidden"
+      <PageMasthead
         photo="/hero/page-faq.jpg"
         photoPosition="50% 45%"
-        photoVariant="masthead"
+        eyebrow="Questions"
+        title="The ten questions people ask before they subscribe"
+        lede="Grouped into product, pricing and data. If the one you came with is missing, an advisor will answer it on a call before you pay anything."
       >
-        <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
-        <div className="relative max-w-3xl">
-          <Badge tone="accent">Questions</Badge>
-          <h1 className="mt-6 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
-            The ten questions people ask before they subscribe
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-copy">
-            Grouped into product, pricing and data. If the one you came with is
-            missing, an advisor will answer it on a call before you pay
-            anything.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-copy">
-            <span className="num">
-              <span className="font-semibold text-fg">{rupees(PRICE.monthly)}</span> a
-              month
-            </span>
-            <span aria-hidden="true" className="text-dim">
-              ·
-            </span>
-            <span>No lock-in on the monthly plan</span>
-            <span aria-hidden="true" className="text-dim">
-              ·
-            </span>
-            <span>Read-only access to your accounts</span>
-          </div>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-copy">
+          <span className="num">
+            <span className="font-medium text-fg">{rupees(PRICE.monthly)}</span> a
+            month
+          </span>
+          <span aria-hidden="true" className="text-dim">
+            ·
+          </span>
+          <span>No lock-in on the monthly plan</span>
+          <span aria-hidden="true" className="text-dim">
+            ·
+          </span>
+          <span>Read-only access to your accounts</span>
         </div>
+      </PageMasthead>
+
+      <Section className="pb-6 md:pb-8">
+        <Reveal className="grid items-start gap-12 md:grid-cols-2">
+          <div>
+            <h2 className="text-[clamp(2rem,4.4vw,3rem)] font-medium text-fg">
+              Asked before
+              <br />
+              anyone pays.
+            </h2>
+            <div className="mt-8">
+              <Button href="/contact" arrow>
+                Ask your own
+              </Button>
+            </div>
+          </div>
+          <p className="text-2xl leading-relaxed text-copy md:text-3xl">
+            Every question here is one a bank relationship manager hears at the
+            branch. Answering them in public is cheaper than answering them on a
+            call.
+          </p>
+        </Reveal>
       </Section>
 
       {GROUPS.map((group, index) => {
@@ -109,7 +123,7 @@ export default function FaqPage() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
                   <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
                 </span>
-                <h2 className="mt-5 text-2xl font-semibold text-fg md:text-3xl">
+                <h2 className="mt-5 text-2xl font-medium text-fg md:text-3xl">
                   {group.title}
                 </h2>
                 <p className="mt-3 leading-relaxed text-copy">{group.blurb}</p>
@@ -124,56 +138,93 @@ export default function FaqPage() {
       })}
 
       {/* Risk reversal restated in short form, straight from TRUST_POINTS */}
-      <Section
-        className="py-14 md:py-20"
-        photo="/hero/section-advisor.jpg"
-        photoPosition="72% 40%"
-      >
+      <Section tone="alt" className="py-14 md:py-20">
         <SectionHead
           eyebrow="The short version"
           title="Four promises the answers above keep coming back to"
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal selector="[data-trust]" className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TRUST_POINTS.map((point) => (
-            <Card key={point.label} className="bg-panel-alt">
-              <h3 className="text-base font-semibold text-fg">{point.label}</h3>
+            <Card key={point.label} data-trust>
+              <h3 className="text-base font-medium text-fg">{point.label}</h3>
               <p className="mt-2 text-[0.95rem] leading-relaxed text-copy">{point.note}</p>
             </Card>
           ))}
-        </div>
+        </Reveal>
+      </Section>
+
+      {/* The advisor plate: the answer behind most of the answers above. */}
+      <Section>
+        <Reveal className="grid items-start gap-8 md:grid-cols-2">
+          <div className="md:pr-12 md:pt-2">
+            <p className="eyebrow mb-2">The one that matters</p>
+            <h2 className="text-[clamp(2.4rem,5vw,3.5rem)] font-medium leading-none text-fg">
+              Ask a
+              <br />
+              person
+            </h2>
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-copy">
+              Most of the answers above end at the same place: a certified
+              advisor who has read your dashboard. If your question is not here,
+              it is a question for them.
+            </p>
+          </div>
+          <MediaPanel
+            image="/hero/section-advisor.jpg"
+            imagePosition="72% 40%"
+            scrim="strong"
+            className="min-h-[28rem] lg:min-h-[34rem]"
+          >
+            <div className="relative p-10 md:p-12">
+              <h3 className="text-[clamp(1.8rem,3.4vw,2.6rem)] font-medium leading-tight text-plate-fg">
+                Before you pay
+              </h3>
+              <p className="mt-5 max-w-md text-base text-plate-copy">
+                An advisor will answer it on a call before you subscribe to
+                anything. There is no card required to have that conversation.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" arrow>
+                  Book a call
+                </Button>
+              </div>
+            </div>
+          </MediaPanel>
+        </Reveal>
       </Section>
 
       {/* AIDA:ACTION · closing CTA points at the human, not the checkout */}
-      <Section tone="ink" photo="/hero/section-rm.jpg" photoPosition="55% 40%">
+      <Section>
+        <AnimatedPlate variant="pulse" tone="ink" className="px-7 py-16 md:px-14 md:py-20">
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
-            <h2 className="text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-fg">
+            <h2 className="text-[clamp(1.9rem,4vw,2.8rem)] font-medium text-white">
               Still have a question we did not answer?
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-copy">
+            <p className="mt-5 text-lg leading-relaxed text-white/60">
               Send it across and an advisor replies. If your bank relationship
               manager introduced you to PaisaWise, mention it: the{" "}
-              <span className="num font-semibold text-fg">
+              <span className="num font-medium text-white">
                 {rupees(PRICE.onboarding)}
               </span>{" "}
               onboarding fee is waived for you.
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row md:flex-col">
-            <Button variant="onInk" size="lg" href="/contact">
+            <Button size="lg" href="/contact" arrow>
               Book a call
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
             <Button
               variant="ghost"
               size="lg"
               href="/get-started"
-              className="border border-edge text-fg hover:text-accent"
+              className="border border-white/25 text-white hover:bg-white/10"
             >
               Get started
             </Button>
           </div>
         </div>
+        </AnimatedPlate>
       </Section>
     </>
   );

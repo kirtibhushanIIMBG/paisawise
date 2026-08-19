@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { ArrowRight, Building2, CalendarClock, Check, Mail } from "lucide-react";
+import { Building2, CalendarClock, Check, Mail } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { Reveal } from "@/components/motion/Reveal";
 import { Badge, Button, Card, Section, SectionHead } from "@/components/ui/primitives";
 import { PRICE } from "@/lib/site";
 import { rupees } from "@/lib/format";
@@ -32,26 +34,38 @@ const CALL_COVERS = [
 export default function ContactPage() {
   return (
     <>
-      <Section
-        tone="ink"
-        className="relative overflow-hidden"
+      <PageMasthead
         photo="/hero/page-contact.jpg"
         photoPosition="45% 45%"
-        photoVariant="masthead"
-      >
-        <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
-        <div className="relative max-w-3xl">
-          <Badge tone="accent">Contact</Badge>
-          <h1 className="mt-6 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
+        eyebrow="Contact"
+        title={
+          <>
             Three ways to reach us. One of them saves you{" "}
             <span className="num">{rupees(PRICE.onboarding)}</span>.
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-copy">
-            Most people arrive here through a bank relationship manager after a
-            branch visit. If that is you, start with the first option. If it is
-            not, the other two work just as well.
+          </>
+        }
+        lede="Most people arrive here through a bank relationship manager after a branch visit. If that is you, start with the first option. If it is not, the other two work just as well."
+      />
+
+      <Section className="pb-6 pt-10 md:pb-8 md:pt-12">
+        <Reveal className="grid items-start gap-12 md:grid-cols-2">
+          <div>
+            <h2 className="text-[clamp(2rem,4.4vw,3rem)] font-medium text-fg">
+              Three doors.
+              <br />
+              One saves you {rupees(PRICE.onboarding)}.
+            </h2>
+            <div className="mt-8">
+              <Button href="/get-started" arrow>
+                Or start on your own
+              </Button>
+            </div>
+          </div>
+          <p className="text-2xl leading-relaxed text-copy md:text-3xl">
+            Most people arrive through a bank relationship manager after a branch
+            visit. If that is you, the onboarding fee is already waived.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Door 1: the RM channel. Primary lead source, so it gets the weight. */}
@@ -78,13 +92,13 @@ export default function ContactPage() {
                   Onboarding fee waived
                 </Badge>
               </div>
-              <h2 className="mt-6 text-2xl font-semibold text-fg md:text-3xl">
+              <h2 className="mt-6 text-2xl font-medium text-fg md:text-3xl">
                 Came to us through your bank relationship manager?
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-copy">
                 PaisaWise works with banks, so your relationship manager can
                 refer you directly. The referral removes the one-time{" "}
-                <span className="num font-semibold text-fg">
+                <span className="num font-medium text-fg">
                   {rupees(PRICE.onboarding)}
                 </span>{" "}
                 onboarding fee and puts you in front of an advisor faster than
@@ -103,9 +117,8 @@ export default function ContactPage() {
               </ol>
 
               <div className="mt-9 flex flex-wrap gap-3">
-                <Button size="lg" href="/get-started">
+                <Button size="lg" href="/get-started" arrow>
                   Get started
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Button>
                 <Button variant="secondary" size="lg" href="/pricing">
                   See what it costs
@@ -119,7 +132,7 @@ export default function ContactPage() {
                 Plenty of members arrive from LinkedIn or a search instead. You
                 get the same product and the same advisor panel. The only
                 difference is the{" "}
-                <span className="num font-semibold text-fg">
+                <span className="num font-medium text-fg">
                   {rupees(PRICE.onboarding)}
                 </span>{" "}
                 onboarding fee, which covers account linking and your first
@@ -150,7 +163,7 @@ export default function ContactPage() {
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <h3 className="text-xl font-semibold text-fg">General enquiry</h3>
+            <h3 className="text-xl font-medium text-fg">General enquiry</h3>
             <p className="mt-2 max-w-xl leading-relaxed text-copy">
               Pricing, bank coverage, what happens to your data, or anything the
               FAQ left open. Replies land on working days.
@@ -167,7 +180,7 @@ export default function ContactPage() {
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft">
                 <CalendarClock className="h-5 w-5 text-accent" aria-hidden="true" />
               </span>
-              <h3 className="mt-5 text-xl font-semibold text-fg">
+              <h3 className="mt-5 text-xl font-medium text-fg">
                 Book an advisor call
               </h3>
               <p className="mt-3 leading-relaxed text-copy">
@@ -195,7 +208,7 @@ export default function ContactPage() {
             </Card>
 
             <Card className="bg-panel md:p-8">
-              <h3 className="text-base font-semibold text-fg">
+              <h3 className="text-base font-medium text-fg">
                 Before you write to us
               </h3>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-copy">
@@ -210,7 +223,7 @@ export default function ContactPage() {
 
       <Section className="py-14 md:py-20">
         <Card className="bg-panel-alt text-center">
-          <h2 className="text-2xl font-semibold text-fg">
+          <h2 className="text-2xl font-medium text-fg">
             Would you rather read first?
           </h2>
           <p className="mx-auto mt-3 max-w-xl leading-relaxed text-copy">
@@ -223,7 +236,6 @@ export default function ContactPage() {
             </Button>
             <Button href="/get-started">
               Get started
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
         </Card>

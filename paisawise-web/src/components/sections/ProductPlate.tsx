@@ -41,7 +41,7 @@ export function ProductPlate({
           style={{
             objectPosition: p.position,
             opacity: active === i ? 1 : 0,
-            filter: "var(--hero-plate-filter)",
+            filter: "var(--plate-filter)",
           }}
         />
       ))}

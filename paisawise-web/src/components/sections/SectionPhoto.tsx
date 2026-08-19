@@ -59,7 +59,7 @@ export function SectionPhoto({
         loading="lazy"
         decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: position, filter: "var(--hero-plate-filter)" }}
+        style={{ objectPosition: position, filter: "var(--plate-filter)" }}
       />
       <div
         className="absolute inset-0"

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { SectionPhoto } from "@/components/sections/SectionPhoto";
-import { ArrowRight } from "lucide-react";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { AnimatedPlate } from "@/components/sections/AnimatedPlate";
 import { Dashboard } from "@/components/interactive/Dashboard";
-import { Button, Badge } from "@/components/ui/primitives";
+import { Button } from "@/components/ui/primitives";
 import { PRICE } from "@/lib/site";
 import { rupees } from "@/lib/format";
 
@@ -15,22 +15,20 @@ export const metadata: Metadata = {
 export default function DemoPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-edge bg-panel-alt py-14 md:py-20">
-        <SectionPhoto src="/hero/page-demo.jpg" position="55% 50%" variant="masthead" />
-        <div className="shell relative z-10">
-          <Badge tone="neutral">Sample data, no sign-up</Badge>
-          <h1 className="mt-5 max-w-3xl text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
-            A real month, before you pay for one
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-copy">
+      <PageMasthead
+        motion="bars"
+        eyebrow="Sample data, no sign-up"
+        title="A real month, before you pay for one"
+        lede={
+          <>
             This is the dashboard a member sees on the first of the month. The
             numbers belong to a made-up salaried professional on a base of{" "}
             <span className="num">{rupees(82000)}</span> a month, with three bank
             accounts and two UPI apps linked. Switch months to watch every figure
             move: July carried variable pay, June was short a reimbursement.
-          </p>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       <section className="py-12 md:py-16" aria-labelledby="dashboard-heading">
         <div className="shell">
@@ -45,27 +43,32 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-edge bg-panel-alt py-20 text-fg md:py-24">
-        <SectionPhoto src="/hero/section-advisor.jpg" position="72% 40%" />
-        <div className="shell relative z-10 text-center">
-          <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.6vw,2.5rem)] font-semibold">
+      <section className="px-4 py-10 md:px-6">
+        <AnimatedPlate variant="orbit" tone="ink" className="px-7 py-16 md:px-14 md:py-20">
+        <div className="relative z-10 text-center">
+          <h2 className="mx-auto max-w-2xl text-[clamp(1.7rem,3.6vw,2.5rem)] font-medium text-white">
             Yours would look like this by the end of week one
           </h2>
-          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-copy">
+          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/60">
             Linking takes about fifteen minutes. The first advisor call happens in
             your opening month, and the {rupees(PRICE.onboarding)} onboarding fee
             is waived if your relationship manager sent you.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href="/get-started" size="lg">
+            <Button href="/get-started" size="lg" arrow>
               Get started
-              <ArrowRight size={18} />
             </Button>
-            <Button href="/pricing" variant="secondary" size="lg">
+            <Button
+              href="/pricing"
+              variant="ghost"
+              size="lg"
+              className="border border-white/25 text-white hover:bg-white/10"
+            >
               See pricing
             </Button>
           </div>
         </div>
+        </AnimatedPlate>
       </section>
     </>
   );

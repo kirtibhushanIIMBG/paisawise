@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Badge, Button, Card, Section, SectionHead } from "@/components/ui/primitives";
+import { Badge, Button, Card, Section } from "@/components/ui/primitives";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { AnimatedPlate } from "@/components/sections/AnimatedPlate";
+import { Reveal } from "@/components/motion/Reveal";
 import { POSTS, formatPostDate } from "@/lib/blog";
 
 /* AUTHORITY · Cialdini:authority. Nothing sells here. The job is to show that
@@ -30,25 +33,33 @@ function Meta({ post }: { post: (typeof POSTS)[number] }) {
 export default function BlogIndexPage() {
   return (
     <>
-      <Section
-        tone="ink"
-        className="relative overflow-hidden"
+      <PageMasthead
         photo="/hero/page-blog.jpg"
         photoPosition="50% 50%"
-        photoVariant="masthead"
-      >
-        <div className="grain pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
-        <div className="relative max-w-3xl">
-          <Badge tone="accent">Writing</Badge>
-          <h1 className="mt-6 text-[clamp(2rem,5vw,3.2rem)] font-semibold text-fg">
-            Money advice that knows what rent costs in a metro
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-copy">
-            Four pieces on the two problems every salaried professional we speak
-            to describes: no clear view of where the money goes, and no
-            confidence about where to put what is left.
+        eyebrow="Writing"
+        title="Money advice that knows what rent costs in a metro"
+        lede="Four pieces on the two problems every salaried professional we speak to describes: no clear view of where the money goes, and no confidence about where to put what is left."
+      />
+
+      <Section className="pb-6 pt-10 md:pb-8 md:pt-12">
+        <Reveal className="grid items-start gap-12 md:grid-cols-2">
+          <div>
+            <h2 className="text-[clamp(2rem,4.4vw,3rem)] font-medium text-fg">
+              Four pieces.
+              <br />
+              No jargon.
+            </h2>
+            <div className="mt-8">
+              <Button href="/get-started" arrow>
+                Find your plan
+              </Button>
+            </div>
+          </div>
+          <p className="text-2xl leading-relaxed text-copy md:text-3xl">
+            Written for a salaried professional in an Indian metro, with the
+            rupee figures worked through rather than left as percentages.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       <Section className="py-14 md:py-20">
@@ -69,9 +80,9 @@ export default function BlogIndexPage() {
             <div className="p-7 md:p-10">
               <div className="flex flex-wrap items-center gap-3">
                 <Badge tone="accent">{featured.category}</Badge>
-                <span className="text-sm font-semibold text-dim">Latest</span>
+                <span className="text-sm font-medium text-dim">Latest</span>
               </div>
-              <h2 className="mt-5 text-[clamp(1.6rem,3.2vw,2.3rem)] font-semibold text-fg">
+              <h2 className="mt-5 text-[clamp(1.6rem,3.2vw,2.3rem)] font-medium text-fg">
                 <Link href={`/blog/${featured.slug}`} className="after:absolute after:inset-0">
                   {featured.title}
                 </Link>
@@ -80,7 +91,7 @@ export default function BlogIndexPage() {
               <div className="mt-6">
                 <Meta post={featured} />
               </div>
-              <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+              <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-accent">
                 Read the post
                 <ArrowRight
                   className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
@@ -132,7 +143,7 @@ export default function BlogIndexPage() {
                 <Badge tone="neutral" className="self-start">
                   {post.category}
                 </Badge>
-                <h2 className="mt-4 text-xl font-semibold leading-snug text-fg">
+                <h2 className="mt-4 text-xl font-medium leading-snug text-fg">
                   <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0">
                     {post.title}
                   </Link>
@@ -151,23 +162,23 @@ export default function BlogIndexPage() {
         </div>
       </Section>
 
-      <Section
-        tone="alt"
-        className="py-14 md:py-20"
-        photo="/hero/section-plan.jpg"
-        photoPosition="70% 45%"
-      >
-        <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-          <SectionHead
-            title="Reading about it is the easy half"
-            lede="The four-question setup takes about two minutes and gives you a plan built from your own numbers."
-            className="max-w-xl"
-          />
-          <Button size="lg" href="/get-started" className="shrink-0">
-            Get started
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Button>
-        </div>
+      <Section>
+        <AnimatedPlate variant="bars" tone="ink" className="px-7 py-16 md:px-14 md:py-20">
+          <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-xl">
+              <h2 className="text-[clamp(1.9rem,4vw,2.8rem)] font-medium text-white">
+                Reading about it is the easy half
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-white/60">
+                The four-question setup takes about two minutes and gives you a
+                plan built from your own numbers.
+              </p>
+            </div>
+            <Button size="lg" href="/get-started" className="shrink-0" arrow>
+              Get started
+            </Button>
+          </div>
+        </AnimatedPlate>
       </Section>
     </>
   );

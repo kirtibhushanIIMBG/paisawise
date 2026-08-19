@@ -22,6 +22,15 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
   with the subject in the left half: the card sits to the left of the phone on
   a wide screen and above it on a narrow one, and a centred subject would be
   half-hidden in the first case and cropped out in the second.
+
+  These are photographs rather than the hero's coin loop on purpose. This is
+  the product reveal, and replaying the clip from the top of the same page
+  reads as a page that only had one idea; a person using the thing is also a
+  better argument here than an abstract plate.
+
+  They are NOT gold-tinted. The tint is a hue rotation, and rotating a
+  photograph of a person turns their skin green — it belongs to the stock
+  clips only.
 */
 const PLATES = [
   { src: "/hero/product-01.jpg", position: "50% 38%" },
@@ -235,7 +244,7 @@ export function PhoneShowcase() {
   return (
     <section
       ref={scope}
-      className="border-b border-edge bg-panel-alt py-20 text-fg md:py-28"
+      className="bg-bg py-20 text-fg md:py-24"
       aria-labelledby="product-heading"
     >
       <div className="shell">
